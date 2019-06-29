@@ -5,10 +5,10 @@ Project 1
 # City Advisor tour guide or soemthing
 
 ### Team Members
-# Rebecca • Elijah • Stephanie • Brendan • Min
+# Rebeacca • Elijah • Stephanie • Brendan • Min
 
 ### Project Description
-A dash board with various info about a particular locaiton. Including Events, Weather, Map, Sports, Landmarks, Picutres, and Tweetd.  
+A dash board with various info about a particular location. Including Events, Weather, Map, Sports, Landmarks, Picutres, and Tweetd.  
 Allso user to store thiere favorite cities and if they have been there. 
 
 ### Skethc of the Design
@@ -20,18 +20,18 @@ Allso user to store thiere favorite cities and if they have been there.
 * Allow useres to recieve Auto genrated emails that SUmmarize teh changing data of thier favorite city. 
 
 ### APIs
-Map API, weather API, Sports API, Wikipedia API, Hotels API/AirBNB, Twitter
+(Weather API, Events API)  Optional:Sports API, Wikipedia API, Hotels API/AirBNB, Twitter
 
 ### Tasks
 * Create Login Credentials
-* allow users set prefrences on which Panels they want displayed. 
-* Pull info from various APIs to display on teh page. 
+* allow users set preferences on which Panels they want displayed. 
+* Pull info from various APIs to display on the page. 
 
 ### Rough Timeline
 
 #### JS developtment
 1 week?
-MONDAY-Each Team Member choses API to explor and Develop Panel.
+MONDAY-We will have 2 API's up and running.
 
 
 #### Styling
