@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id="sign-in-form" class="sign-in">
+        <h3>Sign in</h3>
+        <div id="inputs" class="inputs">
+            <div>
+                <label for="">Username</label>
+                <input type="text" id="username-input" placeholder="Enter username">
+            </div>
+            <div>
+                <label for="">Password</label>
+                <input type="text" id="password-input" placeholder="Enter password">     
+            </div>
+        </div>
+        <input type="submit" id="sign-in-btn" value="Sign in">
+        <span> or </span>
+        <a href="javascript:;">Create a new account</a>
+    </form>
+
+    <form action="" id="create-new-acc-form" class="create-new-acc">
+            <h3>Create a new account</h3>
+            <div id="inputs" class="inputs">
+                <div>
+                    <label for="">Username</label>
+                    <input type="text" id="newusername-input" placeholder="Enter username">
+                </div>
+                <div>
+                    <label for="">Password</label>
+                    <input type="text" id="newpassword-input" placeholder="Enter password">     
+                </div>
+                <div>
+                    <label for="">Confirm Password</label>
+                    <input type="text" id="confirm-password-input" placeholder="Enter password again">     
+                </div>
+            </div>
+            <input type="submit" id="new-acc-btn" value="Submit">
+        <span> or </span>
+        <a href="javascript:;">Sign in</a>
+    </form>
+    <label for="">search</label>
+    <input type="text" id="location-search" placeholder="Enter a city name">
+    <button id="search-btn">Search</button>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+    <script src="assets/javascript/app.js"></script>
+</body>
+</html>
