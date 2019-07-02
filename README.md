@@ -4,6 +4,8 @@ Project 1
 ### Project Title
 # LIVE CITY
 
+LLLL - Live Life Like Locals
+
 ### Team Members
 # Rebeacca • Elijah • Stephanie • Brendan • Min
 
