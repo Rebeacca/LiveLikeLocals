@@ -2,7 +2,7 @@
 Project 1
 
 ### Project Title
-# City Advisor tour guide or something
+# LIVE CITY
 
 ### Team Members
 # Rebeacca • Elijah • Stephanie • Brendan • Min
