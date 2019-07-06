@@ -126,7 +126,12 @@ function gettingDataFromEventbriteAPI(search) {
         console.log(response);
     })
 
+
+
 }
+
+var today = new Date();
+var todayHour = today.getHours();
 
 
 function gettingDataFromEventfullAPI(search) {
@@ -177,13 +182,13 @@ function gettingDataFromSportsAPI(search) {
     });
 }
 
-var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
+function initMap() {
+    let apiKey = "AIzaSyDs0x0Ui6E2RpmMdipq-MOnAvgcTkvJZeY";
+    var  map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
           zoom: 8
         });
-      }
+}
 
 function gettingDataFromTwitterAPI() {
 
