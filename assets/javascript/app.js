@@ -270,12 +270,16 @@ function gettingDataFromTwitterAPI() {
   //     }
   //   });
 }
+function loadcity(cityinput) {
+  $("#dash-city").text(cityinput);
+}
 
 $("#search-btn").on("click", function() {
-  let searchInput = $("#location-search").val();
+  let searchInput = $("#input-city").val();
   gettingDataFromWeatherAPI(searchInput);
   gettingDataFromEventbriteAPI(searchInput);
   gettingDataFromEventfullAPI(searchInput);
   // gettingDataFromTwitterAPI();
   gettingDataFromSportsAPI(searchInput);
+  loadcity(searchInput);
 });
