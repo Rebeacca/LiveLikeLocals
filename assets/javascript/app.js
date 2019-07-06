@@ -1,14 +1,14 @@
 var firebaseConfig = {
-    apiKey: "AIzaSyDs-rUpadv-5w_AzmdDUb5e8PDYws8osjQ",
-    authDomain: "test-6444f.firebaseapp.com",
-    databaseURL: "https://test-6444f.firebaseio.com",
-    projectId: "test-6444f",
-    storageBucket: "",
-    messagingSenderId: "642414957945",
-    appId: "1:642414957945:web:358771aae0f437b1"
+    apiKey: "AIzaSyCwR2Wk62ZvmcJ_Y4741s0gDo2LRscKalQ",
+    authDomain: "ctyscrpr.firebaseapp.com",
+    databaseURL: "https://ctyscrpr.firebaseio.com",
+    projectId: "ctyscrpr",
+    storageBucket: "ctyscrpr.appspot.com",
+    messagingSenderId: "959736741159",
+    appId: "1:959736741159:web:bf3be1bddf2ad63e"
   };
   // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
@@ -47,10 +47,21 @@ $('#new-acc-btn').on('click', function() {
 
 function gettingDataFromWeatherAPI(search) {
     $.ajax({
-        url: `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=eebfc72febcd4f3a1f94dfc49ad4df6a`,
+        url: `https://api.openweathermap.org/data/2.5/forecast?q=${search},us&units=imperial&mode=json&appid=eebfc72febcd4f3a1f94dfc49ad4df6a`,
         method: "GET"
     }).then(function(response) {
         console.log(response);
+        var list = response.list;
+        for(var i = 0; i < list.length; i++) {
+            var time = list[i].dt_txt;
+            var temp = list[i].main.temp;
+            var humidity = list[i].main.humidity;
+            var weather = list[i].weather[0].description;
+            console.log('Time :' + time);
+            console.log('Temperature :' + temp);
+            console.log('Humidity :' + humidity);
+            console.log('Weather :' + weather);
+        }
     });
 };
 
@@ -58,23 +69,121 @@ function kelvinToFahrenheit(temp) {
     return ((temp-273.15) * 9 / 5 + 32).toFixed(0);
 }
 
-// function gettingDataFromEventbriteAPI(search) {
-//     let address =  "philadelphia";
-//     let setting = {
-//         "async": true,
-//         "crossDoamin": true,
-//         "url": `https://www.eventbriteapi.com/v3/events/search/?q=${address}&location.address=`,
-//         "method": 'GET',
-//         "headers": {
-//             "Authorization": "Bearer PER2XACXI4XO4FK2XSYF",
-//             "Content-Type": "application/json"
-//         }
-//     };
-//     $.ajax(setting).then(function(response) {
-//         console.log(response);
-//     })
+function xmlToJson(xml) {
+	
+	// Create the return object
+	var obj = {};
 
-// }
+	if (xml.nodeType == 1) { // element
+		// do attributes
+		if (xml.attributes.length > 0) {
+		obj["@attributes"] = {};
+			for (var j = 0; j < xml.attributes.length; j++) {
+				var attribute = xml.attributes.item(j);
+				obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+			}
+		}
+	} else if (xml.nodeType == 3) { // text
+		obj = xml.nodeValue;
+	}
+
+	// do children
+	if (xml.hasChildNodes()) {
+		for(var i = 0; i < xml.childNodes.length; i++) {
+			var item = xml.childNodes.item(i);
+			var nodeName = item.nodeName;
+			if (typeof(obj[nodeName]) == "undefined") {
+				obj[nodeName] = xmlToJson(item);
+			} else {
+				if (typeof(obj[nodeName].push) == "undefined") {
+					var old = obj[nodeName];
+					obj[nodeName] = [];
+					obj[nodeName].push(old);
+				}
+				obj[nodeName].push(xmlToJson(item));
+			}
+		}
+	}
+	return obj;
+};
+
+function gettingDataFromEventbriteAPI(search) {
+    let setting = {
+        "async": true,
+        "crossDoamin": true,
+        "url": `https://www.eventbriteapi.com/v3/events/search/?q=pa--philadelphia`,
+        "method": 'GET',
+        "headers": {
+            
+            "Authorization": "Bearer 4QXLG6TYHW7DY2WGF5Q3",
+            "Content-Type": "application/json",
+            // "cache-control": "no-cache",
+            // "Postman-Token": "L3YAPY66VPHGMRC77LXHA6FX6SGAHLNB3HRV5XZVIWZLHQLA7R"
+        }
+    };
+    $.ajax(setting).then(function(response) {
+        
+        console.log(response);
+    })
+
+}
+
+
+function gettingDataFromEventfullAPI(search) {
+    let address =  "philadelphia";
+    let setting = {
+        // http://api.eventful.com/json/events/search?...&location=San+Diego
+        "url": `https://community-eventful.p.rapidapi.com/events/search?keywords=${search}&app_key=RG2KXbmbvfckpd86`,
+        "method": "GET",
+        "contentType":"application/json",
+        "headers": {
+            "X-RapidAPI-Host": "community-eventful.p.rapidapi.com",
+            "X-RapidAPI-Key": "d6602cd30dmsh1a91987979aca5ap164ca0jsn1c395fc734ba"
+        }
+    };
+    $.ajax(setting).then(function(response) {
+
+        response = xmlToJson(response);
+        return response;
+    }).then(function(response) {
+        console.log(response);
+        var events = response.search.events.event;
+        for(var i = 0; i < events.length; i++) {
+            var eventTitle = events[i].title['#text'];
+            var eventDescription = events[i].description['#text'];
+            var eventUrl = events[i].url['#text'];
+            var eventLocation = events[i].venue_address['#text'];
+            // var eventImageUrl = events[i].image.medium.url['#text'].slice(2);
+            console.log('Title :' + eventTitle);
+            console.log('Description : ' + eventDescription)
+            console.log('Url :' + eventUrl);
+            console.log('Location :' + eventLocation);
+            // console.log('ImageUrl :' + eventImageUrl);
+            console.log('------------')
+        }
+        console.log(events);
+    })
+
+}
+
+function gettingDataFromSportsAPI(search) {
+    let setting = {
+        "url": `https://api.sportsdata.io/v3/soccer/scores/json/Areas?key=6bc510d4bf8943dd9ba22c79e698f3f7`,
+        "method": "GET",
+    };
+    $.ajax(setting).then(function(response) {
+
+        console.log(response);
+    });
+}
+
+var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
 
 function gettingDataFromTwitterAPI() {
 
@@ -160,9 +269,10 @@ function gettingDataFromTwitterAPI() {
 
 
 $('#search-btn').on('click',function() {
-    let searchInput = $('#input-city').val();
+    let searchInput = $('#location-search').val();
     gettingDataFromWeatherAPI(searchInput);
     gettingDataFromEventbriteAPI(searchInput);
-    gettingDataFromTwitterAPI();
+    gettingDataFromEventfullAPI(searchInput)
+    // gettingDataFromTwitterAPI();
+    gettingDataFromSportsAPI(searchInput);
 })
-
