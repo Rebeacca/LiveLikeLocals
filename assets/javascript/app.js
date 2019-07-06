@@ -160,9 +160,9 @@ function gettingDataFromTwitterAPI() {
 
 
 $('#search-btn').on('click',function() {
-    let searchInput = $('#location-search').val();
+    let searchInput = $('#input-city').val();
     gettingDataFromWeatherAPI(searchInput);
-    // gettingDataFromEventbriteAPI(searchInput);
+    gettingDataFromEventbriteAPI(searchInput);
     gettingDataFromTwitterAPI();
 })
 
