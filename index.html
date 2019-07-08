@@ -20,36 +20,15 @@
   </head>
   <body>
     <div class="container main-container">
-      <section
+     <!-- <section
         id="signInSection"
         class="row d-flex justify-content-between flex-row"
       >
-        <div class="col-3 landing-col">
-          <div class="card text-white bg-danger">
-            <div class="card-header">
-              <h5>Search for a City</h5>
-            </div>
-            <div class="card-body">
-              <form>
-                <div class="form-group">
-                  <input
-                    id="input-city"
-                    class="form-control form-control-lg"
-                    type="text"
-                    placeholder="Philadelphia"
-                  />
-                </div>
-                <a href="#" id="search-btn" class="btn btn-dark">Find</a>
-              </form>
-            </div>
-          </div>
-        </div>
-
         <div class="col-4 landing-col">
           <div class="card border-dark text-white bg-dark ">
             <div class="card-header">
               <h5>
-                 Log In
+                Log In
               </h5>
             </div>
             <div class="card-body">
@@ -74,9 +53,7 @@
                 </div>
                 <a href="#" id="sign-in-btn" class="btn btn-danger">Log-in</a>
                 <a href="#" class="btn btn-outline-danger">Sign-up!</a>
-                <!-- <input type="submit" id="sign-in-btn" value="Sign in" />
-                <span> or </span>
-                <a href="javascript:;">Create a new account</a> -->
+                
               </form>
             </div>
           </div>
@@ -119,23 +96,52 @@
                   >Create Account</a
                 >
                 <a href="#" class="btn btn-outline-danger">Sign-in!</a>
-                <!-- <input type="submit" id="new-acc-btn" value="Submit" />
-                <span> or </span>
-                <a href="javascript:;">Sign in</a> -->
+
               </form>
             </div>
           </div>
         </div>
       </section>
-
+    -->
       <section
         id="controlSection"
         class="row d-flex justify-content-between flex-row"
       >
         <div class="col-12 dash-col">
           <div class="card text-white bg-dark">
-            <div class="card-header" id="dash-city">
-              <h2>Philadelphila (or other city)</h2>
+            <div
+              class="card-header"
+              style="border-bottom: 2px red solid; background-color:black"
+            >
+              <div class="row d-flex">
+                <div class="col-8">
+                  <h2 id="dash-city">Philadelphila (or other city)</h2>
+                </div>
+                <div class="col-4">
+                  <form>
+                    <div class="row">
+                      <div class="col-8">
+                        <div class="form-group">
+                          <input
+                            id="input-city"
+                            class="form-control form-control-lg"
+                            type="text"
+                            placeholder="Philadelphia"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <a
+                          href="#"
+                          id="search-btn"
+                          class="btn btn-lg btn-danger"
+                          >Find</a
+                        >
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
             <div class="card-body" id="saved-Cities">
               <div
@@ -154,7 +160,7 @@
                 </button>
               </div>
             </div>
-            <!-- <hr /> -->
+            <hr align="center" />
             <div class="card-body" id="panel-options">
               <a href="#" class="btn dash-btn-on btn-danger">Weather</a>
               <a href="#" class="btn dash-btn-on btn-danger">Sports</a>
@@ -172,10 +178,10 @@
       >
         <div class="container" id="panel-holder">
           <div class="card-columns">
-            <div id='weather-panel' class="card text-white bg-dark">
+            <div id="weather-panel" class="card text-white bg-dark">
               <img
                 class="card-img-top"
-                id = "weather-panel-icon"
+                id="weather-panel-icon"
                 src=""
                 alt="Card image cap"
               />
@@ -292,7 +298,7 @@
         </div>
       </section>
     </div>
-    <div id="map"></div>
+
     <!--end of main-container-->
 
     <script
@@ -317,8 +323,11 @@
     ></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4wiHU6P5Wbr9KLgbtZREwljCI6nj-bzA&callback=initMap" async defer></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4wiHU6P5Wbr9KLgbtZREwljCI6nj-bzA&callback=initMap"
+      async
+      defer
+    ></script>
     <script src="assets/javascript/app.js"></script>
   </body>
 </html>
-
