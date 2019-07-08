@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>LLLL(live life like locals)</title>
 
-    <!-- Bootstrap -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>LLLL(live life like locals)</title>
 
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <link rel="stylesheet" href="./assets/css/index.css" />
-  </head>
-  <body>
-    <div class="container main-container">
-     <section
-        id="signInSection"
-        class="row d-flex justify-content-between flex-row"
-      >
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./assets/css/index.css" />
+</head>
+
+<body>
+  <!-- login -->
+  <div id="id01" class="modal">
+
+    <form class="modal-content animate bg-dark" action="/action_page.php" style="padding: .5rem">
+
+      <section id="signInSection" class="row d-flex justify-content-between flex-row">
         <div class="col-6 landing-col">
           <div class="card border-dark text-white bg-dark ">
             <div class="card-header">
@@ -35,25 +34,17 @@
               <form action="" id="sign-in-form" class="sign-in">
                 <div id="inputs" class="inputs form-group">
                   <div class="form-group">
-                    <input
-                      class="form-control form-control-lg"
-                      type="text"
-                      id="username-input"
-                      placeholder="Enter username"
-                    />
+                    <input class="form-control form-control-lg" type="text" id="username-input"
+                      placeholder="Enter username" />
                   </div>
                   <div class="form-group">
-                    <input
-                      class="form-control form-control-lg"
-                      type="text"
-                      id="password-input"
-                      placeholder="Enter password"
-                    />
+                    <input class="form-control form-control-lg" type="text" id="password-input"
+                      placeholder="Enter password" />
                   </div>
                 </div>
                 <a href="#" id="sign-in-btn" class="btn btn-danger">Log-in</a>
                 <a href="#" class="btn btn-outline-danger">Sign-up!</a>
-                
+
               </form>
             </div>
           </div>
@@ -68,33 +59,19 @@
               <form action="" id="create-new-acc-form" class="create-new-acc">
                 <div id="inputs" class="inputs form-group">
                   <div class="form-group">
-                    <input
-                      class="form-control form-control-lg"
-                      type="text"
-                      id="newusername-input"
-                      placeholder="Enter Username"
-                    />
+                    <input class="form-control form-control-lg" type="text" id="newusername-input"
+                      placeholder="Enter Username" />
                   </div>
                   <div class="form-group">
-                    <input
-                      class="form-control form-control-lg"
-                      type="text"
-                      id="newpassword-input"
-                      placeholder="Enter password"
-                    />
+                    <input class="form-control form-control-lg" type="text" id="newpassword-input"
+                      placeholder="Enter password" />
                   </div>
                   <div class="form-group">
-                    <input
-                      class="form-control form-control-lg"
-                      type="text"
-                      id="confirm-password-input"
-                      placeholder="Re-enter Password"
-                    />
+                    <input class="form-control form-control-lg" type="text" id="confirm-password-input"
+                      placeholder="Re-enter Password" />
                   </div>
                 </div>
-                <a href="#" id="new-acc-btn" class="btn btn-danger"
-                  >Create Account</a
-                >
+                <a href="#" id="new-acc-btn" class="btn btn-danger">Create Account</a>
                 <a href="#" class="btn btn-outline-danger">Sign-in!</a>
 
               </form>
@@ -102,227 +79,221 @@
           </div>
         </div>
       </section>
-   
-      <section
-        id="controlSection"
-        class="row d-flex justify-content-between flex-row"
-      >
-        <div class="col-12 dash-col">
-          <div class="card text-white bg-dark">
-            <div
-              class="card-header"
-              style="border-bottom: 2px red solid; background-color:black"
-            >
-              <div class="row d-flex">
-                <div class="row col-8">
-                  <h2 id="dash-city" class="col-8">Philadelphila (or other city)</h2>
-                  <div class="col-4">
-                    <button id="favorite-btn" class="btn btn-lg btn-danger">Add to favorite</button>
-                  </div>
-                </div>
+
+
+
+      <!-- <div class="imgcontainer">
+                  <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                      title="Close Modal">&times;</span>
+                  <img src="" alt="Avatar" class="avatar">
+              </div>
+  
+              <div class="container">
+                  <label for="uname"><b>Username</b></label>
+                  <input type="text" placeholder="Enter Username" name="uname" id="username-input" required>
+  
+                  <label for="psw"><b>Password</b></label>
+                  <input type="password" placeholder="Enter Password" name="psw" id="password-input" required>
+  
+                  <button id="sign-in-btn" type="submit">Login</button>
+                  <label>
+                      <input type="checkbox" checked="checked" name="remember"> Remember me
+                  </label>
+              </div>
+  
+              <div class="container" style="background-color:#f1f1f1">
+                  <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                      class="cancelbtn">Cancel</button>
+                  <span class="create"><a href="#">Create New Account</a></span>
+              </div> -->
+    </form>
+  </div>
+  <!-- end login -->
+
+  <div class="container main-container">
+
+
+    <section id="controlSection" class="row d-flex justify-content-between flex-row">
+      <div class="col-12 dash-col">
+        <div class="card text-white bg-dark">
+          <div class="card-header" style="border-bottom: 2px red solid; background-color:black">
+            <div class="row d-flex">
+              <div class="row col-7">
+                <h3 id="dash-city" class="col-8">Philadelphila (or other city)</h3>
                 <div class="col-4">
-                  <form>
-                    <div class="row">
-                      <div class="col-8">
-                        <div class="form-group">
-                          <input
-                            id="input-city"
-                            class="form-control form-control-lg"
-                            type="text"
-                            placeholder="Philadelphia"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <a
-                          href="#"
-                          id="search-btn"
-                          class="btn btn-lg btn-danger"
-                          >Find</a
-                        >
+                  <button id="favorite-btn" class="btn btn-danger">Add to favorite</button>
+                </div>
+              </div>
+              <div class="col-5">
+                <form>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group">
+                        <input id="input-city" class="form-control" type="text" placeholder="Philadelphia" />
                       </div>
                     </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="card-body" >
-              <div
-                id="saved-Cities"
-                class="btn-group btn-group-sm"
-                role="group"
-                aria-label="savedCities"
-              >
-              </div>
-            </div>
-            <hr align="center" />
-            <div class="card-body" id="panel-options">
-              <a href="#" class="btn dash-btn-on btn-danger">Weather</a>
-              <a href="#" class="btn dash-btn-on btn-danger">Sports</a>
-              <a href="#" class="btn dash-btn-on btn-danger">Visible Panel</a>
-              <a href="#" class="btn dash-btn-off btn-outline-danger"
-                >Hidden Panel</a
-              >
-            </div>
-          </div>
-        </div>
-      </section>
-      <section
-        id="dashboardSection"
-        class="row d-flex justify-content-between flex-row"
-      >
-        <div class="container" id="panel-holder">
-          <div class="card-columns">
-            <div id="weather-panel" class="card text-white bg-dark">
-              <img
-                class="card-img-top"
-                id="weather-panel-icon"
-                src=""
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Weather</h5>
-                <p class="card-text">
-                  This is a summary of your weather.
-                </p>
-              </div>
-            </div>
-            <div class="card p-3 text-white bg-dark">
-              <blockquote class="blockquote mb-0 card-body">
-                <p>
-                  Some Random Piece of info
-                </p>
-                <footer class="blockquote-footer">
-                  <small class="text-muted">
-                    about your city
-                    <cite title="Source Title">API SOURCE</cite>
-                  </small>
-                </footer>
-              </blockquote>
-            </div>
-            <div class="card text-white bg-dark">
-              <img
-                class="card-img-top"
-                src="https://www.modeparties.com/wp-content/uploads/ocean-club-closing-party-marbella.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h5 class="card-title"><a href="events.html" target="_blank">Upcoming Events</a></h5>
-                <ul id="upcoming-events" class="list-group list-group-flush">
-                  <li id='upcoming-event-0' class="list-group-item list-group-item-dark">
-                    Cras justo odio
-                  </li>
-                  <li id='upcoming-event-1' class="list-group-item  list-group-item-danger">
-                    Dapibus ac facilisis in
-                  </li>
-                  <li id='upcoming-event-2' class="list-group-item list-group-item-dark">
-                    Vestibulum at eros
-                  </li>
-                </ul>
-              </div>
-
-              <div class="card-body">
-                <p class="card-text">
-                  This card has supporting text below as a natural lead-in to
-                  additional content.
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-            <div class="card bg-danger text-white text-center p-3">
-              <blockquote class="blockquote mb-0">
-                <p>
-                  LATEST NEWS HEADLINE.
-                </p>
-                <footer class="blockquote-footer">
-                  <small>
-                    news source
-                    <cite title="Source Title">NYTIMES API</cite>
-                  </small>
-                </footer>
-              </blockquote>
-            </div>
-            <div class="card text-center text-white bg-dark">
-              <div class="card-body">
-                <h5 class="card-title">Another Card we can add</h5>
-                <p class="card-text">
-                  Another API too
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-            <div class="card text-white bg-dark">
-              <img
-                class="card-img"
-                src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Flag_of_Philadelphia%2C_Pennsylvania.svg"
-                alt="Card image"
-              />
-            </div>
-            <div class="card p-3 text-right text-white bg-danger">
-              <blockquote class="blockquote mb-0">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Integer posuere erat a ante.
-                </p>
-                <footer class="blockquote-footer">
-                  <small class="text-muted">
-                    Someone famous in
-                    <cite title="Source Title">Source Title</cite>
-                  </small>
-                </footer>
-              </blockquote>
-            </div>
-            <div class="card text-danger bg-dark">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This card has even longer
-                  content than the first to show that equal height action.
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
+                    <div class="col-3">
+                      <a href="#" id="search-btn" class="btn btn-danger">Find</a>
+                    </div>
+                    <div class="col-3">
+                      <a onclick="document.getElementById('id01').style.display='block'" href="#" id="login-btn"
+                        class="btn btn-danger">Log-In</a>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
+          <div class="card-body">
+            <div id="saved-Cities" class="btn-group btn-group-sm" role="group" aria-label="savedCities">
+            </div>
+          </div>
+          <hr align="center" />
+          <div class="card-body" id="panel-options">
+            <a href="#" class="btn dash-btn-on btn-danger">Weather</a>
+            <a href="#" class="btn dash-btn-on btn-danger">Sports</a>
+            <a href="#" class="btn dash-btn-on btn-danger">Visible Panel</a>
+            <a href="#" class="btn dash-btn-off btn-outline-danger">Hidden Panel</a>
+          </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+    <section id="dashboardSection" class="row d-flex justify-content-between flex-row">
+      <div class="container" id="panel-holder">
+        <div class="card-columns">
+          <div id="weather-panel" class="card text-white bg-dark">
+            <img class="card-img-top" id="weather-panel-icon" src="" alt="Card image cap" />
+            <div class="card-body">
+              <h5 class="card-title">Weather</h5>
+              <p class="card-text">
+                This is a summary of your weather.
+              </p>
+            </div>
+          </div>
+          <div class="card p-3 text-white bg-dark">
+            <blockquote class="blockquote mb-0 card-body">
+              <p>
+                Some Random Piece of info
+              </p>
+              <footer class="blockquote-footer">
+                <small class="text-muted">
+                  about your city
+                  <cite title="Source Title">API SOURCE</cite>
+                </small>
+              </footer>
+            </blockquote>
+          </div>
+          <div class="card text-white bg-dark">
+            <img class="card-img-top"
+              src="https://www.modeparties.com/wp-content/uploads/ocean-club-closing-party-marbella.jpg"
+              alt="Card image cap" />
+            <div class="card-body">
+              <h5 class="card-title"><a href="events.html" target="_blank">Upcoming Events</a></h5>
+              <ul id="upcoming-events" class="list-group list-group-flush">
+                <li id='upcoming-event-0' class="list-group-item list-group-item-dark">
+                  Cras justo odio
+                </li>
+                <li id='upcoming-event-1' class="list-group-item  list-group-item-danger">
+                  Dapibus ac facilisis in
+                </li>
+                <li id='upcoming-event-2' class="list-group-item list-group-item-dark">
+                  Vestibulum at eros
+                </li>
+              </ul>
+            </div>
 
-    <!--end of main-container-->
+            <div class="card-body">
+              <p class="card-text">
+                This card has supporting text below as a natural lead-in to
+                additional content.
+              </p>
+              <p class="card-text">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </p>
+            </div>
+          </div>
+          <div class="card bg-danger text-white text-center p-3">
+            <blockquote class="blockquote mb-0">
+              <p>
+                LATEST NEWS HEADLINE.
+              </p>
+              <footer class="blockquote-footer">
+                <small>
+                  news source
+                  <cite title="Source Title">NYTIMES API</cite>
+                </small>
+              </footer>
+            </blockquote>
+          </div>
+          <div class="card text-center text-white bg-dark">
+            <div class="card-body">
+              <h5 class="card-title">Another Card we can add</h5>
+              <p class="card-text">
+                Another API too
+              </p>
+              <p class="card-text">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </p>
+            </div>
+          </div>
+          <div class="card text-white bg-dark">
+            <img class="card-img"
+              src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Flag_of_Philadelphia%2C_Pennsylvania.svg"
+              alt="Card image" />
+          </div>
+          <div class="card p-3 text-right text-white bg-danger">
+            <blockquote class="blockquote mb-0">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Integer posuere erat a ante.
+              </p>
+              <footer class="blockquote-footer">
+                <small class="text-muted">
+                  Someone famous in
+                  <cite title="Source Title">Source Title</cite>
+                </small>
+              </footer>
+            </blockquote>
+          </div>
+          <div class="card text-danger bg-dark">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                This is a wider card with supporting text below as a natural
+                lead-in to additional content. This card has even longer
+                content than the first to show that equal height action.
+              </p>
+              <p class="card-text">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
-    <!-- <script
+  <!--end of main-container-->
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+  <!-- <script
       src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
       async
       defer
     ></script> -->
-    <script src="assets/javascript/app.js"></script>
-  </body>
+  <script src="assets/javascript/app.js"></script>
+</body>
+
 </html>
