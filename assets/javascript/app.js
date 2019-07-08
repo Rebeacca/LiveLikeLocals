@@ -278,7 +278,6 @@ window.onclick = function (event) {
   }
   console.log(1)
 }
-getPlacesPhoto('london');
 
 
 // using NYTimes Api to get ARticles realted to the City
@@ -311,3 +310,16 @@ function getNYTheadlines(search) {
   });
 }
 
+function gettingSportsAPI() {
+  let setting = {
+    url:
+      "https://api.sportsdata.io/v3/nba/scores/json/Stadiums?key=46cbe2efbe14462997d1c402c84ffbda",
+    method: "GET"
+  };
+  $.ajax(setting).then(function(response) {
+    console.log("sports API RESPONSE BELOW");
+    console.log(response);
+  });
+ }
+getPlacesPhoto("london");
+gettingSportsAPI("Philadelphia");
