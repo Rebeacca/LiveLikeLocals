@@ -22,17 +22,17 @@ function signInValidation() {
   let passwordInput = $("#password-input")
     .val()
     .trim();
-  database.ref("/userAccounts/").on("child_added", function(snapshot) {
+  database.ref("/userAccounts/").on("child_added", function (snapshot) {
     if (
       usernameInput === snapshot.val().username &&
       snapshot.val().password === passwordInput
     ) {
       username = usernameInput;
       localStorage.setItem('username', username);
-      database.ref('/userData/').once('value', function(snapshot) {
-        if(snapshot.val().hasOwnProperty(username) && snapshot.val()[username].hasOwnProperty('favoriteCities')){
+      database.ref('/userData/').once('value', function (snapshot) {
+        if (snapshot.val().hasOwnProperty(username) && snapshot.val()[username].hasOwnProperty('favoriteCities')) {
           favoriteCityArr = snapshot.val()[username].favoriteCities;
-          favoriteCityArr.forEach(function(cityName) {
+          favoriteCityArr.forEach(function (cityName) {
             var newBtn = $('<button>').text(cityName).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', cityName);
             $('#saved-Cities').append(newBtn);
           });
@@ -64,7 +64,7 @@ function createNewAccFunc() {
 function addToFavorite() {
   favoriteCityArr.push($("#dash-city").text());
   database.ref('/userData/' + username).set({
-    favoriteCities : favoriteCityArr
+    favoriteCities: favoriteCityArr
   })
 };
 
@@ -72,7 +72,7 @@ function gettingDataFromWeatherAPI(search) {
   $.ajax({
     url: `https://api.openweathermap.org/data/2.5/forecast?q=${search},us&units=imperial&mode=json&appid=eebfc72febcd4f3a1f94dfc49ad4df6a`,
     method: "GET"
-  }).then(function(response) {
+  }).then(function (response) {
     console.log(response);
     var list = response.list;
     for (var i = 0; i < list.length; i++) {
@@ -150,7 +150,7 @@ function gettingDataFromEventbriteAPI(search) {
       // "Postman-Token": "L3YAPY66VPHGMRC77LXHA6FX6SGAHLNB3HRV5XZVIWZLHQLA7R"
     }
   };
-  $.ajax(setting).then(function(response) {
+  $.ajax(setting).then(function (response) {
     console.log(response);
   });
 }
@@ -168,11 +168,11 @@ function gettingDataFromEventfullAPI(search) {
     }
   };
   $.ajax(setting)
-    .then(function(response) {
+    .then(function (response) {
       response = xmlToJson(response);
       return response;
     })
-    .then(function(response) {
+    .then(function (response) {
       console.log(response);
       var events = response.search.events.event;
       for (var i = 0; i < 3; i++) {
@@ -191,7 +191,7 @@ function gettingDataFromSportsAPI(search) {
     url: `https://api.sportsdata.io/v3/soccer/scores/json/Areas?key=6bc510d4bf8943dd9ba22c79e698f3f7`,
     method: "GET"
   };
-  $.ajax(setting).then(function(response) {
+  $.ajax(setting).then(function (response) {
     console.log(response);
   });
 }
@@ -201,27 +201,27 @@ function loadcity(cityinput) {
   localStorage.setItem('city', cityinput);
 }
 
-$("#sign-in-btn").on("click", function() {
+$("#sign-in-btn").on("click", function () {
   event.preventDefault();
   signInValidation();
 });
 
-$("#new-acc-btn").on("click", function() {
+$("#new-acc-btn").on("click", function () {
   event.preventDefault();
   createNewAccFunc();
 });
 
-$("#favorite-btn").on("click", function() {
+$("#favorite-btn").on("click", function () {
   addToFavorite();
 });
 
-$(document).on('click', '.favorite-city', function() {
+$(document).on('click', '.favorite-city', function () {
   window.location = 'events.html';
   localStorage.setItem('city', this.id);
 });
 
 
-$("#search-btn").on("click", function() {
+$("#search-btn").on("click", function () {
   let searchInput = $("#input-city").val().trim().replace(/(^|\s)\S/g, x => x.toUpperCase());
   gettingDataFromWeatherAPI(searchInput);
   gettingDataFromEventbriteAPI(searchInput);
@@ -246,7 +246,7 @@ function getPlacesPhoto(search) {
     method: "GET"
   };
   //   then get a photo reference
-  $.ajax(setting).then(function(response) {
+  $.ajax(setting).then(function (response) {
     let gPlace = response.candidates[0].photos[0].photo_reference;
     let photo_setting = {
       url:
@@ -257,10 +257,10 @@ function getPlacesPhoto(search) {
         googleAPIkey,
       method: "GET"
     };
-    $.ajax(photo_setting).then(function(det_response) {
-    //   console.log(det_response);
+    $.ajax(photo_setting).then(function (det_response) {
+      //   console.log(det_response);
       console.log(typeof det_response);
-      var theimage = 'data:image/jpg;base64,'+ det_response;
+      var theimage = 'data:image/jpg;base64,' + det_response;
       $("#flag-img").attr("src", 'theimage');
 
       console.log("🌄");
@@ -269,5 +269,12 @@ function getPlacesPhoto(search) {
     console.log(response);
     console.log("🏔");
   });
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 }
 getPlacesPhoto('london');
