@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>LLLL(live life like locals)</title>
+
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <div class="container main-container">
+      <section
+        id="signInSection"
+        class="row d-flex justify-content-between flex-row"
+      >
+        <div class="col-3 landing-col">
+          <div class="card text-white bg-danger">
+            <div class="card-header">
+              <h5>Search for a City</h5>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="form-group">
+                  <input
+                    id="input-city"
+                    class="form-control form-control-lg"
+                    type="text"
+                    placeholder="Philadelphia"
+                  />
+                </div>
+                <a href="#" id="search-btn" class="btn btn-dark">Find</a>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-4 landing-col">
+          <div class="card border-dark text-white bg-dark ">
+            <div class="card-header">
+              <h5>
+                 Log In
+              </h5>
+            </div>
+            <div class="card-body">
+              <form action="" id="sign-in-form" class="sign-in">
+                <div id="inputs" class="inputs form-group">
+                  <div class="form-group">
+                    <input
+                      class="form-control form-control-lg"
+                      type="text"
+                      id="username-input"
+                      placeholder="Enter username"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      class="form-control form-control-lg"
+                      type="text"
+                      id="password-input"
+                      placeholder="Enter password"
+                    />
+                  </div>
+                </div>
+                <a href="#" id="sign-in-btn" class="btn btn-danger">Log-in</a>
+                <a href="#" class="btn btn-outline-danger">Sign-up!</a>
+                <!-- <input type="submit" id="sign-in-btn" value="Sign in" />
+                <span> or </span>
+                <a href="javascript:;">Create a new account</a> -->
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-4 landing-col">
+          <div class="card border-danger bg-secondary">
+            <div class="card-header text-danger bg-dark">
+              <h5>Create New Account</h5>
+            </div>
+            <div class="card-body">
+              <form action="" id="create-new-acc-form" class="create-new-acc">
+                <div id="inputs" class="inputs form-group">
+                  <div class="form-group">
+                    <input
+                      class="form-control form-control-lg"
+                      type="text"
+                      id="newusername-input"
+                      placeholder="Enter Username"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      class="form-control form-control-lg"
+                      type="text"
+                      id="newpassword-input"
+                      placeholder="Enter password"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      class="form-control form-control-lg"
+                      type="text"
+                      id="confirm-password-input"
+                      placeholder="Re-enter Password"
+                    />
+                  </div>
+                </div>
+                <a href="#" id="new-acc-btn" class="btn btn-danger"
+                  >Create Account</a
+                >
+                <a href="#" class="btn btn-outline-danger">Sign-in!</a>
+                <!-- <input type="submit" id="new-acc-btn" value="Submit" />
+                <span> or </span>
+                <a href="javascript:;">Sign in</a> -->
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="controlSection"
+        class="row d-flex justify-content-between flex-row"
+      >
+        <div class="col-12 dash-col">
+          <div class="card text-white bg-dark">
+            <div class="card-header" id="dash-city">
+              <h2>Philadelphila (or other city)</h2>
+            </div>
+            <div class="card-body">
+              <div
+                id="saved-Cities"
+                class="btn-group btn-group-sm"
+                role="group"
+                aria-label="savedCities"
+              >
+              </div>
+            </div>
+            <!-- <hr /> -->
+            <div class="card-body" id="panel-options">
+              <a href="#" class="btn dash-btn-on btn-danger">Weather</a>
+              <a href="#" class="btn dash-btn-on btn-danger">Sports</a>
+              <a href="#" class="btn dash-btn-on btn-danger">Visible Panel</a>
+              <a href="#" class="btn dash-btn-off btn-outline-danger"
+                >Hidden Panel</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="events" class="row d-flex justify-content-between flex-row"></section>
+    </div>
+    
+    <!--end of main-container-->
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script> -->
+    <script src="assets/javascript/events.js"></script>
+  </body>
+</html>

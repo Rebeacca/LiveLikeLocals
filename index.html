@@ -20,11 +20,11 @@
   </head>
   <body>
     <div class="container main-container">
-     <!-- <section
+     <section
         id="signInSection"
         class="row d-flex justify-content-between flex-row"
       >
-        <div class="col-4 landing-col">
+        <div class="col-6 landing-col">
           <div class="card border-dark text-white bg-dark ">
             <div class="card-header">
               <h5>
@@ -59,7 +59,7 @@
           </div>
         </div>
 
-        <div class="col-4 landing-col">
+        <div class="col-6 landing-col">
           <div class="card border-danger bg-secondary">
             <div class="card-header text-danger bg-dark">
               <h5>Create New Account</h5>
@@ -102,7 +102,7 @@
           </div>
         </div>
       </section>
-    -->
+   
       <section
         id="controlSection"
         class="row d-flex justify-content-between flex-row"
@@ -114,8 +114,11 @@
               style="border-bottom: 2px red solid; background-color:black"
             >
               <div class="row d-flex">
-                <div class="col-8">
-                  <h2 id="dash-city">Philadelphila (or other city)</h2>
+                <div class="row col-8">
+                  <h2 id="dash-city" class="col-8">Philadelphila (or other city)</h2>
+                  <div class="col-4">
+                    <button id="favorite-btn" class="btn btn-lg btn-danger">Add to favorite</button>
+                  </div>
                 </div>
                 <div class="col-4">
                   <form>
@@ -143,21 +146,13 @@
                 </div>
               </div>
             </div>
-            <div class="card-body" id="saved-Cities">
+            <div class="card-body" >
               <div
+                id="saved-Cities"
                 class="btn-group btn-group-sm"
                 role="group"
                 aria-label="savedCities"
               >
-                <button type="button" class="svd-btn btn btn-danger">
-                  Philadelphia
-                </button>
-                <button type="button" class="svd-btn btn btn-outline-danger">
-                  New York
-                </button>
-                <button type="button" class="svd-btn btn btn-outline-danger">
-                  Miami
-                </button>
               </div>
             </div>
             <hr align="center" />
@@ -212,15 +207,15 @@
                 alt="Card image cap"
               />
               <div class="card-body">
-                <h5 class="card-title">Upcoming Events</h5>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item list-group-item-dark">
+                <h5 class="card-title"><a href="events.html" target="_blank">Upcoming Events</a></h5>
+                <ul id="upcoming-events" class="list-group list-group-flush">
+                  <li id='upcoming-event-0' class="list-group-item list-group-item-dark">
                     Cras justo odio
                   </li>
-                  <li class="list-group-item  list-group-item-danger">
+                  <li id='upcoming-event-1' class="list-group-item  list-group-item-danger">
                     Dapibus ac facilisis in
                   </li>
-                  <li class="list-group-item list-group-item-dark">
+                  <li id='upcoming-event-2' class="list-group-item list-group-item-dark">
                     Vestibulum at eros
                   </li>
                 </ul>
@@ -323,11 +318,11 @@
     ></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4wiHU6P5Wbr9KLgbtZREwljCI6nj-bzA&callback=initMap"
+    <!-- <script
+      src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
       async
       defer
-    ></script>
+    ></script> -->
     <script src="assets/javascript/app.js"></script>
   </body>
 </html>
