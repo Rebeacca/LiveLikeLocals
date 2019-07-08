@@ -1,5 +1,19 @@
+<<<<<<< Updated upstream
 var favoriteCityArr = [];
 var username;
+=======
+// Login
+$(document).ready(function () {
+  document.getElementById('id01').style.display = 'block';
+  var modal = document.getElementById('id01');
+  window.onclick = function (event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+})
+// 
+>>>>>>> Stashed changes
 
 var firebaseConfig = {
   apiKey: "AIzaSyCwR2Wk62ZvmcJ_Y4741s0gDo2LRscKalQ",
