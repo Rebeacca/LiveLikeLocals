@@ -133,16 +133,24 @@
       >
         <div class="col-12 dash-col">
           <div class="card text-white bg-dark">
-            <div class="row card-header">
-              <h2 id="dash-city" class="col-10">Philadelphia</h2>
-              <button id="favorite-btn" type="button" class="svd-btn btn btn-outline-danger">Add to favorite</button>
+            <div class="card-header" id="dash-city">
+              <h2>Philadelphila (or other city)</h2>
             </div>
-            <div class="card-body">
-              <div  id="saved-Cities"
+            <div class="card-body" id="saved-Cities">
+              <div
                 class="btn-group btn-group-sm"
                 role="group"
                 aria-label="savedCities"
               >
+                <button type="button" class="svd-btn btn btn-danger">
+                  Philadelphia
+                </button>
+                <button type="button" class="svd-btn btn btn-outline-danger">
+                  New York
+                </button>
+                <button type="button" class="svd-btn btn btn-outline-danger">
+                  Miami
+                </button>
               </div>
             </div>
             <!-- <hr /> -->
@@ -157,125 +165,9 @@
           </div>
         </div>
       </section>
-      <section
-        id="dashboardSection"
-        class="row d-flex justify-content-between flex-row"
-      >
-        <div class="container" id="panel-holder">
-          <div class="card-columns">
-            <div id='weather-panel' class="card text-white bg-dark">
-              <img
-                class="card-img-top"
-                id = "weather-panel-icon"
-                src=""
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Weather</h5>
-                <p class="card-text">
-                  This is a summary of your weather.
-                </p>
-              </div>
-            </div>
-            <div class="card p-3 text-white bg-dark">
-              <blockquote class="blockquote mb-0 card-body">
-                <p>
-                  Some Random Piece of info
-                </p>
-                <footer class="blockquote-footer">
-                  <small class="text-muted">
-                    about your city
-                    <cite title="Source Title">API SOURCE</cite>
-                  </small>
-                </footer>
-              </blockquote>
-            </div>
-            <div class="card text-white bg-dark">
-              <img
-                class="card-img-top"
-                src="https://www.modeparties.com/wp-content/uploads/ocean-club-closing-party-marbella.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Upcoming Events</h5>
-                <ul id="upcoming-events" class="list-group list-group-flush">
-                </ul>
-              </div>
-
-              <div class="card-body">
-                <p class="card-text">
-                  This card has supporting text below as a natural lead-in to
-                  additional content.
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-            <div id="events" class="card bg-danger text-white p-3">
-              <blockquote class="blockquote mb-0">
-                <p>
-                  LATEST NEWS HEADLINE.
-                </p>
-                <footer class="blockquote-footer">
-                  <small>
-                    news source
-                    <cite title="Source Title">NYTIMES API</cite>
-                  </small>
-                </footer>
-              </blockquote>
-            </div>
-            <div class="card text-center text-white bg-dark">
-              <div class="card-body">
-                <h5 class="card-title">Another Card we can add</h5>
-                <p class="card-text">
-                  Another API too
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-            <div class="card text-white bg-dark">
-              <img
-                class="card-img"
-                src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Flag_of_Philadelphia%2C_Pennsylvania.svg"
-                alt="Card image"
-              />
-            </div>
-            <div class="card p-3 text-right text-white bg-danger">
-              <blockquote class="blockquote mb-0">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Integer posuere erat a ante.
-                </p>
-                <footer class="blockquote-footer">
-                  <small class="text-muted">
-                    Someone famous in
-                    <cite title="Source Title">Source Title</cite>
-                  </small>
-                </footer>
-              </blockquote>
-            </div>
-            <div class="card text-danger bg-dark">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This card has even longer
-                  content than the first to show that equal height action.
-                </p>
-                <a href="events.html">new link</a>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section id="events" class="row d-flex justify-content-between flex-row"></section>
     </div>
-    <div id="map"></div>
+    
     <!--end of main-container-->
 
     <script
@@ -301,7 +193,6 @@
     <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhCHFpzK5923yuwMI42dWEccf13xy0wUA&callback=initMap" async defer></script> -->
-    <script src="assets/javascript/app.js"></script>
+    <script src="assets/javascript/events.js"></script>
   </body>
 </html>
-

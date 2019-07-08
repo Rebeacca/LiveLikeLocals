@@ -28,8 +28,7 @@ body {
     margin-bottom: 0;
     opacity: 0.95;
   }
-  .card {
-  }
+ 
   h3 {
     text-transform: uppercase;
     font-size: 1rem;
@@ -37,5 +36,11 @@ body {
   
   .inputs {
     font-size: 0.8rem;
+  }
+
+  .img-fluid {
+    height: 128px;
+    width: 128px;
+    padding-right: 10px;
   }
   
