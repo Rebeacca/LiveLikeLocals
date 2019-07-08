@@ -1,19 +1,5 @@
-<<<<<<< Updated upstream
 var favoriteCityArr = [];
 var username;
-=======
-// Login
-$(document).ready(function () {
-  document.getElementById('id01').style.display = 'block';
-  var modal = document.getElementById('id01');
-  window.onclick = function (event) {
-      if (event.target == modal) {
-          modal.style.display = "none";
-      }
-  }
-})
-// 
->>>>>>> Stashed changes
 
 var firebaseConfig = {
   apiKey: "AIzaSyCwR2Wk62ZvmcJ_Y4741s0gDo2LRscKalQ",
@@ -293,3 +279,35 @@ window.onclick = function (event) {
   console.log(1)
 }
 getPlacesPhoto('london');
+
+
+// using NYTimes Api to get ARticles realted to the City
+function getNYTheadlines(search) {
+  let timesAPIKey = "tZBdDvmK4rEbR0G33QN4LMbkuYMVDJr2";
+  let setting = {
+    url:
+      "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+      search +
+      "&api-key=tZBdDvmK4rEbR0G33QN4LMbkuYMVDJr2",
+    method: "GET"
+  };
+  $.ajax(setting).then(function(response) {
+    var articleList = response.response.docs;
+    // console.log(response);
+    // console.log(articleList);
+    var headline_div = $("<ul class='list-group list-group-left' >");
+    for (var i = 0; i < 3; i++) {
+      var headline = articleList[i].headline.main;
+      var timesLink = articleList[i].web_url;
+      var cardlink = $("<a class='card-link'>");
+      cardlink.attr("href", timesLink);
+      cardlink.text(headline);
+      //   console.log(headline_div);
+      headline_div.append(
+        $("<li class='list-group-item bg-dark text-danger' >").append(cardlink)
+      );
+    }
+    $("#nyt-panel-body").append(headline_div);
+  });
+}
+
