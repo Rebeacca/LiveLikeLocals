@@ -1,3 +1,6 @@
+var favoriteCityArr = [];
+var username;
+
 var firebaseConfig = {
   apiKey: "AIzaSyCwR2Wk62ZvmcJ_Y4741s0gDo2LRscKalQ",
   authDomain: "ctyscrpr.firebaseapp.com",
@@ -19,11 +22,22 @@ function signInValidation() {
   let passwordInput = $("#password-input")
     .val()
     .trim();
-  database.ref("/userData/userAccounts/").on("child_added", function(snapshot) {
+  database.ref("/userAccounts/").on("child_added", function(snapshot) {
     if (
       usernameInput === snapshot.val().username &&
       snapshot.val().password === passwordInput
     ) {
+      username = usernameInput;
+      localStorage.setItem('username', username);
+      database.ref('/userData/').once('value', function(snapshot) {
+        if(snapshot.val().hasOwnProperty(username) && snapshot.val()[username].hasOwnProperty('favoriteCities')){
+          favoriteCityArr = snapshot.val()[username].favoriteCities;
+          favoriteCityArr.forEach(function(cityName) {
+            var newBtn = $('<button>').text(cityName).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', cityName);
+            $('#saved-Cities').append(newBtn);
+          });
+        };
+      });
       $("#sign-in-form").remove();
     }
   });
@@ -40,23 +54,19 @@ function createNewAccFunc() {
     .val()
     .trim();
   if (newPasswordInput === confirmPasswordInput) {
-    database.ref("/userData/userAccounts").push({
+    database.ref("/userAccounts").push({
       username: newUsernameInput,
       password: newPasswordInput
     });
   }
 }
 
-$("#sign-in-btn").on("click", function() {
-  event.preventDefault();
-  signInValidation();
-});
-
-$("#new-acc-btn").on("click", function() {
-  event.preventDefault();
-
-  createNewAccFunc();
-});
+function addToFavorite() {
+  favoriteCityArr.push($("#dash-city").text());
+  database.ref('/userData/' + username).set({
+    favoriteCities : favoriteCityArr
+  })
+};
 
 function gettingDataFromWeatherAPI(search) {
   $.ajax({
@@ -165,18 +175,12 @@ function gettingDataFromEventfullAPI(search) {
     .then(function(response) {
       console.log(response);
       var events = response.search.events.event;
-      for (var i = 0; i < events.length; i++) {
+      for (var i = 0; i < 3; i++) {
         var eventTitle = events[i].title["#text"];
-        var eventDescription = events[i].description["#text"];
         var eventUrl = events[i].url["#text"];
-        var eventLocation = events[i].venue_address["#text"];
-        // var eventImageUrl = events[i].image.medium.url['#text'].slice(2);
-        console.log("Title :" + eventTitle);
-        console.log("Description : " + eventDescription);
-        console.log("Url :" + eventUrl);
-        console.log("Location :" + eventLocation);
-        // console.log('ImageUrl :' + eventImageUrl);
-        console.log("------------");
+        console.log(eventTitle);
+        var newTitle = $('<a>').attr('src', eventUrl).attr('target', '_blank').text(eventTitle);
+        $('#upcoming-event-' + i).html(newTitle);
       }
       console.log(events);
     });
@@ -192,90 +196,33 @@ function gettingDataFromSportsAPI(search) {
   });
 }
 
-var map;
-function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8
-  });
-}
-
-function gettingDataFromTwitterAPI() {
-  //lets create signature
-  // $.ajax({
-  //     url: 'https://api.twitter.com/1.1/search/tweets.json?q=philadelphia&result_type=mixed&count=2',
-  //     method: 'get',
-  //     dataType:'json',
-  //     header: {
-  //         "authorization": "OAuth",
-  //         "oauth_consumer_key": "2QZwyGahvrpkQFqfb0Veho9D2",
-  //         "oauth_nonce" : "generated-nonce",
-  //         "oauth_signature":"generated-signature",
-  //         "oauth_signature_method": "HMAC-SHA1",
-  //         "oauth_timestamp": "generated-timestamp",
-  //         "oauth_token": "1145536089270169601-TLeZYW2U3vYG2gLgkwUtsx3RqiYj4J",
-  //         "oauth_version": "1.0"
-  //     }
-  // }).then(function(response) {
-  //     console.log(response);
-  // });
-  // var oauth = require('oauth.js');
-  // var urlLink = 'https://api.twitter.com/1.1/statuses/update.json';
-  // var twitterStatus = "Sample tweet";
-  // var oauth_consumer_key = "2QZwyGahvrpkQFqfb0Veho9D2";
-  // var consumerSecret = "LDeGpLet5yTdnFYeLAzN1IqlSRoiI6H4y1lLSDTGsPBOJJam9G";
-  // var oauth_token = "1145536089270169601-TLeZYW2U3vYG2gLgkwUtsx3RqiYj4J";
-  // var tokenSecret = "S5hztbtyp6KfH4pumPk5ymytg822MMKMsV5gB5HtBdSct";
-  // var nonce = oauth.nonce(32);
-  // var ts = Math.floor(new Date().getTime() / 1000);
-  // var timestamp = ts.toString();
-  // var accessor = {
-  //     "consumerSecret": consumerSecret,
-  //     "tokenSecret": tokenSecret
-  // };
-  // var params = {
-  //     "status": twitterStatus,
-  //     "oauth_consumer_key": oauth_consumer_key,
-  //     "oauth_nonce": nonce,
-  //     "oauth_signature_method": "HMAC-SHA1",
-  //     "oauth_timestamp": timestamp,
-  //     "oauth_token": oauth_token,
-  //     "oauth_version": "1.0"
-  // };
-  // var message = {
-  //     "method": "GET",
-  //     "action": urlLink,
-  //     "parameters": params
-  // };
-  // //lets create signature
-  // oauth.SignatureMethod.sign(message, accessor);
-  // var normPar = oauth.SignatureMethod.normalizeParameters(message.parameters);
-  // var baseString = oauth.SignatureMethod.getBaseString(message);
-  // var sig = oauth.getParameter(message.parameters, "oauth_signature") + "=";
-  // var encodedSig = oauth.percentEncode(sig); //finally you got oauth signature
-  // $.ajax({
-  //     url: urlLink,
-  //     type: 'GET',
-  //     data: {
-  //         "status": twitterStatus
-  //     },
-  //     beforeSend: function(xhr){
-  //         xhr.setRequestHeader("Authorization",'OAuth oauth_consumer_key="'+oauth_consumer_key+'",oauth_signature_method="HMAC-SHA1",oauth_timestamp="' + timestamp + '",oauth_nonce="' + nonce + '",oauth_version="1.0",oauth_token="'+oauth_token+'",oauth_signature="' + encodedSig + '"');
-  //    },
-  //    success: function(data) {
-  //         alert("Tweeted!");
-  //    },
-  //    error:function(exception){
-  //        alert("Exeption:"+exception);
-  //     }
-  //   });
-}
 function loadcity(cityinput) {
   $("#dash-city").text(cityinput);
+  localStorage.setItem('city', cityinput);
 }
 
+$("#sign-in-btn").on("click", function() {
+  event.preventDefault();
+  signInValidation();
+});
+
+$("#new-acc-btn").on("click", function() {
+  event.preventDefault();
+  createNewAccFunc();
+});
+
+$("#favorite-btn").on("click", function() {
+  addToFavorite();
+});
+
+$(document).on('click', '.favorite-city', function() {
+  window.location = 'events.html';
+  localStorage.setItem('city', this.id);
+});
+
+
 $("#search-btn").on("click", function() {
-  let searchInput = $("#input-city").val();
+  let searchInput = $("#input-city").val().trim().replace(/(^|\s)\S/g, x => x.toUpperCase());
   gettingDataFromWeatherAPI(searchInput);
   gettingDataFromEventbriteAPI(searchInput);
   gettingDataFromEventfullAPI(searchInput);
@@ -283,3 +230,44 @@ $("#search-btn").on("click", function() {
   gettingDataFromSportsAPI(searchInput);
   loadcity(searchInput);
 });
+// Get image of city from google places
+function getPlacesPhoto(search) {
+  let googleAPIkey = "AIzaSyDPd-sNhT630sHlTS2BBJXgx4YQpfpHLmc";
+  let herok = "https://cors-anywhere.herokuapp.com/";
+
+  //   first find the place in place search
+  let setting = {
+    url:
+      herok +
+      "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=" +
+      search +
+      " &inputtype=textquery&fields=photos,formatted_address,name,place_id,geometry&key=" +
+      googleAPIkey,
+    method: "GET"
+  };
+  //   then get a photo reference
+  $.ajax(setting).then(function(response) {
+    let gPlace = response.candidates[0].photos[0].photo_reference;
+    let photo_setting = {
+      url:
+        herok +
+        "https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=" +
+        gPlace +
+        "&key=" +
+        googleAPIkey,
+      method: "GET"
+    };
+    $.ajax(photo_setting).then(function(det_response) {
+    //   console.log(det_response);
+      console.log(typeof det_response);
+      var theimage = 'data:image/jpg;base64,'+ det_response;
+      $("#flag-img").attr("src", 'theimage');
+
+      console.log("🌄");
+    });
+    console.log(gPlace);
+    console.log(response);
+    console.log("🏔");
+  });
+}
+getPlacesPhoto('london');

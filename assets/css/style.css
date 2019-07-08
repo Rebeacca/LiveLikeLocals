@@ -13,7 +13,7 @@ hr {
   padding: 0px;
   /* width: 80%; */
   margin: auto;
-  text-align: right;
+  align: right;
 
   
 }
@@ -45,4 +45,10 @@ h3 {
 
 .inputs {
   font-size: 0.8rem;
+}
+
+.img-fluid {
+  height: 128px;
+  width: 128px;
+  padding-right: 10px;
 }

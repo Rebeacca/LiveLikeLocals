@@ -1,8 +1,39 @@
 var city = 'Washington DC';
+var favoriteCityArr = [];
+var username;
+
+var firebaseConfig = {
+  apiKey: "AIzaSyCwR2Wk62ZvmcJ_Y4741s0gDo2LRscKalQ",
+  authDomain: "ctyscrpr.firebaseapp.com",
+  databaseURL: "https://ctyscrpr.firebaseio.com",
+  projectId: "ctyscrpr",
+  storageBucket: "ctyscrpr.appspot.com",
+  messagingSenderId: "959736741159",
+  appId: "1:959736741159:web:bf3be1bddf2ad63e"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+var database = firebase.database();
+
+if(localStorage.getItem('username')) {
+  username = localStorage.getItem('username');
+  database.ref('/userData/').once('value', function(snapshot) {
+    if(snapshot.val().hasOwnProperty(username) && snapshot.val()[username].hasOwnProperty('favoriteCities')){
+      favoriteCityArr = snapshot.val()[username].favoriteCities;
+      favoriteCityArr.forEach(function(cityName) {
+        var newBtn = $('<button>').text(cityName).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', cityName);
+        $('#saved-Cities').append(newBtn);
+      });
+    };
+  });
+  // localStorage.setItem('username', '')
+}
+
+
 if(localStorage.getItem('city')) {
   city = localStorage.getItem('city');
 }
-
 localStorage.setItem('city', '');
 console.log(city);
 
@@ -101,4 +132,9 @@ function gettingDataFromEventfullAPI(search) {
       console.log(events);
     });
 };
-gettingDataFromEventfullAPI(city)
+gettingDataFromEventfullAPI(city);
+
+$(document).on('click', '.favorite-city', function() {
+  window.location = 'events.html';
+  localStorage.setItem('city', this.id);
+});
