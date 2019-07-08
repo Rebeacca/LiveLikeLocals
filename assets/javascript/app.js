@@ -271,6 +271,7 @@ function getPlacesPhoto(search) {
   });
 }
 
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
   if (event.target == modal) {
@@ -278,3 +279,35 @@ window.onclick = function (event) {
   }
 }
 getPlacesPhoto('london');
+
+
+// using NYTimes Api to get ARticles realted to the City
+function getNYTheadlines(search) {
+  let timesAPIKey = "tZBdDvmK4rEbR0G33QN4LMbkuYMVDJr2";
+  let setting = {
+    url:
+      "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+      search +
+      "&api-key=tZBdDvmK4rEbR0G33QN4LMbkuYMVDJr2",
+    method: "GET"
+  };
+  $.ajax(setting).then(function(response) {
+    var articleList = response.response.docs;
+    // console.log(response);
+    // console.log(articleList);
+    var headline_div = $("<ul class='list-group list-group-left' >");
+    for (var i = 0; i < 3; i++) {
+      var headline = articleList[i].headline.main;
+      var timesLink = articleList[i].web_url;
+      var cardlink = $("<a class='card-link'>");
+      cardlink.attr("href", timesLink);
+      cardlink.text(headline);
+      //   console.log(headline_div);
+      headline_div.append(
+        $("<li class='list-group-item bg-dark text-danger' >").append(cardlink)
+      );
+    }
+    $("#nyt-panel-body").append(headline_div);
+  });
+}
+
