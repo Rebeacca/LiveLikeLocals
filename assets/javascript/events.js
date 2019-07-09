@@ -1,3 +1,5 @@
+
+
 var city = 'Washington DC';
 var favoriteCityArr = [];
 var username;
