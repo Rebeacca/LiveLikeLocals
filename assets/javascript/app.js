@@ -22,17 +22,17 @@ function signInValidation() {
   let passwordInput = $("#password-input")
     .val()
     .trim();
-  database.ref("/userAccounts/").on("child_added", function(snapshot) {
+  database.ref("/userAccounts/").on("child_added", function (snapshot) {
     if (
       usernameInput === snapshot.val().username &&
       snapshot.val().password === passwordInput
     ) {
       username = usernameInput;
       localStorage.setItem('username', username);
-      database.ref('/userData/').once('value', function(snapshot) {
-        if(snapshot.val().hasOwnProperty(username) && snapshot.val()[username].hasOwnProperty('favoriteCities')){
+      database.ref('/userData/').once('value', function (snapshot) {
+        if (snapshot.val().hasOwnProperty(username) && snapshot.val()[username].hasOwnProperty('favoriteCities')) {
           favoriteCityArr = snapshot.val()[username].favoriteCities;
-          favoriteCityArr.forEach(function(cityName) {
+          favoriteCityArr.forEach(function (cityName) {
             var newBtn = $('<button>').text(cityName).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', cityName);
             $('#saved-Cities').append(newBtn);
           });
@@ -75,7 +75,7 @@ function gettingDataFromWeatherAPI(search) {
   $.ajax({
     url: `https://api.openweathermap.org/data/2.5/forecast?q=${search},us&units=imperial&mode=json&appid=eebfc72febcd4f3a1f94dfc49ad4df6a`,
     method: "GET"
-  }).then(function(response) {
+  }).then(function (response) {
     console.log(response);
     var list = response.list;
     for (var i = 0; i < list.length; i++) {
@@ -153,7 +153,7 @@ function gettingDataFromEventbriteAPI(search) {
       // "Postman-Token": "L3YAPY66VPHGMRC77LXHA6FX6SGAHLNB3HRV5XZVIWZLHQLA7R"
     }
   };
-  $.ajax(setting).then(function(response) {
+  $.ajax(setting).then(function (response) {
     console.log(response);
   });
 }
@@ -171,11 +171,11 @@ function gettingDataFromEventfullAPI(search) {
     }
   };
   $.ajax(setting)
-    .then(function(response) {
+    .then(function (response) {
       response = xmlToJson(response);
       return response;
     })
-    .then(function(response) {
+    .then(function (response) {
       console.log(response);
       var events = response.search.events.event;
       for (var i = 0; i < 3; i++) {
@@ -194,7 +194,7 @@ function gettingDataFromSportsAPI(search) {
     url: `https://api.sportsdata.io/v3/soccer/scores/json/Areas?key=6bc510d4bf8943dd9ba22c79e698f3f7`,
     method: "GET"
   };
-  $.ajax(setting).then(function(response) {
+  $.ajax(setting).then(function (response) {
     console.log(response);
   });
 }
@@ -204,26 +204,26 @@ function loadcity(cityinput) {
   localStorage.setItem('city', cityinput);
 }
 
-$("#sign-in-btn").on("click", function() {
+$("#sign-in-btn").on("click", function () {
   event.preventDefault();
   signInValidation();
 });
 
-$("#new-acc-btn").on("click", function() {
+$("#new-acc-btn").on("click", function () {
   event.preventDefault();
   createNewAccFunc();
 });
 
-$("#favorite-btn").on("click", function() {
+$("#favorite-btn").on("click", function () {
   addToFavorite();
 });
 
 $(document).on('click', '.favorite-city', function() {
-  gettingDataFromEventfullAPI(this.id)
+  gettingDataFromEventfullAPI(this.id);
 });
 
 
-$("#search-btn").on("click", function() {
+$("#search-btn").on("click", function () {
   let searchInput = $("#input-city").val().trim().replace(/(^|\s)\S/g, x => x.toUpperCase());
   gettingDataFromWeatherAPI(searchInput);
   gettingDataFromEventbriteAPI(searchInput);
@@ -248,7 +248,7 @@ function getPlacesPhoto(search) {
     method: "GET"
   };
   //   then get a photo reference
-  $.ajax(setting).then(function(response) {
+  $.ajax(setting).then(function (response) {
     let gPlace = response.candidates[0].photos[0].photo_reference;
     let photo_setting = {
       url:
@@ -259,10 +259,10 @@ function getPlacesPhoto(search) {
         googleAPIkey,
       method: "GET"
     };
-    $.ajax(photo_setting).then(function(det_response) {
-    //   console.log(det_response);
+    $.ajax(photo_setting).then(function (det_response) {
+      //   console.log(det_response);
       console.log(typeof det_response);
-      var theimage = 'data:image/jpg;base64,'+ det_response;
+      var theimage = 'data:image/jpg;base64,' + det_response;
       $("#flag-img").attr("src", 'theimage');
 
       console.log("🌄");
@@ -272,4 +272,73 @@ function getPlacesPhoto(search) {
     console.log("🏔");
   });
 }
-getPlacesPhoto('United States');
+
+let modal = document.getElementById('id01');
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+  console.log(1)
+}
+
+
+// using NYTimes Api to get ARticles realted to the City
+function getNYTheadlines(search) {
+  let timesAPIKey = "tZBdDvmK4rEbR0G33QN4LMbkuYMVDJr2";
+  let setting = {
+    url:
+      "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+      search +
+      "&api-key=tZBdDvmK4rEbR0G33QN4LMbkuYMVDJr2",
+    method: "GET"
+  };
+  $.ajax(setting).then(function(response) {
+    var articleList = response.response.docs;
+    // console.log(response);
+    // console.log(articleList);
+    var headline_div = $("<ul class='list-group list-group-left' >");
+    for (var i = 0; i < 3; i++) {
+      var headline = articleList[i].headline.main;
+      var timesLink = articleList[i].web_url;
+      var cardlink = $("<a class='card-link'>");
+      cardlink.attr("href", timesLink);
+      cardlink.text(headline);
+      //   console.log(headline_div);
+      headline_div.append(
+        $("<li class='list-group-item bg-dark text-danger' >").append(cardlink)
+      );
+    }
+    $("#nyt-panel-body").append(headline_div);
+  });
+}
+
+function gettingSportsAPI() {
+  let setting = {
+    url:
+      "https://api.sportsdata.io/v3/nba/scores/json/Stadiums?key=46cbe2efbe14462997d1c402c84ffbda",
+    method: "GET"
+  };
+  $.ajax(setting).then(function(response) {
+    console.log("sports API RESPONSE BELOW");
+    console.log(response);
+    var stadiumList = response;
+    for (i = 0; i < stadiumList.length; i++) {
+      console.log(stadiumList[i].City);
+      
+      if (stadiumList[i].City === "Philadelphia") {
+        // console.log("found1");
+        // console.log(stadiumList[i].Name);
+        $("#stadium-name-div").text(stadiumList[i].Name);
+        
+       
+      }
+    }
+  });
+}
+
+gettingSportsAPI();
+
+getPlacesPhoto("london");
+gettingSportsAPI("Philadelphia");
+
