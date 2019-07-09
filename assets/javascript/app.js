@@ -319,7 +319,22 @@ function gettingSportsAPI() {
   $.ajax(setting).then(function(response) {
     console.log("sports API RESPONSE BELOW");
     console.log(response);
+    var stadiumList = response;
+    for (i = 0; i < stadiumList.length; i++) {
+      console.log(stadiumList[i].City);
+      
+      if (stadiumList[i].City === "Philadelphia") {
+        // console.log("found1");
+        // console.log(stadiumList[i].Name);
+        $("#stadium-name-div").text(stadiumList[i].Name);
+        
+       
+      }
+    }
   });
- }
+}
+
+gettingSportsAPI();
+
 getPlacesPhoto("london");
 gettingSportsAPI("Philadelphia");
