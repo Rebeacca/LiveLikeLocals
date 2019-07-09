@@ -8,7 +8,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>LLLL(live life like locals)</title>
 
-<<<<<<< Updated upstream
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
@@ -19,141 +18,97 @@
 
 <body>
   <!-- login -->
-  <div id="id01" class="modal">
 
-    <form class="modal-content animate bg-dark" action="/action_page.php" style="padding: .5rem">
 
-      <section id="signInSection" class="row d-flex justify-content-between flex-row">
-        <div class="col-6 landing-col">
-=======
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <link rel="stylesheet" href="./assets/css/index.css" />
-  </head>
-  <body>
     <!-- Log In Modal -->
     <div id="id01" class="modal">
 
-        <form class="modal-content animate" action="/action_page.php">
-          <h1>Live Life Like Locals</h1>
-            <!-- <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close"
-                    title="Close Modal">&times;</span>
-                <img src="" alt="Avatar" class="avatar">
-            </div> -->
-
-            <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
-
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-
-                <button type="submit">Login</button>
-                <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-            </div>
-
-            <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                    class="cancelbtn">Cancel</button>
-                <span class="psw">Forgot <a href="#">password?</a></span>
-            </div>
-        </form>
-    </div>
-    <!-- End of log in modal -->
-    <div class="container main-container">
-     <!-- <section
+      <form class="modal-content animate bg-dark" action="/action_page.php">
+          
+          
+        <section
         id="signInSection"
         class="row d-flex justify-content-between flex-row"
       >
-        <div class="col-4 landing-col">
->>>>>>> Stashed changes
-          <div class="card border-dark text-white bg-dark ">
-            <div class="card-header">
-              <h5>
-                Log In
-              </h5>
-            </div>
-            <div class="card-body">
-              <form action="" id="sign-in-form" class="sign-in">
-                <div id="inputs" class="inputs form-group">
-                  <div class="form-group">
-                    <input class="form-control form-control-lg" type="text" id="username-input"
-                      placeholder="Enter username" />
+          <div class="col-6 landing-col">
+            <div class="card border-dark text-white bg-dark ">
+              <div class="card-header">
+                <h5>
+                  Log In
+                </h5>
+              </div>
+              <div class="card-body">
+                <form action="" id="sign-in-form" class="sign-in">
+                  <div id="inputs" class="inputs form-group">
+                    <div class="form-group">
+                      <input
+                        class="form-control form-control-lg"
+                        type="text"
+                        id="username-input"
+                        placeholder="Enter username"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <input
+                        class="form-control form-control-lg"
+                        type="text"
+                        id="password-input"
+                        placeholder="Enter password"
+                      />
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <input class="form-control form-control-lg" type="text" id="password-input"
-                      placeholder="Enter password" />
-                  </div>
-                </div>
-                <a href="#" id="sign-in-btn" class="btn btn-danger">Log-in</a>
-                <a href="#" class="btn btn-outline-danger">Sign-up!</a>
-
-              </form>
+                  <a href="#" id="sign-in-btn" class="btn btn-danger">Log-in</a>
+                  <a href="#" class="btn btn-outline-danger">Sign-up!</a>
+                  
+                </form>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="col-6 landing-col">
-          <div class="card border-danger bg-secondary">
-            <div class="card-header text-danger bg-dark">
-              <h5>Create New Account</h5>
-            </div>
-            <div class="card-body">
-              <form action="" id="create-new-acc-form" class="create-new-acc">
-                <div id="inputs" class="inputs form-group">
-                  <div class="form-group">
-                    <input class="form-control form-control-lg" type="text" id="newusername-input"
-                      placeholder="Enter Username" />
+          <div class="col-6 landing-col">
+            <div class="card border-danger bg-secondary">
+              <div class="card-header text-danger bg-dark">
+                <h5>Create New Account</h5>
+              </div>
+              <div class="card-body">
+                <form action="" id="create-new-acc-form" class="create-new-acc">
+                  <div id="inputs" class="inputs form-group">
+                    <div class="form-group">
+                      <input
+                        class="form-control form-control-lg"
+                        type="text"
+                        id="newusername-input"
+                        placeholder="Enter Username"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <input
+                        class="form-control form-control-lg"
+                        type="text"
+                        id="newpassword-input"
+                        placeholder="Enter password"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <input
+                        class="form-control form-control-lg"
+                        type="text"
+                        id="confirm-password-input"
+                        placeholder="Re-enter Password"
+                      />
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <input class="form-control form-control-lg" type="text" id="newpassword-input"
-                      placeholder="Enter password" />
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control form-control-lg" type="text" id="confirm-password-input"
-                      placeholder="Re-enter Password" />
-                  </div>
-                </div>
-                <a href="#" id="new-acc-btn" class="btn btn-danger">Create Account</a>
-                <a href="#" class="btn btn-outline-danger">Sign-in!</a>
-
-              </form>
+                  <a href="#" id="new-acc-btn" class="btn btn-danger"
+                    >Create Account</a
+                  >
+                  <a href="#" class="btn btn-outline-danger">Sign-in!</a>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </form>
+    </div>
 
-
-
-      <!-- <div class="imgcontainer">
-                  <span onclick="document.getElementById('id01').style.display='none'" class="close"
-                      title="Close Modal">&times;</span>
-                  <img src="" alt="Avatar" class="avatar">
-              </div>
-  
-              <div class="container">
-                  <label for="uname"><b>Username</b></label>
-                  <input type="text" placeholder="Enter Username" name="uname" id="username-input" required>
-  
-                  <label for="psw"><b>Password</b></label>
-                  <input type="password" placeholder="Enter Password" name="psw" id="password-input" required>
-  
-                  <button id="sign-in-btn" type="submit">Login</button>
-                  <label>
-                      <input type="checkbox" checked="checked" name="remember"> Remember me
-                  </label>
-              </div>
-  
-              <div class="container" style="background-color:#f1f1f1">
-                  <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                      class="cancelbtn">Cancel</button>
-                  <span class="create"><a href="#">Create New Account</a></span>
-              </div> -->
-    </form>
-  </div>
-  <!-- end login -->
 
   <div class="container main-container">
 
