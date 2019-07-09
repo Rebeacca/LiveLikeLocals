@@ -62,10 +62,13 @@ function createNewAccFunc() {
 }
 
 function addToFavorite() {
-  favoriteCityArr.push($("#dash-city").text());
+  var favoriteCity = $("#dash-city").text();
+  favoriteCityArr.push(favoriteCity);
   database.ref('/userData/' + username).set({
-    favoriteCities: favoriteCityArr
-  })
+    favoriteCities : favoriteCityArr
+  });
+  var newBtn = $('<button>').text(favoriteCity).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', favoriteCity);
+  $('#saved-Cities').append(newBtn);
 };
 
 function gettingDataFromWeatherAPI(search) {
@@ -215,9 +218,8 @@ $("#favorite-btn").on("click", function () {
   addToFavorite();
 });
 
-$(document).on('click', '.favorite-city', function () {
-  window.location = 'events.html';
-  localStorage.setItem('city', this.id);
+$(document).on('click', '.favorite-city', function() {
+  gettingDataFromEventfullAPI(this.id);
 });
 
 
@@ -241,7 +243,7 @@ function getPlacesPhoto(search) {
       herok +
       "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=" +
       search +
-      " &inputtype=textquery&fields=photos,formatted_address,name,place_id,geometry&key=" +
+      " &inputtype=textquery&fields=photos,formatted_address,name,type,place_id,geometry&key=" +
       googleAPIkey,
     method: "GET"
   };
@@ -270,6 +272,7 @@ function getPlacesPhoto(search) {
     console.log("🏔");
   });
 }
+
 let modal = document.getElementById('id01');
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
@@ -338,3 +341,4 @@ gettingSportsAPI();
 
 getPlacesPhoto("london");
 gettingSportsAPI("Philadelphia");
+
