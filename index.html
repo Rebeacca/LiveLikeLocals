@@ -137,13 +137,15 @@
                   <form>
                     <div class="row">
                       <div class="col-6">
-                        <div class="form-group">
+                        <div id="input-form" class="form-group">
                           <input
                             id="input-city"
                             class="form-control"
                             type="text"
+                            autoComplete="off"
                             placeholder="Philadelphia"
                           />
+                          <div id="city-suggestion"></div>
                         </div>
                       </div>
                       <div class="col-3">
@@ -367,6 +369,8 @@
     ></script> -->
     <!-- <script src="assets/javascript/app.js"></script> -->
     <script src="assets/javascript/app.js"></script>
+    <script src="assets/javascript/deletefavorite.js"></script>
+    <script src="assets/javascript/searchAutoFill.js"></script>
 
     <!-- caman javascript for image manipulation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.0.0/caman.full.min.js"></script>

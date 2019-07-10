@@ -70,20 +70,19 @@ function createNewAccFunc() {
 function loadcity(cityinput) {
   $("#dash-city").text(cityinput);
   localStorage.setItem("city", cityinput);
-}
+};
 
 function addToFavorite() {
   var favoriteCity = $("#dash-city").text();
   favoriteCityArr.push(favoriteCity);
-  database.ref("/userData/" + username).set({
-    favoriteCities: favoriteCityArr
+  database.ref('/userData/' + username).set({
+    favoriteCities : favoriteCityArr
   });
-  var newBtn = $("<button>")
-    .text(favoriteCity)
-    .addClass("svd-btn btn btn-outline-danger favorite-city")
-    .attr("id", favoriteCity);
-  $("#saved-Cities").append(newBtn);
-}
+  var newDiv = $('<div>').attr('id', favoriteCity + '-div').addClass('favorite-city-btn-div');
+        var newBtn = $('<button>').text(favoriteCity).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', favoriteCity);
+        newDiv.append(newBtn);
+        $('#saved-Cities').append(newDiv);
+};
 
 function gettingDataFromWeatherAPI(search) {
   $.ajax({
@@ -239,6 +238,16 @@ $("#favorite-btn").on("click", function() {
 
 $(document).on("click", ".favorite-city", function() {
   gettingDataFromEventfullAPI(this.id);
+});
+
+$(document).on('mouseenter', '.favorite-city', function() {
+  deleteFavDisplay(this.id.replace(' ', '-'));
+});
+
+$(document).on('mouseleave', '.favorite-city', function() {
+  setTimeout(function() {
+    $('#X').remove();
+  },2000);
 });
 
 $("#search-btn").on("click", function() {

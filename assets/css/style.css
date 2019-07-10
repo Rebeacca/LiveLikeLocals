@@ -207,3 +207,40 @@ h3 {
   width: 128px;
   padding-right: 10px;
 }
+
+.del-fav-btn {
+    font-size: 10px;
+    text-align: center;
+    padding: 2px 3px;
+    width: 20px;
+    position: absolute;
+    top: 0;
+    background-color:rgb(66, 31, 31);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#input-form {
+    position: relative;
+}
+
+#city-suggestion {
+    display: none;
+    position: absolute;
+    top: 50px;
+    color: #666;
+    background-color: #fff;
+    width: 400px;
+    height: 200px;
+    overflow: scroll;
+    border: 1px solid red;
+    z-index: 99;
+}
+
+.suggested-city {
+    cursor: pointer;
+}
+
+.suggested-city:hover {
+    background-color: red;
+}
