@@ -20,6 +20,8 @@
   </head>
 
   <body>
+
+
     <!-- login -->
 
     <!-- Log In Modal -->
@@ -190,22 +192,25 @@
         <div class="container" id="panel-holder">
           <div class="card-columns">
             <!-- Here is our Weather Panel -->
+
             <div id="weather-panel" class="card text-white bg-dark">
-              <img
-                class="card-img-top"
-                id="weather-panel-icon"
-                src=""
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h5 class="card-title" id="weather-panel-desc">Weather</h5>
-                <p class="card-text" id="weather-panel-temps">
-                  This is a summary of your weather.
-                </p>
+              <div class="media">
+                <img
+                  class="mr-3"
+                  id="weather-panel-icon"
+                  src=""
+                  alt="Card image cap"
+                />
+                <div class="media-body">
+                  <h5 class="mt-0" id="weather-panel-desc">Weather</h5>
+                  <p id="weather-panel-temps">
+                    This is a summary of your weather.
+                  </p>
+                </div>
               </div>
             </div>
 
-            <!-- THiss Panel can be filled or should be hiddein -->
+            <!-- This Panel can be filled or should be hiddein -->
             <div class="card p-3 text-white bg-dark">
               <blockquote class="blockquote mb-0 card-body">
                 <p>
@@ -290,6 +295,7 @@
             <div class="card text-white bg-dark">
               <img
                 class="card-img"
+                id="flag-img"
                 src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Flag_of_Philadelphia%2C_Pennsylvania.svg"
                 alt="Card image"
               />
@@ -361,5 +367,9 @@
     ></script> -->
     <!-- <script src="assets/javascript/app.js"></script> -->
     <script src="assets/javascript/app.js"></script>
+
+    <!-- caman javascript for image manipulation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.0.0/caman.full.min.js"></script>
+
   </body>
 </html>
