@@ -63,7 +63,7 @@ function gettingDataFromWeatherAPI(search) {
     url: `https://api.openweathermap.org/data/2.5/forecast?q=${search},us&units=imperial&mode=json&appid=eebfc72febcd4f3a1f94dfc49ad4df6a`,
     method: "GET"
   }).then(function(response) {
-    console.log(response);
+    // console.log(response);
     var list = response.list;
     for (var i = 0; i < list.length; i++) {
       var time = list[i].dt_txt;
@@ -74,11 +74,11 @@ function gettingDataFromWeatherAPI(search) {
       var weathericonSoure =
         "http://openweathermap.org/img/wn/" + weathericon + "@2x.png";
 
-      console.log(weathericonSoure);
-      console.log("Time :" + time);
-      console.log("Temperature :" + temp);
-      console.log("Humidity :" + humidity);
-      console.log("Weather :" + weather);
+      // console.log(weathericonSoure);
+      // console.log("Time :" + time);
+      // console.log("Temperature :" + temp);
+      // console.log("Humidity :" + humidity);
+      // console.log("Weather :" + weather);
       $("#weather-panel-icon").attr("src", weathericonSoure);
     }
   });
@@ -128,21 +128,36 @@ function xmlToJson(xml) {
 }
 
 function gettingDataFromEventbriteAPI(search) {
-  let setting = {
-    async: true,
-    crossDoamin: true,
-    url: `https://www.eventbriteapi.com/v3/events/search/?q=pa--philadelphia`,
-    method: "GET",
-    headers: {
-      Authorization: "Bearer 4QXLG6TYHW7DY2WGF5Q3",
-      "Content-Type": "application/json"
-      // "cache-control": "no-cache",
-      // "Postman-Token": "L3YAPY66VPHGMRC77LXHA6FX6SGAHLNB3HRV5XZVIWZLHQLA7R"
+  console.log("inside stephanie's functions")
+    let setting = {
+      async: true,
+      crossDoamin: true,
+      url: `https://www.eventbriteapi.com/v3/events/search/?q=pa--philadelphia`,
+      method: "GET",
+      headers: {
+        Authorization: "Bearer 4QXLG6TYHW7DY2WGF5Q3",
+        "Content-Type": "application/json"
+        // "cache-control": "no-cache",
+        // "Postman-Token": "L3YAPY66VPHGMRC77LXHA6FX6SGAHLNB3HRV5XZVIWZLHQLA7R"
+      }
+    };
+    $.ajax(setting).then(function(response) {
+      console.log("thi is my response",response);
+    for (var i = 0; i < 4 ; i++) {
+      var name = response.events[i].name.text;
+      console.log("nameinfo", name)
+      var url = response.events[i].url;
+      console.log("urlinfo", url)
+      var namep = "<p>" + url + "</p>";
+      var urlp = "<p>" + name + "</p>";
+      
+      $(".card-body").append(urlp)
+      // $(".list-group-item-dark").append(urlp);
+      // $(".list-group-item-danger").append(urlp);
+      // $(".list-group-item-dark").append(urlp);
+      // Im going to append to them using the same class name since it will be lopped to the next or should I give them individual names?
     }
-  };
-  $.ajax(setting).then(function(response) {
-    console.log(response);
-  });
+  })
 }
 
 function gettingDataFromEventfullAPI(search) {
@@ -163,7 +178,7 @@ function gettingDataFromEventfullAPI(search) {
       return response;
     })
     .then(function(response) {
-      console.log(response);
+      // console.log("this is 2",response);
       var events = response.search.events.event;
       for (var i = 0; i < events.length; i++) {
         var eventTitle = events[i].title["#text"];
@@ -171,14 +186,14 @@ function gettingDataFromEventfullAPI(search) {
         var eventUrl = events[i].url["#text"];
         var eventLocation = events[i].venue_address["#text"];
         // var eventImageUrl = events[i].image.medium.url['#text'].slice(2);
-        console.log("Title :" + eventTitle);
-        console.log("Description : " + eventDescription);
-        console.log("Url :" + eventUrl);
-        console.log("Location :" + eventLocation);
-        // console.log('ImageUrl :' + eventImageUrl);
-        console.log("------------");
+        // console.log("Title :" + eventTitle);
+        // console.log("Description : " + eventDescription);
+        // console.log("Url :" + eventUrl);
+        // console.log("Location :" + eventLocation);
+        // // console.log('ImageUrl :' + eventImageUrl);
+        // console.log("------------");
       }
-      console.log(events);
+      // console.log("this is event",events);
     });
 }
 
@@ -188,7 +203,7 @@ function gettingDataFromSportsAPI(search) {
     method: "GET"
   };
   $.ajax(setting).then(function(response) {
-    console.log(response);
+    // console.log(response);
   });
 }
 
