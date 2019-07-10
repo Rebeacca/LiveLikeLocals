@@ -89,15 +89,20 @@ function gettingDataFromWeatherAPI(search) {
       var humidity = list[i].main.humidity;
       var weather = list[i].weather[0].description;
       var weathericon = list[i].weather[0].icon;
+      var weatherDescription = list[i].weather[0].description;
+      var weatherTemps = ("Current: " + list[i].main.temp + "º | High: " + list[i].main.temp_max + "º | Low: "+ list[i].main.temp_min + "º");
       var weathericonSoure =
         "http://openweathermap.org/img/wn/" + weathericon + "@2x.png";
 
       console.log(weathericonSoure);
-      console.log("Time :" + time);
-      console.log("Temperature :" + temp);
-      console.log("Humidity :" + humidity);
-      console.log("Weather :" + weather);
+      // console.log("Time :" + time);
+      // console.log("Temperature :" + temp);
+      // console.log("Humidity :" + humidity);
+      // console.log("Weather :" + weather);
       $("#weather-panel-icon").attr("src", weathericonSoure);
+      $("#weather-panel-desc").text(weatherDescription);
+      $("#weather-panel-temps").text(weatherTemps);
+
     }
   });
 };
@@ -226,6 +231,7 @@ $("#search-btn").on("click", function () {
   gettingDataFromEventfullAPI(searchInput);
   // gettingDataFromTwitterAPI();
   gettingDataFromSportsAPI(searchInput);
+  getNYTheadlines(searchInput);
   loadcity(searchInput);
 });
 // Get image of city from google places
@@ -305,7 +311,7 @@ function getNYTheadlines(search) {
         $("<li class='list-group-item bg-dark text-danger' >").append(cardlink)
       );
     }
-    $("#nyt-panel-body").append(headline_div);
+    $("#nyt-panel-body").prepend(headline_div);
   });
 }
 
