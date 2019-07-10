@@ -155,8 +155,12 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-
+ 
   /* filter: grayscale(1); */
+}
+
+.background{
+    z-index: -5;
 }
 
 hr {
