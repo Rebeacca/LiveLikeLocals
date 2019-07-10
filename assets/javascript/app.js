@@ -59,6 +59,11 @@ function createNewAccFunc() {
       password: newPasswordInput
     });
   }
+};
+
+function loadcity(cityinput) {
+  $("#dash-city").text(cityinput);
+  localStorage.setItem('city', cityinput);
 }
 
 function addToFavorite() {
@@ -95,11 +100,7 @@ function gettingDataFromWeatherAPI(search) {
       $("#weather-panel-icon").attr("src", weathericonSoure);
     }
   });
-}
-
-function kelvinToFahrenheit(temp) {
-  return (((temp - 273.15) * 9) / 5 + 32).toFixed(0);
-}
+};
 
 function xmlToJson(xml) {
   // Create the return object
@@ -197,11 +198,6 @@ function gettingDataFromSportsAPI(search) {
   $.ajax(setting).then(function (response) {
     console.log(response);
   });
-}
-
-function loadcity(cityinput) {
-  $("#dash-city").text(cityinput);
-  localStorage.setItem('city', cityinput);
 }
 
 $("#sign-in-btn").on("click", function () {

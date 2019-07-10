@@ -1,8 +1,8 @@
 
-
 var city = 'Washington DC';
 var favoriteCityArr = [];
 var username;
+var prevEventTitle = '';
 
 var firebaseConfig = {
   apiKey: "AIzaSyCwR2Wk62ZvmcJ_Y4741s0gDo2LRscKalQ",
@@ -35,9 +35,72 @@ if(localStorage.getItem('username')) {
 
 if(localStorage.getItem('city')) {
   city = localStorage.getItem('city');
+  $("#dash-city").text(city);
+} else {
+  $("#dash-city").text(city);
 }
 localStorage.setItem('city', '');
-console.log(city);
+
+function signInValidation() {
+  let usernameInput = $("#username-input")
+    .val()
+    .trim();
+  let passwordInput = $("#password-input")
+    .val()
+    .trim();
+  database.ref("/userAccounts/").on("child_added", function (snapshot) {
+    if (
+      usernameInput === snapshot.val().username &&
+      snapshot.val().password === passwordInput
+    ) {
+      username = usernameInput;
+      localStorage.setItem('username', username);
+      database.ref('/userData/').once('value', function (snapshot) {
+        if (snapshot.val().hasOwnProperty(username) && snapshot.val()[username].hasOwnProperty('favoriteCities')) {
+          favoriteCityArr = snapshot.val()[username].favoriteCities;
+          favoriteCityArr.forEach(function (cityName) {
+            var newBtn = $('<button>').text(cityName).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', cityName);
+            $('#saved-Cities').append(newBtn);
+          });
+        };
+      });
+      $("#sign-in-form").remove();
+    }
+  });
+}
+
+function createNewAccFunc() {
+  let newUsernameInput = $("#newusername-input")
+    .val()
+    .trim();
+  let newPasswordInput = $("#newpassword-input")
+    .val()
+    .trim();
+  let confirmPasswordInput = $("#confirm-password-input")
+    .val()
+    .trim();
+  if (newPasswordInput === confirmPasswordInput) {
+    database.ref("/userAccounts").push({
+      username: newUsernameInput,
+      password: newPasswordInput
+    });
+  }
+};
+
+function loadcity(cityinput) {
+  $("#dash-city").text(cityinput);
+  localStorage.setItem('city', cityinput);
+}
+
+function addToFavorite() {
+  var favoriteCity = $("#dash-city").text();
+  favoriteCityArr.push(favoriteCity);
+  database.ref('/userData/' + username).set({
+    favoriteCities : favoriteCityArr
+  });
+  var newBtn = $('<button>').text(favoriteCity).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', favoriteCity);
+  $('#saved-Cities').append(newBtn);
+};
 
 function xmlToJson(xml) {
   // Create the return object
@@ -99,44 +162,71 @@ function gettingDataFromEventfullAPI(search) {
       var events = response.search.events.event;
       for (var i = 0; i < events.length; i++) {
         var eventTitle = events[i].title["#text"];
-        var eventDescription = events[i].description["#text"]; 
-        var eventUrl = events[i].url["#text"];
-        var eventImageUrl;
-        var eventLocation = events[i].venue_address["#text"];
-        if(events[i].image.hasOwnProperty("medium")) {
-          eventImageUrl = 'https://' + events[i].image.medium.url['#text'].slice(2);
-        }else {
-          eventImageUrl = 'https://www.crucial.com.au/blog/wp-content/uploads/2014/12/events_medium.jpg';
-        }
-        var newCardTitle = $('<div>').addClass('card-title');
-        var newTitle = $('<h4>').text(eventTitle);
-        newCardTitle.append(newTitle);
-        var newCardBody = $('<div>').addClass('card-body');
-        var newImgDiv = $('<div>');
-        var newImg = $('<img>').attr('src', eventImageUrl).attr('alt', eventTitle).addClass('float-left img-fluid');
-        newImgDiv.append(newImg);
-        if(eventDescription) {
-          if(eventDescription[4] === '>') {
-            var newDescription = $('<p>').addClass('text-justify').html(eventDescription.slice(5));;
-          } else {
-            var newDescription = $('<p>').html(eventDescription);
+        if(prevEventTitle !== eventTitle) {
+          var eventDescription = events[i].description["#text"]; 
+          var eventUrl = events[i].url["#text"];
+          var eventImageUrl;
+          var eventLocation = events[i].venue_address["#text"];
+          if(events[i].image.hasOwnProperty("medium")) {
+            eventImageUrl = 'https://' + events[i].image.medium.url['#text'].slice(2);
+          }else {
+            eventImageUrl = 'https://www.crucial.com.au/blog/wp-content/uploads/2014/12/events_medium.jpg';
           }
-        }
-        var newLocation = $('<p>').text('Location : ' + eventLocation);
-        var newUrl = $('<a>').html("see more").attr('href', eventUrl).attr('target', '_blank');
-        newCardBody.append(newImgDiv).append(newDescription).append(newLocation).append(newUrl);
-        var newCard = $('<div>').addClass('card p-3 mb-3');
-        newCard.append(newCardTitle).append(newCardBody);
-        var newDiv = $('<div>').addClass('dash-col col-12');
-        newDiv.append(newCard);
-        $('#events').append(newDiv);
+          var newTitle = $('<h4>').text(eventTitle).addClass('card-title');
+          var newCardBody = $('<div>').addClass('card-body');
+          var newImgDiv = $('<div>');
+          var newImg = $('<img>').attr('src', eventImageUrl).attr('alt', eventTitle).addClass('float-left img-fluid');
+          newImgDiv.append(newImg);
+          if(eventDescription) {
+            var eventDescription300 = eventDescription.split('').splice(0,400);
+            var modifiedEventDescription = eventDescription300.join('')+eventDescription.slice(400).split('.')[0] + '...';  
+            if(modifiedEventDescription[4] === '>') {
+              var newDescription = $('<p>').addClass('text-justify card-text').html(modifiedEventDescription.slice(5));;
+            } else {
+              var newDescription = $('<p>').addClass('text-justify card-text').html(modifiedEventDescription);
+            }
+          }
+          
+                
+  
+          var newLocation = $('<p>').text('Location : ' + eventLocation);
+          var newUrl = $('<a>').html("see more").attr('href', eventUrl).attr('target', '_blank');
+          newCardBody.append(newTitle).append(newImgDiv).append(newDescription).append(newLocation).append(newUrl);
+          var newCard = $('<div>').addClass('card mb-3');
+          newCard.append(newCardBody);
+          var newDiv = $('<div>').addClass('dash-col col-12');
+          newDiv.append(newCard);
+          $('#events').append(newDiv);
+          }
       }
       console.log(events);
     });
 };
 gettingDataFromEventfullAPI(city);
 
+$("#sign-in-btn").on("click", function () {
+  event.preventDefault();
+  signInValidation();
+});
+
+$("#new-acc-btn").on("click", function () {
+  event.preventDefault();
+  createNewAccFunc();
+});
+
+$("#search-btn").on("click", function () {
+  console.log(1);
+  let searchInput = $("#input-city").val().trim().replace(/(^|\s)\S/g, x => x.toUpperCase());
+  gettingDataFromEventfullAPI(searchInput);
+  loadcity(searchInput);
+});
+
+$("#favorite-btn").on("click", function () {
+  addToFavorite();
+});
+
 $(document).on('click', '.favorite-city', function() {
-  window.location = 'events.html';
-  localStorage.setItem('city', this.id);
+  $('#events').empty();
+  gettingDataFromEventfullAPI(this.id);
+  loadcity(this.id);
 });
