@@ -143,21 +143,29 @@ function gettingDataFromEventbriteAPI(search) {
     };
     $.ajax(setting).then(function(response) {
       console.log("thi is my response",response);
-    for (var i = 0; i < 4 ; i++) {
+      if(response.events.length > 0){
+            for (var i = 0; i < 3 ; i++) {
       var name = response.events[i].name.text;
       console.log("nameinfo", name)
       var url = response.events[i].url;
       console.log("urlinfo", url)
-      var namep = "<p>" + url + "</p>";
-      var urlp = "<p>" + name + "</p>";
-      
-      $(".card-body").append(urlp)
+      if(i % 2 === 0){
+     $(".event_block").append(`<li class="list-group-item list-group-item-dark"><a href=${url}>${name}</a></li>`)
+      }else{
+     $(".event_block").append(`<li class="list-group-item list-group-item-danger"><a href=${url}>${name}</a></li>`)
+      }
+            }
+      }else{
+        $(".event_block").append(`<li class="list-group-item list-group-item-danger">No results found</li>`) 
+      }
+
+
+      //$(".card-body").append(urlp)
       // $(".list-group-item-dark").append(urlp);
       // $(".list-group-item-danger").append(urlp);
       // $(".list-group-item-dark").append(urlp);
       // Im going to append to them using the same class name since it will be lopped to the next or should I give them individual names?
-    }
-  })
+    })
 }
 
 function gettingDataFromEventfullAPI(search) {
