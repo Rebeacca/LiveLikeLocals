@@ -24,8 +24,10 @@ if(localStorage.getItem('username')) {
     if(snapshot.val().hasOwnProperty(username) && snapshot.val()[username].hasOwnProperty('favoriteCities')){
       favoriteCityArr = snapshot.val()[username].favoriteCities;
       favoriteCityArr.forEach(function(cityName) {
+        var newDiv = $('<div>').attr('id', cityName.replace(' ','-') + '-div').addClass('favorite-city-btn-div');
         var newBtn = $('<button>').text(cityName).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', cityName);
-        $('#saved-Cities').append(newBtn);
+        newDiv.append(newBtn);
+        $('#saved-Cities').append(newDiv);
       });
     };
   });
@@ -98,8 +100,10 @@ function addToFavorite() {
   database.ref('/userData/' + username).set({
     favoriteCities : favoriteCityArr
   });
-  var newBtn = $('<button>').text(favoriteCity).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', favoriteCity);
-  $('#saved-Cities').append(newBtn);
+  var newDiv = $('<div>').attr('id', favoriteCity + '-div').addClass('favorite-city-btn-div');
+        var newBtn = $('<button>').text(favoriteCity).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', favoriteCity);
+        newDiv.append(newBtn);
+        $('#saved-Cities').append(newDiv);
 };
 
 function xmlToJson(xml) {
