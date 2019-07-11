@@ -2,12 +2,12 @@
 h1 {
   text-align: center;
   color: rgb(184, 18, 18);
-  padding-top: 10px;
+  /* padding-top: 10px; */
   text-decoration-line: underline;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   text-decoration-style: dotted;
 }
-/* Full-width input fields */
+Full-width input fields
 input[type=text],
 input[type=password] {
     width: 100%;
@@ -19,7 +19,7 @@ input[type=password] {
 }
 
 /* Set a style for all buttons */
-button {
+/* button {
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -27,7 +27,7 @@ button {
     border: none;
     cursor: pointer;
     width: 100%;
-}
+} */
 
 button:hover {
     opacity: 0.8;
@@ -159,9 +159,9 @@ body {
   /* filter: grayscale(1); */
 }
 
-.background{
+/* .background{
     z-index: -5;
-}
+} */
 
 hr {
   border-top: 1px dotted red;
@@ -172,14 +172,14 @@ hr {
 
   
 }
-#savedCities {
+#saved-Cities-Card{
   margin-bottom: 0;
-  padding-bottom: 0;
+  display: none;
 }
-.card-header {
+/* .card-header {
   padding-bottom: 0;
   padding-top: 1rem;
-}
+} */
 
 input:placeholder {
   color: maroon;

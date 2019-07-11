@@ -1,197 +1,95 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>LLLL(live life like locals)</title>
 
-    <!-- Bootstrap -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>LLLL(live life like locals)</title>
 
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <link rel="stylesheet" href="./assets/css/index.css" />
-  </head>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
-  <body>
-    <!-- login -->
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./assets/css/index.css" />
+</head>
 
-    <!-- Log In Modal -->
-    <div id="id01" class="modal">
-      <form class="modal-content animate bg-dark" action="/action_page.php">
-        <section
-          id="signInSection"
-          class="row d-flex justify-content-between flex-row"
-        >
-          <div class="col-6 landing-col">
-            <div class="card border-dark text-white bg-dark ">
-              <div class="card-header">
-                <h5>
-                  Log In
-                </h5>
-              </div>
-              <div class="card-body">
-                <form action="" id="sign-in-form" class="sign-in">
-                  <div id="inputs" class="inputs form-group">
-                    <div class="form-group">
-                      <input
-                        class="form-control form-control-lg"
-                        type="text"
-                        id="username-input"
-                        placeholder="Enter username"
-                      />
-                    </div>
-                    <div class="form-group">
-                      <input
-                        class="form-control form-control-lg"
-                        type="text"
-                        id="password-input"
-                        placeholder="Enter password"
-                      />
-                    </div>
-                    <a href="#" id="sign-in-btn" class="btn btn-danger"
-                      >Log-in</a
-                    >
-                    <a href="#" class="btn btn-outline-danger">Sign-up!</a>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 landing-col">
-            <div class="card border-danger bg-secondary">
-              <div class="card-header text-danger bg-dark">
-                <h5>Create New Account</h5>
-              </div>
-              <div class="card-body">
-                <form action="" id="create-new-acc-form" class="create-new-acc">
-                  <div id="inputs" class="inputs form-group">
-                    <div class="form-group">
-                      <input
-                        class="form-control form-control-lg"
-                        type="text"
-                        id="newusername-input"
-                        placeholder="Enter Username"
-                      />
-                    </div>
-                    <div class="form-group">
-                      <input
-                        class="form-control form-control-lg"
-                        type="text"
-                        id="newpassword-input"
-                        placeholder="Enter password"
-                      />
-                    </div>
-                    <div class="form-group">
-                      <input
-                        class="form-control form-control-lg"
-                        type="text"
-                        id="confirm-password-input"
-                        placeholder="Re-enter Password"
-                      />
-                    </div>
-                  </div>
-                  <a href="#" id="new-acc-btn" class="btn btn-danger"
-                    >Create Account</a
-                  >
-                  <a href="#" class="btn btn-outline-danger">Sign-in!</a>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
-      </form>
-    </div>
+<body>
 
-    <div class="container main-container">
-      <section
-        id="controlSection"
-        class="row d-flex justify-content-between flex-row"
-      >
-        <div class="col-12 dash-col">
-          <div class="card text-white bg-dark">
-            <div
-              class="card-header"
-              style="border-bottom: 2px red solid; background-color:black"
-            >
-              <div class="row d-flex">
-                <div class="row col-7">
-                  <h3 id="dash-city" class="col-8">
-                    Philadelphila (or other city)
-                  </h3>
-                  <div class="col-4">
-                    <button id="favorite-btn" class="btn btn-danger">
-                      Add to favorite
-                    </button>
-                  </div>
-                </div>
-                <div class="col-5">
-                  <form>
-                    <div class="row">
-                      <div class="col-6">
-                        <div id="input-form" class="form-group">
-                          <input
-                            id="input-city"
-                            class="form-control"
-                            type="text"
-                            autoComplete="off"
-                            placeholder="Philadelphia"
-                          />
-                          <div id="city-suggestion"></div>
-                        </div>
-                      </div>
-                      <div class="col-3">
-                        <a href="#" id="search-btn" class="btn btn-danger"
-                          >Find</a
-                        >
-                      </div>
-                      <div class="col-3">
-                        <a
-                          onclick="document.getElementById('id01').style.display='block'"
-                          href="#"
-                          id="login-btn"
-                          class="btn btn-danger"
-                          >Log-In</a
-                        >
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
+
+
+  <!-- login -->
+
+  <!-- Log In Modal -->
+  <div id="id01" class="modal">
+    <form class="modal-content animate bg-dark" action="/action_page.php">
+      <section id="signInSection" class="row d-flex justify-content-between flex-row">
+        <div class="col-6 landing-col">
+          <div class="card border-dark text-white bg-dark ">
+            <div class="card-header">
+              <h5>
+                Log In
+              </h5>
             </div>
             <div class="card-body">
-              <div
-                id="saved-Cities"
-                class="btn-group btn-group-sm"
-                role="group"
-                aria-label="savedCities"
-              ></div>
+              <form action="" id="sign-in-form" class="sign-in">
+                <div id="inputs" class="inputs form-group">
+                  <div class="form-group">
+                    <input class="form-control form-control-lg" type="text" id="username-input"
+                      placeholder="Enter username" />
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control form-control-lg" type="text" id="password-input"
+                      placeholder="Enter password" />
+                  </div>
+                  <a href="#" id="sign-in-btn" class="btn btn-danger">Log-in</a>
+                  <a href="#" class="btn btn-outline-danger">Sign-up!</a>
+                </div>
+              </form>
             </div>
-            <hr align="center" />
-            <div class="card-body" id="panel-options">
-              <a href="#" class="btn dash-btn-on btn-danger">Weather</a>
-              <a href="#" class="btn dash-btn-on btn-danger">Sports</a>
-              <a href="#" class="btn dash-btn-on btn-danger">Visible Panel</a>
-              <a href="#" class="btn dash-btn-off btn-outline-danger"
-                >Hidden Panel</a
-              >
+          </div>
+        </div>
+        <div class="col-6 landing-col">
+          <div class="card border-danger bg-secondary">
+            <div class="card-header text-danger bg-dark">
+              <h5>Create New Account</h5>
+            </div>
+            <div class="card-body">
+              <form action="" id="create-new-acc-form" class="create-new-acc">
+                <div id="inputs" class="inputs form-group">
+                  <div class="form-group">
+                    <input class="form-control form-control-lg" type="text" id="newusername-input"
+                      placeholder="Enter Username" />
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control form-control-lg" type="text" id="newpassword-input"
+                      placeholder="Enter password" />
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control form-control-lg" type="text" id="confirm-password-input"
+                      placeholder="Re-enter Password" />
+                  </div>
+                </div>
+                <a href="#" id="new-acc-btn" class="btn btn-danger">Create Account</a>
+                <a href="#" class="btn btn-outline-danger">Sign-in!</a>
+              </form>
             </div>
           </div>
         </div>
       </section>
-      <section
-        id="dashboardSection"
-        class="row d-flex justify-content-between flex-row"
-      >
-        <div class="container" id="panel-holder">
-          <div class="card-columns">
-            <!-- Here is our Weather Panel -->
+    </form>
+  </div>
+  <div class="container main-container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <h1>
+        <a  style = "font-size: 1.5rem" class="navbar-brand" href="./index.html">Live Like Locals</a>
+      </h1>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
             <div id="weather-panel" class="card text-white bg-dark">
               <div class="media">
@@ -215,167 +113,205 @@
               </div>
             </div>
 
-            <!-- This Panel can be filled or should be hiddein -->
-            <div class="card p-3 text-white bg-dark">
-              <blockquote class="blockquote mb-0 card-body">
-                <p>
-                  Some Random Piece of info
-                </p>
-                <footer class="blockquote-footer">
-                  <small class="text-muted">
-                    about your city
-                    <cite title="Source Title">API SOURCE</cite>
-                  </small>
-                </footer>
-              </blockquote>
-            </div>
+        </ul>
+        <form class="form-inline my-2 my-lg-0 ">
+          <input class="form-control mr-sm-2" type="search" placeholder="Where to?" aria-label="Search">
+          <button class="btn btn-danger my-2 my-sm-0" id="search-btn" type="submit">GO</button>
 
-            <!-- This is the events Panel -->
 
-            <div class="card text-white bg-dark">
-              <img
-                class="card-img-top"
-                src="https://www.modeparties.com/wp-content/uploads/ocean-club-closing-party-marbella.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h5 class="card-title">
-                  <a href="events.html" target="_blank">Upcoming Events</a>
-                </h5>
-                <ul id="upcoming-events" class="list-group list-group-flush">
-                  <li
-                    id="upcoming-event-0"
-                    class="list-group-item list-group-item-dark"
-                  >
-                    Cras justo odio
-                  </li>
-                  <li
-                    id="upcoming-event-1"
-                    class="list-group-item  list-group-item-danger"
-                  >
-                    Dapibus ac facilisis in
-                  </li>
-                  <li
-                    id="upcoming-event-2"
-                    class="list-group-item list-group-item-dark"
-                  >
-                    Vestibulum at eros
-                  </li>
-                </ul>
-              </div>
-              <!-- THiss Panel can be filled or should be hiddein -->
-              <div class="card-body">
-                <p class="card-text">
-                  This card has supporting text below as a natural lead-in to
-                  additional content.
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
+        </form>
+        <button onclick="document.getElementById('id01').style.display='block'"
+          class="btn btn-outline-danger my-2 my-sm-0" id="search-btn">Log In</button>
+      </div>
+    </nav>
+    <section id="controlSection" class="row d-flex justify-content-between flex-row">
+      <div class="col-12 dash-col">
+        <div class="card text-white bg-dark">
+          <div class="card-header" style="border-bottom: 2px red solid; background-color:black">
+
+            <div class="row">
+              <h2 id="dash-city" class="col-10">
+                Philadelphia
+              </h2>
+              <div class="col-2">
+                <button id="favorite-btn" class="btn btn-danger float-right">
+                  Favorite
+                </button>
               </div>
             </div>
+            <!--  -->
 
-            <!-- This is the NYTimes Headline Panel-->
-            <div
-              class="card bg-danger text-white text-center p-3"
-              id="nyt-panel-body"
-            >
-              <footer class="blockquote-footer">
-                <small>
-                  <cite title="Source Title">NYTIMES API</cite>
-                </small>
-              </footer>
-            </div>
+          </div>
+          <div id="saved-Cities-Card" class="card-body">
+            <div id="saved-Cities" lass="btn-group btn-group-sm" role="group" aria-label="savedCities"></div>
+          </div>
+          <hr>
+          <!-- <div class="card-body" id="panel-options">
+            <a href="#" class="btn dash-btn-on btn-danger">Weather</a>
+            <a href="#" class="btn dash-btn-on btn-danger">Sports</a>
+            <a href="#" class="btn dash-btn-on btn-danger">Visible Panel</a>
+            <a href="#" class="btn dash-btn-off btn-outline-danger">Hidden Panel</a>
+          </div> -->
+        </div>
+      </div>
+    </section>
+    <section id="dashboardSection" class="row d-flex justify-content-between flex-row">
+      <div class="container" id="panel-holder">
+        <div class="card-columns">
+          <!-- Here is our Weather Panel -->
 
-            <!-- THis is the First SPorts Panel, right now it is NBA arena names           -->
-            <div class="card text-center text-white bg-dark">
-              <div class="card-body">
-                <h5 class="card-title">Sports Stadium in your Area</h5>
-                <p id="stadium-name-div" class="card-text">
-                  STADIUMNAME WILL GO HERE
-                </p>
-              </div>
-            </div>
-            <!--  THis is a picture panel, right now it just shows the flag of Philly -->
-            <div class="card text-white bg-dark">
-              <img
-                class="card-img"
-                id="flag-img"
-                src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Flag_of_Philadelphia%2C_Pennsylvania.svg"
-                alt="Card image"
-              />
-            </div>
-
-            <!-- THis Panel can be filled or should be hiddein -->
-            <div class="card p-3 text-right text-white bg-danger">
-              <blockquote class="blockquote mb-0">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Integer posuere erat a ante.
-                </p>
-                <footer class="blockquote-footer">
-                  <small class="text-muted">
-                    Someone famous in
-                    <cite title="Source Title">Source Title</cite>
-                  </small>
-                </footer>
-              </blockquote>
-            </div>
-
-            <!-- THiss Panel can be filled or should be hiddein -->
-            <div class="card text-danger bg-dark">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This card has even longer
-                  content than the first to show that equal height action.
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
+          <div id="weather-panel" class="card text-white bg-dark">
+            <div class="media">
+              <img class="mr-3" id="weather-panel-icon" src="" alt="Card image cap" />
+              <div class="media-body">
+                <h5 class="mt-0" id="weather-panel-desc">Weather</h5>
+                <p id="weather-panel-temps">
+                  This is a summary of your weather.
                 </p>
               </div>
             </div>
           </div>
+
+          <!-- This Panel can be filled or should be hiddein -->
+          <div class="card p-3 text-white bg-dark">
+            <blockquote class="blockquote mb-0 card-body">
+              <p>
+                Some Random Piece of info
+              </p>
+              <footer class="blockquote-footer">
+                <small class="text-muted">
+                  about your city
+                  <cite title="Source Title">API SOURCE</cite>
+                </small>
+              </footer>
+            </blockquote>
+          </div>
+
+          <!-- This is the events Panel -->
+
+          <div class="card text-white bg-dark">
+            <img class="card-img-top"
+              src="https://www.modeparties.com/wp-content/uploads/ocean-club-closing-party-marbella.jpg"
+              alt="Card image cap" />
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="events.html" target="_blank">Upcoming Events</a>
+              </h5>
+              <ul id="upcoming-events" class="list-group list-group-flush">
+                <li id="upcoming-event-0" class="list-group-item list-group-item-dark">
+                  Cras justo odio
+                </li>
+                <li id="upcoming-event-1" class="list-group-item  list-group-item-danger">
+                  Dapibus ac facilisis in
+                </li>
+                <li id="upcoming-event-2" class="list-group-item list-group-item-dark">
+                  Vestibulum at eros
+                </li>
+              </ul>
+            </div>
+            <!-- THiss Panel can be filled or should be hiddein -->
+            <div class="card-body">
+              <p class="card-text">
+                This card has supporting text below as a natural lead-in to
+                additional content.
+              </p>
+              <p class="card-text">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </p>
+            </div>
+          </div>
+
+          <!-- This is the NYTimes Headline Panel-->
+          <div class="card bg-danger text-white text-center p-3" id="nyt-panel-body">
+            <footer class="blockquote-footer">
+              <small>
+                <cite title="Source Title">NYTIMES API</cite>
+              </small>
+            </footer>
+          </div>
+
+          <!-- THis is the First SPorts Panel, right now it is NBA arena names           -->
+          <div class="card text-center text-white bg-dark">
+            <div class="card-body">
+              <h5 class="card-title">Sports Stadium in your Area</h5>
+              <p id="stadium-name-div" class="card-text">
+                STADIUMNAME WILL GO HERE
+              </p>
+            </div>
+          </div>
+          <!--  THis is a picture panel, right now it just shows the flag of Philly -->
+          <div class="card text-white bg-dark">
+            <img class="card-img" id="flag-img"
+              src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Flag_of_Philadelphia%2C_Pennsylvania.svg"
+              alt="Card image" />
+          </div>
+
+          <!-- THis Panel can be filled or should be hiddein -->
+          <div class="card p-3 text-right text-white bg-danger">
+            <blockquote class="blockquote mb-0">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Integer posuere erat a ante.
+              </p>
+              <footer class="blockquote-footer">
+                <small class="text-muted">
+                  Someone famous in
+                  <cite title="Source Title">Source Title</cite>
+                </small>
+              </footer>
+            </blockquote>
+          </div>
+
+          <!-- THiss Panel can be filled or should be hiddein -->
+          <div class="card text-danger bg-dark">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                This is a wider card with supporting text below as a natural
+                lead-in to additional content. This card has even longer
+                content than the first to show that equal height action.
+              </p>
+              <p class="card-text">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </p>
+            </div>
+          </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+  </div>
 
-    <!--end of main-container-->
+  <!--end of main-container-->
 
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
-    <!-- <script
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+  <!-- <script
       src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
       async
       defer
     ></script> -->
-    <!-- <script src="assets/javascript/app.js"></script> -->
-    <script src="assets/javascript/app.js"></script>
-    <script src="assets/javascript/deletefavorite.js"></script>
-    <script src="assets/javascript/searchAutoFill.js"></script>
+  <!-- <script src="assets/javascript/app.js"></script> -->
+  <script src="assets/javascript/app.js"></script>
+  <script src="assets/javascript/deletefavorite.js"></script>
+  <script src="assets/javascript/searchAutoFill.js"></script>
+
+  <!-- caman javascript for image manipulation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.0.0/caman.full.min.js"></script>
+
 
     <!-- caman javascript for image manipulation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.0.0/caman.full.min.js"></script>
   </body>
 </html>
+

@@ -41,6 +41,7 @@ function signInValidation() {
               .addClass("svd-btn btn btn-outline-danger favorite-city")
               .attr("id", cityName);
             $("#saved-Cities").append(newBtn);
+            $("#saved-Cities-Card").css("display", "block");
           });
         }
       });
@@ -263,7 +264,10 @@ var searchInput = "Philadelphia";
 loadpanels(searchInput);
 
 $("#search-btn").on("click", function() {
+  event.preventDefault();
+
   searchInput = $("#input-city")
+
     .val()
     .trim()
     .replace(/(^|\s)\S/g, x => x.toUpperCase());
