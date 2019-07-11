@@ -92,42 +92,40 @@ function addToFavorite() {
 
 function gettingDataFromWeatherAPI(search) {
   $.ajax({
-    url: `https://api.openweathermap.org/data/2.5/forecast?q=${search},us&units=imperial&mode=json&appid=eebfc72febcd4f3a1f94dfc49ad4df6a`,
+    url: `https://api.openweathermap.org/data/2.5/weather?q=${search},us&units=imperial&mode=json&appid=eebfc72febcd4f3a1f94dfc49ad4df6a`,
     method: "GET"
   }).then(function(response) {
     console.log("weather below");
     console.log(response);
-    var list = response.list;
-    console.log(list[0].main.temp_min);
-    for (var i = 0; i < list.length; i++) {
-      var time = list[i].dt_txt;
-      var temp = list[i].main.temp;
-      var humidity = list[i].main.humidity;
-      var weather = list[i].weather[0].description;
-      var weathericon = list[i].weather[0].icon;
-      var weatherDescription = list[i].weather[0].description;
-      var weatherTemp_Current =
-        "Current: " + Math.floor(list[i].main.temp) + "º";
-      var weatherTemp_High = "High: " + Math.floor(list[i].main.temp_max) + "º";
-      var weatherTemp_Low = "Low: " + Math.floor(list[i].main.temp_min) + "º";
-      var weatherTemps =
-        weatherTemp_Current +
-        "\r\n" +
-        weatherTemp_High +
-        "\r\n" +
-        weatherTemp_Low;
-      var weathericonSoure =
-        "http://openweathermap.org/img/wn/" + weathericon + "@2x.png";
+    var list = response;
+    console.log(list.main.temp_min);
 
-      // console.log(weathericonSoure);
-      // console.log("Time :" + time);
-      // console.log("Temperature :" + temp);
-      // console.log("Humidity :" + humidity);
-      // console.log("Weather :" + weather);
-      $("#weather-panel-icon").attr("src", weathericonSoure);
-      $("#weather-panel-desc").text(weatherDescription);
-      $("#weather-panel-temps").text(weatherTemps);
-    }
+    // var time = list[i].dt_txt;
+    // var temp = list[i].main.temp;
+    // var humidity = list[i].main.humidity;
+    // var weather = list[i].weather[0].description;
+    var weathericon = list.weather[0].icon;
+    var weatherDescription = list.weather[0].description;
+    var weatherTemp_Current = "Current: " + Math.floor(list.main.temp) + "º";
+    var weatherTemp_High = "High: " + Math.floor(list.main.temp_max) + "º";
+    var weatherTemp_Low = "Low: " + Math.floor(list.main.temp_min) + "º";
+    var weatherTemps =
+      weatherTemp_Current +
+      "\r\n" +
+      weatherTemp_High +
+      "\r\n" +
+      weatherTemp_Low;
+    var weathericonSoure =
+      "http://openweathermap.org/img/wn/" + weathericon + "@2x.png";
+
+    // console.log(weathericonSoure);
+    // console.log("Time :" + time);
+    // console.log("Temperature :" + temp);
+    // console.log("Humidity :" + humidity);
+    // console.log("Weather :" + weather);
+    $("#weather-panel-icon").attr("src", weathericonSoure);
+    $("#weather-panel-desc").text(weatherDescription);
+    $("#weather-panel-temps").text(weatherTemps);
   });
 }
 
@@ -248,6 +246,8 @@ $("#favorite-btn").on("click", function() {
 
 $(document).on("click", ".favorite-city", function() {
   gettingDataFromEventfullAPI(this.id);
+  loadpanels(this.id);
+  // console.log(this.id);
 });
 
 $(document).on("mouseenter", ".favorite-city", function() {
@@ -267,7 +267,6 @@ $("#search-btn").on("click", function() {
   event.preventDefault();
 
   searchInput = $("#input-city")
-
     .val()
     .trim()
     .replace(/(^|\s)\S/g, x => x.toUpperCase());
