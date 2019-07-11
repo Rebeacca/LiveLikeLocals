@@ -2,7 +2,7 @@
 Project 1
 
 ### Project Title
-# LIVE CITY
+# LIVE LIKE LOCALS
 
 LLLL - Live Life Like Locals
 
@@ -13,7 +13,7 @@ LLLL - Live Life Like Locals
 A dash board with various info about a particular location. Including Events, Weather, Map, Sports, Landmarks, Pictures, and Tweets.  
 Also user to store their favorite cities and if they have been there. 
 
-### Skethc of the Design
+### Sketch of the Design
 [See wire frame of Landing Page and Dashboard Page](https://drive.google.com/file/d/1-oBXfiJ9c2-8TDEMnMD0eGRKxSTQpHhM/view?usp=sharing)
 * Site is essentially a dashboard with inforamtion about a city/location.
 * Site contains "Panels" of inforamtion pulled from APIs to display various data sets. 
