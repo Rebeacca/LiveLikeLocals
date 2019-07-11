@@ -106,6 +106,7 @@ function gettingDataFromWeatherAPI(search) {
     // var weather = list[i].weather[0].description;
     var weathericon = list.weather[0].icon;
     var weatherDescription = list.weather[0].description;
+    weatherDescription = weatherDescription.toUpperCase();
     var weatherTemp_Current = "Current: " + Math.floor(list.main.temp) + "º";
     var weatherTemp_High = "High: " + Math.floor(list.main.temp_max) + "º";
     var weatherTemp_Low = "Low: " + Math.floor(list.main.temp_min) + "º";
@@ -351,7 +352,7 @@ function getNYTheadlines(search) {
     // console.log(response);
     // console.log(articleList);
     var headline_div = $("<ul class='list-group list-group-left' >");
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 5; i++) {
       var headline = articleList[i].headline.main;
       var timesLink = articleList[i].web_url;
       var cardlink = $("<a class='card-link'>");
@@ -362,6 +363,8 @@ function getNYTheadlines(search) {
         $("<li class='list-group-item bg-dark text-danger' >").append(cardlink)
       );
     }
+
+    $("#nyt-panel-body").empty();
     $("#nyt-panel-body").prepend(headline_div);
   });
 }
