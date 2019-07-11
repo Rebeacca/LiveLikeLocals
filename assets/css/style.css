@@ -155,12 +155,11 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-blend-mode: multiply;
+  background-color: rgba(51, 48, 48, .5);
+
  
   /* filter: grayscale(1); */
-}
-
-.background{
-    z-index: -5;
 }
 
 hr {

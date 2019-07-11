@@ -78,7 +78,7 @@ function addToFavorite() {
   database.ref('/userData/' + username).set({
     favoriteCities : favoriteCityArr
   });
-  var newDiv = $('<div>').attr('id', favoriteCity + '-div').addClass('favorite-city-btn-div');
+  var newDiv = $('<div>').attr('id', favoriteCity.replace(' ', '-') + '-div').addClass('favorite-city-btn-div');
         var newBtn = $('<button>').text(favoriteCity).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', favoriteCity);
         newDiv.append(newBtn);
         $('#saved-Cities').append(newDiv);
@@ -86,38 +86,11 @@ function addToFavorite() {
 
 function gettingDataFromWeatherAPI(search) {
   $.ajax({
-    url: `https://api.openweathermap.org/data/2.5/forecast?q=${search},us&units=imperial&mode=json&appid=eebfc72febcd4f3a1f94dfc49ad4df6a`,
+    url: `https://api.openweathermap.org/data/2.5/weather?q=${search},us&units=imperial&mode=json&appid=eebfc72febcd4f3a1f94dfc49ad4df6a`,
     method: "GET"
   }).then(function(response) {
-    // console.log(response);
-    var list = response.list;
-    for (var i = 0; i < list.length; i++) {
-      var time = list[i].dt_txt;
-      var temp = list[i].main.temp;
-      var humidity = list[i].main.humidity;
-      var weather = list[i].weather[0].description;
-      var weathericon = list[i].weather[0].icon;
-      var weatherDescription = list[i].weather[0].description;
-      var weatherTemps =
-        "Current: " +
-        list[i].main.temp +
-        "º | High: " +
-        list[i].main.temp_max +
-        "º | Low: " +
-        list[i].main.temp_min +
-        "º";
-      var weathericonSoure =
-        "http://openweathermap.org/img/wn/" + weathericon + "@2x.png";
-
-      // console.log(weathericonSoure);
-      // console.log("Time :" + time);
-      // console.log("Temperature :" + temp);
-      // console.log("Humidity :" + humidity);
-      // console.log("Weather :" + weather);
-      $("#weather-panel-icon").attr("src", weathericonSoure);
-      $("#weather-panel-desc").text(weatherDescription);
-      $("#weather-panel-temps").text(weatherTemps);
-    }
+    console.log(response);
+    console.log(response.weather);
   });
 }
 
@@ -158,24 +131,6 @@ function xmlToJson(xml) {
     }
   }
   return obj;
-}
-
-function gettingDataFromEventbriteAPI(search) {
-  let setting = {
-    async: true,
-    crossDoamin: true,
-    url: `https://www.eventbriteapi.com/v3/events/search/?q=pa--philadelphia`,
-    method: "GET",
-    headers: {
-      Authorization: "Bearer 4QXLG6TYHW7DY2WGF5Q3",
-      "Content-Type": "application/json"
-      // "cache-control": "no-cache",
-      // "Postman-Token": "L3YAPY66VPHGMRC77LXHA6FX6SGAHLNB3HRV5XZVIWZLHQLA7R"
-    }
-  };
-  $.ajax(setting).then(function(response) {
-    console.log(response);
-  });
 }
 
 function gettingDataFromEventfullAPI(search) {
@@ -256,7 +211,6 @@ $("#search-btn").on("click", function() {
     .trim()
     .replace(/(^|\s)\S/g, x => x.toUpperCase());
   gettingDataFromWeatherAPI(searchInput);
-  gettingDataFromEventbriteAPI(searchInput);
   gettingDataFromEventfullAPI(searchInput);
   getPlacesPhoto(searchInput);
 

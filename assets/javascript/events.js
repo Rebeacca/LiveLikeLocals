@@ -61,7 +61,7 @@ function signInValidation() {
         if (snapshot.val().hasOwnProperty(username) && snapshot.val()[username].hasOwnProperty('favoriteCities')) {
           favoriteCityArr = snapshot.val()[username].favoriteCities;
           favoriteCityArr.forEach(function (cityName) {
-            var newDiv = $('<div>').attr('id',cityName + '-div');
+            var newDiv = $('<div>').attr('id',cityName.replace(' ', '-')  + '-div');
             var newBtn = $('<button>').text(cityName).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', cityName);
             newDiv.append(newBtn);
             $('#saved-Cities').append(newDiv);
@@ -102,7 +102,7 @@ function addToFavorite() {
   database.ref('/userData/' + username).set({
     favoriteCities : favoriteCityArr
   });
-  var newDiv = $('<div>').attr('id',favoriteCity + '-div');
+  var newDiv = $('<div>').attr('id',favoriteCity.replace(' ', '-') + '-div');
   var newBtn = $('<button>').text(favoriteCity).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', favoriteCity);
   newDiv.append(newBtn);
   $('#saved-Cities').append(newDiv);
