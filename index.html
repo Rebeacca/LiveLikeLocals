@@ -19,7 +19,6 @@
 <body>
 
 
-
   <!-- login -->
 
   <!-- Log In Modal -->
@@ -82,7 +81,7 @@
     </form>
   </div>
   <div class="container main-container">
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-dark">
       <h1>
         <a  style = "font-size: 1.5rem" class="navbar-brand" href="./index.html">Live Like Locals</a>
       </h1>
@@ -91,31 +90,12 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-            <div id="weather-panel" class="card text-white bg-dark">
-              <div class="media">
-                <img
-                  class="mr-3"
-                  id="weather-panel-icon"
-                  src=""
-                  alt="Card image cap"
-                />
-                <div class="media-body">
-                  <h5
-                    class="mt-0 p-3"
-                    id="weather-panel-desc"
-                  >
-                    Weather
-                  </h5>
-                  <p class="p-3" id="weather-panel-temps">
-                    This is a summary of your weather.
-                  </p>
-                </div>
-              </div>
-            </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
 
         </ul>
         <form class="form-inline my-2 my-lg-0 ">
-          <input class="form-control mr-sm-2" type="search" placeholder="Where to?" aria-label="Search">
+          <input id="input-city" class="form-control mr-sm-2" type="search" placeholder="Where to?" aria-label="Search">
           <button class="btn btn-danger my-2 my-sm-0" id="search-btn" type="submit">GO</button>
 
 
@@ -309,9 +289,6 @@
   <!-- caman javascript for image manipulation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.0.0/caman.full.min.js"></script>
 
+</body>
 
-    <!-- caman javascript for image manipulation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.0.0/caman.full.min.js"></script>
-  </body>
 </html>
-

@@ -155,6 +155,8 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-blend-mode: multiply;
+  background-color: rgb(90, 86, 86);
  
   /* filter: grayscale(1); */
 }
