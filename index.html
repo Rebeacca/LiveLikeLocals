@@ -19,6 +19,7 @@
 <body>
 
 
+
   <!-- login -->
 
   <!-- Log In Modal -->
@@ -90,8 +91,27 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+            <div id="weather-panel" class="card text-white bg-dark">
+              <div class="media">
+                <img
+                  class="mr-3"
+                  id="weather-panel-icon"
+                  src=""
+                  alt="Card image cap"
+                />
+                <div class="media-body">
+                  <h5
+                    class="mt-0 p-3"
+                    id="weather-panel-desc"
+                  >
+                    Weather
+                  </h5>
+                  <p class="p-3" id="weather-panel-temps">
+                    This is a summary of your weather.
+                  </p>
+                </div>
+              </div>
+            </div>
 
         </ul>
         <form class="form-inline my-2 my-lg-0 ">
@@ -289,6 +309,9 @@
   <!-- caman javascript for image manipulation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.0.0/caman.full.min.js"></script>
 
-</body>
 
+    <!-- caman javascript for image manipulation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.0.0/caman.full.min.js"></script>
+  </body>
 </html>
+

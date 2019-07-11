@@ -71,27 +71,34 @@ function createNewAccFunc() {
 function loadcity(cityinput) {
   $("#dash-city").text(cityinput);
   localStorage.setItem("city", cityinput);
-};
+}
 
 function addToFavorite() {
   var favoriteCity = $("#dash-city").text();
   favoriteCityArr.push(favoriteCity);
-  database.ref('/userData/' + username).set({
-    favoriteCities : favoriteCityArr
+  database.ref("/userData/" + username).set({
+    favoriteCities: favoriteCityArr
   });
-  var newDiv = $('<div>').attr('id', favoriteCity + '-div').addClass('favorite-city-btn-div');
-        var newBtn = $('<button>').text(favoriteCity).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', favoriteCity);
-        newDiv.append(newBtn);
-        $('#saved-Cities').append(newDiv);
-};
+  var newDiv = $("<div>")
+    .attr("id", favoriteCity + "-div")
+    .addClass("favorite-city-btn-div");
+  var newBtn = $("<button>")
+    .text(favoriteCity)
+    .addClass("svd-btn btn btn-outline-danger favorite-city")
+    .attr("id", favoriteCity);
+  newDiv.append(newBtn);
+  $("#saved-Cities").append(newDiv);
+}
 
 function gettingDataFromWeatherAPI(search) {
   $.ajax({
     url: `https://api.openweathermap.org/data/2.5/forecast?q=${search},us&units=imperial&mode=json&appid=eebfc72febcd4f3a1f94dfc49ad4df6a`,
     method: "GET"
   }).then(function(response) {
-    // console.log(response);
+    console.log("weather below");
+    console.log(response);
     var list = response.list;
+    console.log(list[0].main.temp_min);
     for (var i = 0; i < list.length; i++) {
       var time = list[i].dt_txt;
       var temp = list[i].main.temp;
@@ -99,14 +106,16 @@ function gettingDataFromWeatherAPI(search) {
       var weather = list[i].weather[0].description;
       var weathericon = list[i].weather[0].icon;
       var weatherDescription = list[i].weather[0].description;
+      var weatherTemp_Current =
+        "Current: " + Math.floor(list[i].main.temp) + "º";
+      var weatherTemp_High = "High: " + Math.floor(list[i].main.temp_max) + "º";
+      var weatherTemp_Low = "Low: " + Math.floor(list[i].main.temp_min) + "º";
       var weatherTemps =
-        "Current: " +
-        list[i].main.temp +
-        "º | High: " +
-        list[i].main.temp_max +
-        "º | Low: " +
-        list[i].main.temp_min +
-        "º";
+        weatherTemp_Current +
+        "\r\n" +
+        weatherTemp_High +
+        "\r\n" +
+        weatherTemp_Low;
       var weathericonSoure =
         "http://openweathermap.org/img/wn/" + weathericon + "@2x.png";
 
@@ -241,31 +250,28 @@ $(document).on("click", ".favorite-city", function() {
   gettingDataFromEventfullAPI(this.id);
 });
 
-$(document).on('mouseenter', '.favorite-city', function() {
-  deleteFavDisplay(this.id.replace(' ', '-'));
+$(document).on("mouseenter", ".favorite-city", function() {
+  deleteFavDisplay(this.id.replace(" ", "-"));
 });
 
-$(document).on('mouseleave', '.favorite-city', function() {
+$(document).on("mouseleave", ".favorite-city", function() {
   setTimeout(function() {
-    $('#X').remove();
-  },2000);
+    $("#X").remove();
+  }, 2000);
 });
+// set deafult city to philly
+var searchInput = "Philadelphia";
+loadpanels(searchInput);
 
 $("#search-btn").on("click", function() {
   event.preventDefault();
-  let searchInput = $("#input-city")
+
+  searchInput = $("#input-city")
+
     .val()
     .trim()
     .replace(/(^|\s)\S/g, x => x.toUpperCase());
-  gettingDataFromWeatherAPI(searchInput);
-  gettingDataFromEventbriteAPI(searchInput);
-  gettingDataFromEventfullAPI(searchInput);
-  getPlacesPhoto(searchInput);
-
-  // gettingDataFromTwitterAPI();
-  gettingDataFromSportsAPI(searchInput);
-  getNYTheadlines(searchInput);
-  loadcity(searchInput);
+  loadpanels(searchInput);
 });
 // Get image of city from google places
 function getPlacesPhoto(search) {
@@ -381,6 +387,18 @@ function gettingSportsAPI() {
       }
     }
   });
+}
+
+function loadpanels(searchInput) {
+  gettingDataFromWeatherAPI(searchInput);
+  gettingDataFromEventbriteAPI(searchInput);
+  gettingDataFromEventfullAPI(searchInput);
+  getPlacesPhoto(searchInput);
+
+  // gettingDataFromTwitterAPI();
+  gettingDataFromSportsAPI(searchInput);
+  getNYTheadlines(searchInput);
+  loadcity(searchInput);
 }
 
 gettingSportsAPI();
