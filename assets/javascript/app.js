@@ -41,6 +41,7 @@ function signInValidation() {
               .addClass("svd-btn btn btn-outline-danger favorite-city")
               .attr("id", cityName);
             $("#saved-Cities").append(newBtn);
+            $("#saved-Cities-Card").css("display", "block");
           });
         }
       });
@@ -251,6 +252,7 @@ $(document).on('mouseleave', '.favorite-city', function() {
 });
 
 $("#search-btn").on("click", function() {
+  event.preventDefault();
   let searchInput = $("#input-city")
     .val()
     .trim()
