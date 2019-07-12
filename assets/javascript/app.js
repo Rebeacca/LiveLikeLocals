@@ -1,5 +1,9 @@
 var favoriteCityArr = [];
 var username;
+var searchInput = "Philadelphia";
+if(localStorage.getItem('city') !== '') {
+  searchInput = localStorage.getItem('city');
+}
 
 var firebaseConfig = {
   apiKey: "AIzaSyCwR2Wk62ZvmcJ_Y4741s0gDo2LRscKalQ",
@@ -106,6 +110,7 @@ function gettingDataFromWeatherAPI(search) {
     // var weather = list[i].weather[0].description;
     var weathericon = list.weather[0].icon;
     var weatherDescription = list.weather[0].description;
+    weatherDescription = weatherDescription.toUpperCase();
     var weatherTemp_Current = "Current: " + Math.floor(list.main.temp) + "º";
     var weatherTemp_High = "High: " + Math.floor(list.main.temp_max) + "º";
     var weatherTemp_Low = "Low: " + Math.floor(list.main.temp_min) + "º";
@@ -210,6 +215,18 @@ function gettingDataFromSportsAPI(search) {
   $.ajax(setting).then(function(response) {
     console.log(response);
   });
+};
+
+function loadpanels(searchInput) {
+  loadcity(searchInput);
+  gettingDataFromWeatherAPI(searchInput);
+  gettingDataFromEventfullAPI(searchInput);
+  getPlacesPhoto(searchInput);
+
+  // gettingDataFromTwitterAPI();
+  gettingDataFromSportsAPI(searchInput);
+  getNYTheadlines(searchInput);
+  gettingSportsAPI(searchInput);
 }
 
 $("#sign-in-btn").on("click", function() {
@@ -242,17 +259,17 @@ $(document).on("mouseleave", ".favorite-city", function() {
   }, 2000);
 });
 // set deafult city to philly
-var searchInput = "Philadelphia";
+
 loadpanels(searchInput);
 
 $("#search-btn").on("click", function() {
   event.preventDefault();
-
   searchInput = $("#input-city")
     .val()
     .trim()
     .replace(/(^|\s)\S/g, x => x.toUpperCase());
   loadpanels(searchInput);
+  $("#input-city").val('');
 });
 // Get image of city from google places
 function getPlacesPhoto(search) {
@@ -333,7 +350,7 @@ function getNYTheadlines(search) {
     // console.log(response);
     // console.log(articleList);
     var headline_div = $("<ul class='list-group list-group-left' >");
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 5; i++) {
       var headline = articleList[i].headline.main;
       var timesLink = articleList[i].web_url;
       var cardlink = $("<a class='card-link'>");
@@ -344,11 +361,13 @@ function getNYTheadlines(search) {
         $("<li class='list-group-item bg-dark text-danger' >").append(cardlink)
       );
     }
+
+    $("#nyt-panel-body").empty();
     $("#nyt-panel-body").prepend(headline_div);
   });
 }
 
-function gettingSportsAPI() {
+function gettingSportsAPI(search) {
   let setting = {
     url:
       "https://api.sportsdata.io/v3/nba/scores/json/Stadiums?key=46cbe2efbe14462997d1c402c84ffbda",
@@ -359,29 +378,11 @@ function gettingSportsAPI() {
     console.log(response);
     var stadiumList = response;
     for (i = 0; i < stadiumList.length; i++) {
-      // console.log(stadiumList[i].City);
-
-      if (stadiumList[i].City === "Philadelphia") {
-        // console.log("found1");
-        // console.log(stadiumList[i].Name);
+      if (stadiumList[i].City === search) {
         $("#stadium-name-div").text(stadiumList[i].Name);
       }
     }
   });
 }
 
-function loadpanels(searchInput) {
-  gettingDataFromWeatherAPI(searchInput);
-  gettingDataFromEventbriteAPI(searchInput);
-  gettingDataFromEventfullAPI(searchInput);
-  getPlacesPhoto(searchInput);
 
-  // gettingDataFromTwitterAPI();
-  gettingDataFromSportsAPI(searchInput);
-  getNYTheadlines(searchInput);
-  loadcity(searchInput);
-}
-
-gettingSportsAPI();
-
-gettingSportsAPI("Philadelphia");
