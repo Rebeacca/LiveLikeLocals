@@ -31,7 +31,7 @@
               id="signInSection"
               class="row d-flex justify-content-center flex-row"
             >
-              <div class="col-4 landing-col">
+              <div id="log-in-div" class="col-4 landing-col">
                 <div class="card border-light text-white bg-dark ">
                   <div class="card-header">
                     <h5>
@@ -60,13 +60,13 @@
                         <a href="#" id="sign-in-btn" class="btn btn-danger"
                           >Log-in</a
                         >
-                        <a href="#" class="btn btn-outline-danger">Sign-up!</a>
+                        <a id="sign-up-link" href="#" class="btn btn-outline-danger">Sign-up!</a>
                       </div>
                     </form>
                   </div>
                 </div>
               </div>
-              <div class="col-4 landing-col">
+              <div id="create-acc-div" class="col-4 landing-col">
                 <div class="card border-danger bg-secondary">
                   <div class="card-header text-danger bg-dark">
                     <h5>Create Account</h5>
@@ -106,7 +106,7 @@
                       <a href="#" id="new-acc-btn" class="btn btn-danger"
                         >Create</a
                       >
-                      <a href="#" class="btn btn-outline-danger">Sign-in!</a>
+                      <a id="sign-in-link" href="#" class="btn btn-outline-danger">Sign-in!</a>
                     </form>
                   </div>
                 </div>
@@ -157,10 +157,17 @@
           </button>
         </div>
         <button
-          onclick="document.getElementById('id01').style.display='block'"
-          class="btn btn-outline-danger my-2 my-sm-0"
+          class="btn btn-outline-danger my-2 ml-2 my-sm-0"
+          id='log-in-btn'
         >
           Log In
+        </button>
+        <button
+          class="btn btn-outline-danger my-2 ml-2 my-sm-0"
+          style="display: none"
+          id='log-out-btn'
+        >
+          Log out
         </button>
         <!-- </section> -->
       </nav>
@@ -253,33 +260,30 @@
             <!-- This is the events Panel -->
 
             <div class="card text-white bg-dark">
-              <img
+              <img id="upcoming-event-img"
                 class="card-img-top"
                 src="https://www.modeparties.com/wp-content/uploads/ocean-club-closing-party-marbella.jpg"
                 alt="Card image cap"
               />
               <div class="card-body">
                 <h5 class="card-title">
-                  <a href="events.html" target="_blank">Upcoming Events</a>
+                  <a href="events.html" target="_blank" class="card-link">Upcoming Events</a>
                 </h5>
                 <ul id="upcoming-events" class="list-group list-group-flush">
                   <li
                     id="upcoming-event-0"
                     class="list-group-item list-group-item-dark"
                   >
-                    Cras justo odio
                   </li>
                   <li
                     id="upcoming-event-1"
                     class="list-group-item  list-group-item-danger"
                   >
-                    Dapibus ac facilisis in
                   </li>
                   <li
                     id="upcoming-event-2"
                     class="list-group-item list-group-item-dark"
                   >
-                    Vestibulum at eros
                   </li>
                 </ul>
               </div>
@@ -311,6 +315,7 @@
             <div class="card text-center text-white bg-dark">
               <div class="card-body">
                 <h5 class="card-title">NBA Arena in your Area</h5>
+                <hr>
                 <p id="stadium-name-div" class="card-text">
                   STADIUM NAME WILL GO HERE
                 </p>
