@@ -40,11 +40,15 @@ function signInValidation() {
         ) {
           favoriteCityArr = snapshot.val()[username].favoriteCities;
           favoriteCityArr.forEach(function(cityName) {
+            var newDiv = $("<div>")
+              .attr("id", cityName.replace(' ', '-') + "-div")
+              .addClass("favorite-city-btn-div mr-2 ml-2");
             var newBtn = $("<button>")
               .text(cityName)
               .addClass("svd-btn btn btn-outline-danger favorite-city")
               .attr("id", cityName);
-            $("#saved-Cities").append(newBtn);
+            newDiv.append(newBtn);
+            $("#saved-Cities").append(newDiv);
             $("#saved-Cities-Card").css("display", "block");
           });
         }
@@ -84,8 +88,8 @@ function addToFavorite() {
     favoriteCities: favoriteCityArr
   });
   var newDiv = $("<div>")
-    .attr("id", favoriteCity + "-div")
-    .addClass("favorite-city-btn-div");
+    .attr("id", favoriteCity.replace(' ', '-') + "-div")
+    .addClass("favorite-city-btn-div mr-2 ml-2");
   var newBtn = $("<button>")
     .text(favoriteCity)
     .addClass("svd-btn btn btn-outline-danger favorite-city")
@@ -99,15 +103,7 @@ function gettingDataFromWeatherAPI(search) {
     url: `https://api.openweathermap.org/data/2.5/weather?q=${search},us&units=imperial&mode=json&appid=eebfc72febcd4f3a1f94dfc49ad4df6a`,
     method: "GET"
   }).then(function(response) {
-    console.log("weather below");
-    console.log(response);
     var list = response;
-    console.log(list.main.temp_min);
-
-    // var time = list[i].dt_txt;
-    // var temp = list[i].main.temp;
-    // var humidity = list[i].main.humidity;
-    // var weather = list[i].weather[0].description;
     var weathericon = list.weather[0].icon;
     var weatherDescription = list.weather[0].description;
     weatherDescription = weatherDescription.toUpperCase();
@@ -122,12 +118,6 @@ function gettingDataFromWeatherAPI(search) {
       weatherTemp_Low;
     var weathericonSoure =
       "http://openweathermap.org/img/wn/" + weathericon + "@2x.png";
-
-    // console.log(weathericonSoure);
-    // console.log("Time :" + time);
-    // console.log("Temperature :" + temp);
-    // console.log("Humidity :" + humidity);
-    // console.log("Weather :" + weather);
     $("#weather-panel-icon").attr("src", weathericonSoure);
     $("#weather-panel-desc").text(weatherDescription);
     $("#weather-panel-temps").text(weatherTemps);
@@ -176,7 +166,6 @@ function xmlToJson(xml) {
 function gettingDataFromEventfullAPI(search) {
   let address = "philadelphia";
   let setting = {
-    // http://api.eventful.com/json/events/search?...&location=San+Diego
     url: `https://community-eventful.p.rapidapi.com/events/search?keywords=${search}&app_key=RG2KXbmbvfckpd86`,
     method: "GET",
     contentType: "application/json",
@@ -191,87 +180,35 @@ function gettingDataFromEventfullAPI(search) {
       return response;
     })
     .then(function(response) {
-      console.log(response);
       var events = response.search.events.event;
       for (var i = 0; i < 3; i++) {
         var eventTitle = events[i].title["#text"];
         var eventUrl = events[i].url["#text"];
-        console.log(eventTitle);
         var newTitle = $("<a>")
           .attr("src", eventUrl)
           .attr("target", "_blank")
           .text(eventTitle);
         $("#upcoming-event-" + i).html(newTitle);
       }
-      console.log(events);
     });
 }
 
-function gettingDataFromSportsAPI(search) {
+function gettingSportsAPI(search) {
   let setting = {
-    url: `https://api.sportsdata.io/v3/soccer/scores/json/Areas?key=6bc510d4bf8943dd9ba22c79e698f3f7`,
+    url:
+      "https://api.sportsdata.io/v3/nba/scores/json/Stadiums?key=46cbe2efbe14462997d1c402c84ffbda",
     method: "GET"
   };
   $.ajax(setting).then(function(response) {
-    console.log(response);
+    var stadiumList = response;
+    for (i = 0; i < stadiumList.length; i++) {
+      if (stadiumList[i].City === search) {
+        $("#stadium-name-div").text(stadiumList[i].Name);
+      }
+    }
   });
-};
-
-function loadpanels(searchInput) {
-  loadcity(searchInput);
-  gettingDataFromWeatherAPI(searchInput);
-  gettingDataFromEventfullAPI(searchInput);
-  getPlacesPhoto(searchInput);
-
-  // gettingDataFromTwitterAPI();
-  gettingDataFromSportsAPI(searchInput);
-  getNYTheadlines(searchInput);
-  gettingSportsAPI(searchInput);
 }
 
-$("#sign-in-btn").on("click", function() {
-  event.preventDefault();
-  signInValidation();
-});
-
-$("#new-acc-btn").on("click", function() {
-  event.preventDefault();
-  createNewAccFunc();
-});
-
-$("#favorite-btn").on("click", function() {
-  addToFavorite();
-});
-
-$(document).on("click", ".favorite-city", function() {
-  gettingDataFromEventfullAPI(this.id);
-  loadpanels(this.id);
-  // console.log(this.id);
-});
-
-$(document).on("mouseenter", ".favorite-city", function() {
-  deleteFavDisplay(this.id.replace(" ", "-"));
-});
-
-$(document).on("mouseleave", ".favorite-city", function() {
-  setTimeout(function() {
-    $("#X").remove();
-  }, 2000);
-});
-// set deafult city to philly
-
-loadpanels(searchInput);
-
-$("#search-btn").on("click", function() {
-  event.preventDefault();
-  searchInput = $("#input-city")
-    .val()
-    .trim()
-    .replace(/(^|\s)\S/g, x => x.toUpperCase());
-  loadpanels(searchInput);
-  $("#input-city").val('');
-});
-// Get image of city from google places
 function getPlacesPhoto(search) {
   let googleAPIkey = "AIzaSyDPd-sNhT630sHlTS2BBJXgx4YQpfpHLmc";
   let herok = "https://cors-anywhere.herokuapp.com/";
@@ -286,13 +223,8 @@ function getPlacesPhoto(search) {
       googleAPIkey,
     method: "GET"
   };
-  console.log("intial place search URL");
-  console.log(setting.url);
   //   then get a photo reference
   $.ajax(setting).then(function(response) {
-    console.log("google place photo search respons below");
-    console.log(response);
-
     let gPlace = response.candidates[0].photos[0].photo_reference;
     let photo_setting = {
       url:
@@ -303,11 +235,6 @@ function getPlacesPhoto(search) {
         googleAPIkey,
       method: "GET"
     };
-
-    console.log(photo_setting.url);
-    // $.ajax(photo_setting).then(function(det_response) {
-    //   //   console.log(det_response);
-    //   // console.log(typeof det_response);
     var theimage =
       "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1200&photoreference=" +
       gPlace +
@@ -316,24 +243,8 @@ function getPlacesPhoto(search) {
 
     $("#flag-img").attr("src", theimage);
     $("body").css("background-image", "url('" + theimage + "')");
-    // $("#bg_image").attr("src", theimage);
-
-    // console.log("🌄");
   });
-  // console.log(gPlace);
-  // console.log(response);
-  // console.log("🏔");
-  // });
 }
-
-let modal = document.getElementById("id01");
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-  console.log(1);
-};
 
 // using NYTimes Api to get ARticles realted to the City
 function getNYTheadlines(search) {
@@ -367,22 +278,55 @@ function getNYTheadlines(search) {
   });
 }
 
-function gettingSportsAPI(search) {
-  let setting = {
-    url:
-      "https://api.sportsdata.io/v3/nba/scores/json/Stadiums?key=46cbe2efbe14462997d1c402c84ffbda",
-    method: "GET"
-  };
-  $.ajax(setting).then(function(response) {
-    console.log("sports API RESPONSE BELOW");
-    console.log(response);
-    var stadiumList = response;
-    for (i = 0; i < stadiumList.length; i++) {
-      if (stadiumList[i].City === search) {
-        $("#stadium-name-div").text(stadiumList[i].Name);
-      }
-    }
-  });
+function loadpanels(searchInput) {
+  loadcity(searchInput);
+  gettingDataFromWeatherAPI(searchInput);
+  gettingDataFromEventfullAPI(searchInput);
+  getPlacesPhoto(searchInput);
+  getNYTheadlines(searchInput);
+  gettingSportsAPI(searchInput);
 }
+
+$("#sign-in-btn").on("click", function() {
+  event.preventDefault();
+  signInValidation();
+});
+
+$("#new-acc-btn").on("click", function() {
+  event.preventDefault();
+  createNewAccFunc();
+});
+
+$("#favorite-btn").on("click", function() {
+  addToFavorite();
+});
+
+$(document).on("click", ".favorite-city", function() {
+  gettingDataFromEventfullAPI(this.id);
+  loadpanels(this.id);
+});
+
+// set deafult city to philly
+
+loadpanels(searchInput);
+
+$("#search-btn").on("click", function() {
+  event.preventDefault();
+  searchInput = $("#input-city")
+    .val()
+    .trim()
+    .replace(/(^|\s)\S/g, x => x.toUpperCase());
+  loadpanels(searchInput);
+  $("#input-city").val('');
+});
+
+let modal = document.getElementById("id01");
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
 
 
