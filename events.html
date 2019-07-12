@@ -16,95 +16,104 @@
     />
 
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/index.css" />
   </head>
   <body>
       <!-- login -->
 
     <!-- Log In Modal -->
-    <div id="id01" class="modal">
-      <form class="modal-content animate bg-dark" action="/action_page.php">
-        <section
-          id="signInSection"
-          class="row d-flex justify-content-between flex-row"
-        >
-          <div class="col-6 landing-col">
-            <div class="card border-dark text-white bg-dark ">
-              <div class="card-header">
-                <h5>
-                  Log In
-                </h5>
+    <div id="id01" class="modal" >
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form class="modal-content animate bg-dark" action="/action_page.php">
+            <section
+              id="signInSection"
+              class="row d-flex justify-content-center flex-row"
+            >
+              <div id="log-in-div" class="col-4 landing-col">
+                <div class="card border-light text-white bg-dark ">
+                  <div class="card-header">
+                    <h5>
+                      Log In
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <form action="" id="sign-in-form" class="sign-in">
+                      <div id="inputs" class="inputs form-group">
+                        <div class="form-group">
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="username-input"
+                            placeholder="Username"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="password-input"
+                            placeholder="Password"
+                          />
+                        </div>
+                        <a href="#" id="sign-in-btn" class="btn btn-danger"
+                          >Log-in</a
+                        >
+                        <a id="sign-up-link" href="#" class="btn btn-outline-danger">Sign-up!</a>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
-              <div class="card-body">
-                <form action="" id="sign-in-form" class="sign-in">
-                  <div id="inputs" class="inputs form-group">
-                    <div class="form-group">
-                      <input
-                        class="form-control form-control-lg"
-                        type="text"
-                        id="username-input"
-                        placeholder="Enter username"
-                      />
-                    </div>
-                    <div class="form-group">
-                      <input
-                        class="form-control form-control-lg"
-                        type="text"
-                        id="password-input"
-                        placeholder="Enter password"
-                      />
-                    </div>
-                    <a href="#" id="sign-in-btn" class="btn btn-danger"
-                      >Log-in</a
+              <div id="create-acc-div" class="col-4 landing-col">
+                <div class="card border-danger bg-secondary">
+                  <div class="card-header text-danger bg-dark">
+                    <h5>Create Account</h5>
+                  </div>
+                  <div class="card-body">
+                    <form
+                      action=""
+                      id="create-new-acc-form"
+                      class="create-new-acc"
                     >
-                    <a href="#" class="btn btn-outline-danger">Sign-up!</a>
+                      <div id="inputs" class="inputs form-group">
+                        <div class="form-group">
+                          <input
+                            class="form-control "
+                            type="text"
+                            id="newusername-input"
+                            placeholder="Username"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <input
+                            class="form-control "
+                            type="text"
+                            id="newpassword-input"
+                            placeholder="password"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="confirm-password-input"
+                            placeholder="Re-enter Password"
+                          />
+                        </div>
+                      </div>
+                      <a href="#" id="new-acc-btn" class="btn btn-danger"
+                        >Create</a
+                      >
+                      <a id="sign-in-link" href="#" class="btn btn-outline-danger">Sign-in!</a>
+                    </form>
                   </div>
-                </form>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="col-6 landing-col">
-            <div class="card border-danger bg-secondary">
-              <div class="card-header text-danger bg-dark">
-                <h5>Create New Account</h5>
-              </div>
-              <div class="card-body">
-                <form action="" id="create-new-acc-form" class="create-new-acc">
-                  <div id="inputs" class="inputs form-group">
-                    <div class="form-group">
-                      <input
-                        class="form-control form-control-lg"
-                        type="text"
-                        id="newusername-input"
-                        placeholder="Enter Username"
-                      />
-                    </div>
-                    <div class="form-group">
-                      <input
-                        class="form-control form-control-lg"
-                        type="text"
-                        id="newpassword-input"
-                        placeholder="Enter password"
-                      />
-                    </div>
-                    <div class="form-group">
-                      <input
-                        class="form-control form-control-lg"
-                        type="text"
-                        id="confirm-password-input"
-                        placeholder="Re-enter Password"
-                      />
-                    </div>
-                  </div>
-                  <a href="#" id="new-acc-btn" class="btn btn-danger"
-                    >Create Account</a
-                  >
-                  <a href="#" class="btn btn-outline-danger">Sign-in!</a>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
-      </form>
+            </section>
+          </form>
+        </div>
+      </div>
     </div>
     <div class="container main-container">
       <nav class="navbar navbar-expand-lg navbar-dark">
@@ -147,12 +156,19 @@
             </button>
           </div>
           <button
-            onclick="document.getElementById('id01').style.display='block'"
-            class="btn btn-outline-danger my-2 my-sm-0"
-          >
-            Log In
-          </button>
-        </div>
+          class="btn btn-outline-danger my-2 ml-2 my-sm-0"
+          id='log-in-btn'
+        >
+          Log In
+        </button>
+        <button
+          class="btn btn-outline-danger my-2 ml-2 my-sm-0"
+          style="display: none"
+          id='log-out-btn'
+        >
+          Log out
+        </button>
+        
       </nav>
       <section
         id="controlSection"
@@ -194,7 +210,7 @@
           </div>
         </div>
       </section>
-      <section id="events" class="container"></section>
+      <section id="events" class="container p-3 pt-0"></section>
     </div>
     
     <!--end of main-container-->

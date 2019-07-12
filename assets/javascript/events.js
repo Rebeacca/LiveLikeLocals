@@ -1,5 +1,5 @@
 
-var city = '';
+var city = 'philadelphia';
 var favoriteCityArr = [];
 var username;
 var prevEventTitle = '';
@@ -50,14 +50,13 @@ if(localStorage.getItem('city')) {
 localStorage.setItem('city', '');
 
 function signInValidation() {
-  $("#saved-Cities").empty();
   let usernameInput = $("#username-input")
     .val()
     .trim();
   let passwordInput = $("#password-input")
     .val()
     .trim();
-  database.ref("/userAccounts/").on("child_added", function (snapshot) {
+  database.ref("/userAccounts/").on("child_added", function(snapshot) {
     if (
       usernameInput === snapshot.val().username &&
       snapshot.val().password === passwordInput
@@ -80,11 +79,14 @@ function signInValidation() {
               .attr("id", cityName);
             newDiv.append(newBtn);
             $("#saved-Cities").append(newDiv);
-            $("#saved-Cities-Card").css("display", "block");
+            $("#saved-Cities-Card").show();
           });
         }
       });
-      $("#sign-in-form").remove();
+      $("#saved-Cities").empty();
+      modal.style.display = "none"
+      $('#log-in-btn').hide();
+      $('#log-out-btn').show();
     }
   });
 }
@@ -182,6 +184,7 @@ function gettingDataFromEventfullAPI(search) {
   $.ajax(setting)
     .then(function(response) {
       response = xmlToJson(response);
+      console.log(response);
       return response;
     })
     .then(function(response) {
@@ -212,14 +215,14 @@ function gettingDataFromEventfullAPI(search) {
               var newDescription = $('<p>').addClass('text-justify card-text').html(modifiedEventDescription);
             }
           }
-          
-                
-  
           var newLocation = $('<p>').text('Location : ' + eventLocation);
           var newUrl = $('<a>').html("see more").attr('href', eventUrl).attr('target', '_blank');
-          newCardBody.append(newTitle).append(newImgDiv).append(newDescription).append(newLocation).append(newUrl);
-          var newCard = $('<div>').addClass('card mb-3');
-          newCard.append(newCardBody);
+          newCardBody.append(newImgDiv).append(newDescription).append(newLocation).append(newUrl);
+          var newCard = $('<div>').addClass('card mt-3');
+          var newCardHeader = $('<div>').addClass('card-header bg-light');
+          newCardHeader.append(newTitle);
+          newCard.append(newCardHeader)
+            .append(newCardBody);
           var newDiv = $('<div>').addClass('dash-col col-12');
           newDiv.append(newCard);
           $('#events').append(newDiv);
@@ -230,15 +233,34 @@ function gettingDataFromEventfullAPI(search) {
 };
 gettingDataFromEventfullAPI(city);
 
+
 $("#sign-in-btn").on("click", function () {
   event.preventDefault();
   signInValidation();
+});
+
+$("#sign-up-link").on('click', function() {
+  $("#create-acc-div").show();
+  $("#log-in-div").hide();
 });
 
 $("#new-acc-btn").on("click", function () {
   event.preventDefault();
   createNewAccFunc();
 });
+
+$("#sign-in-link").on('click', function() {
+  $("#create-acc-div").hide();
+  $("#log-in-div").show();
+});
+
+$('#log-in-btn').on('click', function() {
+  document.getElementById('id01').style.display='block';
+  $("#create-acc-div").hide();
+  $("#log-in-div").show();
+});
+
+
 
 $("#search-btn").on("click", function () {
   console.log(1);

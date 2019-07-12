@@ -19,6 +19,14 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
+let modal = document.getElementById("id01");
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
 function signInValidation() {
   let usernameInput = $("#username-input")
     .val()
@@ -49,11 +57,14 @@ function signInValidation() {
               .attr("id", cityName);
             newDiv.append(newBtn);
             $("#saved-Cities").append(newDiv);
-            $("#saved-Cities-Card").css("display", "block");
+            $("#saved-Cities-Card").show();
           });
         }
       });
-      $("#sign-in-form").remove();
+      $("#saved-Cities").empty();
+      modal.style.display = "none"
+      $('#log-in-btn').hide();
+      $('#log-out-btn').show();
     }
   });
 }
@@ -163,8 +174,8 @@ function xmlToJson(xml) {
   return obj;
 }
 
+var i = 0;              
 function gettingDataFromEventfullAPI(search) {
-  let address = "philadelphia";
   let setting = {
     url: `https://community-eventful.p.rapidapi.com/events/search?keywords=${search}&app_key=RG2KXbmbvfckpd86`,
     method: "GET",
@@ -185,11 +196,14 @@ function gettingDataFromEventfullAPI(search) {
         var eventTitle = events[i].title["#text"];
         var eventUrl = events[i].url["#text"];
         var newTitle = $("<a>")
-          .attr("src", eventUrl)
+          .attr("href", eventUrl)
           .attr("target", "_blank")
-          .text(eventTitle);
+          .text(eventTitle)
+          .addClass('card-link');
         $("#upcoming-event-" + i).html(newTitle);
       }
+    }).then(function(response) {
+      console.log(1);
     });
 }
 
@@ -287,14 +301,38 @@ function loadpanels(searchInput) {
   gettingSportsAPI(searchInput);
 }
 
-$("#sign-in-btn").on("click", function() {
+$("#sign-in-btn").on("click", function () {
   event.preventDefault();
   signInValidation();
 });
 
-$("#new-acc-btn").on("click", function() {
+$("#sign-up-link").on('click', function() {
+  $("#create-acc-div").show();
+  $("#log-in-div").hide();
+});
+
+$("#new-acc-btn").on("click", function () {
   event.preventDefault();
   createNewAccFunc();
+});
+
+$("#sign-in-link").on('click', function() {
+  $("#create-acc-div").hide();
+  $("#log-in-div").show();
+});
+
+$('#log-in-btn').on('click', function() {
+  document.getElementById('id01').style.display='block';
+  $("#create-acc-div").hide();
+  $("#log-in-div").show();
+});
+
+$('#log-out-btn').on('click', function() {
+  console.log(this.id);
+  $('#saved-Cities').empty();
+  $("#saved-Cities-Card").hide();
+  username = '';
+  localStorage.setItem('username', username);
 });
 
 $("#favorite-btn").on("click", function() {
@@ -320,13 +358,7 @@ $("#search-btn").on("click", function() {
   $("#input-city").val('');
 });
 
-let modal = document.getElementById("id01");
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
+
 
 
 
