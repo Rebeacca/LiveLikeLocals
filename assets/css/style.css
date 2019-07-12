@@ -216,7 +216,7 @@ h3 {
     padding: 2px 3px;
     width: 20px;
     position: absolute;
-    top: 0;
+    top: -10px;
     background-color:rgb(66, 31, 31);
     border-radius: 50%;
     cursor: pointer;
@@ -229,20 +229,25 @@ h3 {
 #city-suggestion {
     display: none;
     position: absolute;
-    top: 50px;
-    color: #666;
-    background-color: #fff;
+    top: 65px;
+    color: rgb(247, 247, 247);
+    background-color: rgb(58, 56, 56);
     width: 400px;
-    height: 200px;
+    height: 220px;
     overflow: scroll;
-    border: 1px solid red;
+    box-shadow: 0 0 2px 0 rgba(44, 44, 44, 0.4);
     z-index: 99;
+    border-radius: 5px;
 }
+
 
 .suggested-city {
     cursor: pointer;
+    padding: 10px;
+    margin: 0;
 }
 
 .suggested-city:hover {
-    background-color: red;
+    background-color: rgb(255, 255, 255);
+    color: rgb(58, 56, 56);
 }

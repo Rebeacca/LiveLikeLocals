@@ -129,14 +129,17 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto"></ul>
-          <form class="form-inline my-2 my-lg-0 ">
-            <input
+          <div class="form-inline my-2 my-lg-0 ">
+              <input
               id="input-city"
               class="form-control mr-sm-2"
               type="search"
               placeholder="Where to?"
               aria-label="Search"
+              autocomplete="off"
             />
+            <div id="city-suggestion"></div>
+            </div>
             <button
               class="btn btn-danger my-2 my-sm-0"
               id="search-btn"
@@ -144,11 +147,10 @@
             >
               GO
             </button>
-          </form>
+          </div>
           <button
             onclick="document.getElementById('id01').style.display='block'"
             class="btn btn-outline-danger my-2 my-sm-0"
-            id="search-btn"
           >
             Log In
           </button>
@@ -179,7 +181,7 @@
             <div id="saved-Cities-Card" class="card-body">
               <div
                 id="saved-Cities"
-                lass="btn-group btn-group-sm"
+                class="btn-group btn-group-sm"
                 role="group"
                 aria-label="savedCities"
               ></div>

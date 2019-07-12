@@ -11,10 +11,8 @@ $(document).on('mouseenter', '.favorite-city', function() {
   deleteFavDisplay(this.id.replace(' ', '-'));
 });
 
-$(document).on('mouseleave', '.favorite-city', function() {
-  setTimeout(function() {
+$(document).on('mouseleave', '.favorite-city-btn-div', function() {
     $('#X').remove();
-  },500);
 });
 
 $(document).on('click', '#X', function() {

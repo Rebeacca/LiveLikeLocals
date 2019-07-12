@@ -1,5 +1,5 @@
 
-var city = 'Washington DC';
+var city = '';
 var favoriteCityArr = [];
 var username;
 var prevEventTitle = '';
@@ -24,10 +24,16 @@ if(localStorage.getItem('username')) {
     if(snapshot.val().hasOwnProperty(username) && snapshot.val()[username].hasOwnProperty('favoriteCities')){
       favoriteCityArr = snapshot.val()[username].favoriteCities;
       favoriteCityArr.forEach(function(cityName) {
-        var newDiv = $('<div>').attr('id',cityName + '-div');
-        var newBtn = $('<button>').text(cityName).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', cityName);
-        newDiv.append(newBtn);
-        $('#saved-Cities').append(newDiv);
+        var newDiv = $("<div>")
+              .attr("id", cityName.replace(' ', '-') + "-div")
+              .addClass("favorite-city-btn-div mr-2 ml-2");
+            var newBtn = $("<button>")
+              .text(cityName)
+              .addClass("svd-btn btn btn-outline-danger favorite-city")
+              .attr("id", cityName);
+            newDiv.append(newBtn);
+            $("#saved-Cities").append(newDiv);
+            $("#saved-Cities-Card").css("display", "block");
       });
     };
   });
@@ -44,6 +50,7 @@ if(localStorage.getItem('city')) {
 localStorage.setItem('city', '');
 
 function signInValidation() {
+  $("#saved-Cities").empty();
   let usernameInput = $("#username-input")
     .val()
     .trim();
@@ -56,17 +63,26 @@ function signInValidation() {
       snapshot.val().password === passwordInput
     ) {
       username = usernameInput;
-      localStorage.setItem('username', username);
-      database.ref('/userData/').once('value', function (snapshot) {
-        if (snapshot.val().hasOwnProperty(username) && snapshot.val()[username].hasOwnProperty('favoriteCities')) {
+      localStorage.setItem("username", username);
+      database.ref("/userData/").once("value", function(snapshot) {
+        if (
+          snapshot.val().hasOwnProperty(username) &&
+          snapshot.val()[username].hasOwnProperty("favoriteCities")
+        ) {
           favoriteCityArr = snapshot.val()[username].favoriteCities;
-          favoriteCityArr.forEach(function (cityName) {
-            var newDiv = $('<div>').attr('id',cityName + '-div');
-            var newBtn = $('<button>').text(cityName).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', cityName);
+          favoriteCityArr.forEach(function(cityName) {
+            var newDiv = $("<div>")
+              .attr("id", cityName.replace(' ', '-') + "-div")
+              .addClass("favorite-city-btn-div mr-2 ml-2");
+            var newBtn = $("<button>")
+              .text(cityName)
+              .addClass("svd-btn btn btn-outline-danger favorite-city")
+              .attr("id", cityName);
             newDiv.append(newBtn);
-            $('#saved-Cities').append(newDiv);
+            $("#saved-Cities").append(newDiv);
+            $("#saved-Cities-Card").css("display", "block");
           });
-        };
+        }
       });
       $("#sign-in-form").remove();
     }
@@ -99,14 +115,19 @@ function loadcity(cityinput) {
 function addToFavorite() {
   var favoriteCity = $("#dash-city").text();
   favoriteCityArr.push(favoriteCity);
-  database.ref('/userData/' + username).set({
-    favoriteCities : favoriteCityArr
+  database.ref("/userData/" + username).set({
+    favoriteCities: favoriteCityArr
   });
-  var newDiv = $('<div>').attr('id',favoriteCity + '-div');
-  var newBtn = $('<button>').text(favoriteCity).addClass('svd-btn btn btn-outline-danger favorite-city').attr('id', favoriteCity);
+  var newDiv = $("<div>")
+    .attr("id", favoriteCity.replace(' ', '-') + "-div")
+    .addClass("favorite-city-btn-div mr-2 ml-2");
+  var newBtn = $("<button>")
+    .text(favoriteCity)
+    .addClass("svd-btn btn btn-outline-danger favorite-city")
+    .attr("id", favoriteCity);
   newDiv.append(newBtn);
-  $('#saved-Cities').append(newDiv);
-};
+  $("#saved-Cities").append(newDiv);
+}
 
 function xmlToJson(xml) {
   // Create the return object
@@ -164,7 +185,6 @@ function gettingDataFromEventfullAPI(search) {
       return response;
     })
     .then(function(response) {
-      console.log(response);
       var events = response.search.events.event;
       for (var i = 0; i < events.length; i++) {
         var eventTitle = events[i].title["#text"];
@@ -203,9 +223,9 @@ function gettingDataFromEventfullAPI(search) {
           var newDiv = $('<div>').addClass('dash-col col-12');
           newDiv.append(newCard);
           $('#events').append(newDiv);
+          prevEventTitle = eventTitle;
           }
       }
-      console.log(events);
     });
 };
 gettingDataFromEventfullAPI(city);
@@ -236,3 +256,13 @@ $(document).on('click', '.favorite-city', function() {
   gettingDataFromEventfullAPI(this.id);
   loadcity(this.id);
 });
+
+let modal = document.getElementById("id01");
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+gettingDataFromEventfullAPI("philadelphia")
