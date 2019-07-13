@@ -31,6 +31,32 @@ window.onclick = function(event) {
   }
 };
 
+$("#favorite-btn").hide();
+if(localStorage.getItem('username')) {
+  username = localStorage.getItem('username');
+  database.ref('/userData/').once('value', function(snapshot) {
+    if(snapshot.val().hasOwnProperty(username) && snapshot.val()[username].hasOwnProperty('favoriteCities')){
+      favoriteCityArr = snapshot.val()[username].favoriteCities;
+      favoriteCityArr.forEach(function(cityName) {
+        var newDiv = $("<div>")
+              .attr("id", cityName.replace(' ', '-') + "-div")
+              .addClass("favorite-city-btn-div mr-2 ml-2");
+            var newBtn = $("<button>")
+              .text(cityName)
+              .addClass("svd-btn btn btn-outline-danger favorite-city")
+              .attr("id", cityName);
+            newDiv.append(newBtn);
+            $("#saved-Cities").append(newDiv);
+            $("#saved-Cities-Card").css("display", "block");
+            $("#favorite-btn").show();
+            $('#log-in-btn').hide();
+            $('#log-out-btn').show();
+      });
+    };
+  });
+  city = localStorage.getItem('city');
+}
+
 function signInValidation() {
   let usernameInput = $("#username-input")
     .val()
@@ -70,6 +96,7 @@ function signInValidation() {
         $('#sign-in-invalid-text').text('');
         $("#username-input").val('');
         $("#password-input").val('');
+        $("#favorite-btn").show();
       }
     } else {
       $('#sign-in-invalid-text').text('The username or the password is invalid');
@@ -115,7 +142,9 @@ function loadcity(cityinput) {
 
 function addToFavorite() {
   var favoriteCity = $("#dash-city").text();
-  favoriteCityArr.push(favoriteCity);
+  if(!favoriteCityArr.includes(favoriteCity)) {
+    favoriteCityArr.push(favoriteCity);
+  }
   database.ref("/userData/" + username).set({
     favoriteCities: favoriteCityArr
   });
@@ -324,7 +353,7 @@ function getNYTheadlines(search) {
     $("#nyt-panel-body").empty();
     $("#nyt-panel-body").prepend(headline_div);
   }).then(function() {
-    $("#nyt-panel-body").prepend($('<h1>').text('New York Times').css('color', 'white'));
+    $("#nyt-panel-body").prepend($('<h5>').text('New York Times').css('color', 'white'));
   });
 }
 
@@ -375,6 +404,7 @@ $('#log-out-btn').on('click', function() {
   $('#log-in-btn').show();
   $('#log-out-btn').hide();
   $('#sign-in-invalid-text').text('');
+  $("#favorite-btn").hide();
 });
 
 $("#favorite-btn").on("click", function() {
@@ -382,6 +412,7 @@ $("#favorite-btn").on("click", function() {
 });
 
 $(document).on("click", ".favorite-city", function() {
+  upcomingEventImageArr = [];
   gettingDataFromEventfullAPI(this.id);
   loadpanels(this.id);
 });
@@ -392,12 +423,15 @@ loadpanels(searchInput);
 
 $("#search-btn").on("click", function() {
   event.preventDefault();
-  searchInput = $("#input-city")
-    .val()
-    .trim()
-    .replace(/(^|\s)\S/g, x => x.toUpperCase());
+  
+  if($("#input-city").val()) {
+    upcomingEventImageArr = [];
+    let searchInput = $("#input-city").val().trim().replace(/(^|\s)\S/g, x => x.toUpperCase());
     loadpanels(searchInput);
+  } else {
+    $("#invalid-text").text('Enter a city');
     $("#input-city").val('');
+  }
 });
 
 $('#upcoming-event-0').hover(function () {

@@ -34,6 +34,7 @@ if(localStorage.getItem('username')) {
             newDiv.append(newBtn);
             $("#saved-Cities").append(newDiv);
             $("#saved-Cities-Card").css("display", "block");
+            $("#favorite-btn").show();
       });
     };
   });
@@ -85,6 +86,9 @@ function signInValidation() {
         $('#sign-in-invalid-text').text('');
         $("#username-input").val('');
         $("#password-input").val('');
+        $('#log-in-btn').hide();
+        $('#log-out-btn').show();
+        $("#favorite-btn").show();
       }
     } else {
       $('#sign-in-invalid-text').text('The username or the password is invalid');
@@ -129,7 +133,9 @@ function loadcity(cityinput) {
 
 function addToFavorite() {
   var favoriteCity = $("#dash-city").text();
-  favoriteCityArr.push(favoriteCity);
+  if(!favoriteCityArr.includes(favoriteCity)) {
+    favoriteCityArr.push(favoriteCity);
+  }
   database.ref("/userData/" + username).set({
     favoriteCities: favoriteCityArr
   });
@@ -203,7 +209,6 @@ function gettingDataFromEventfullAPI(search) {
     })
     .then(function(response) {
       var events = response.search.events.event;
-      console.log(events);
       for (var i = 0; i < events.length; i++) {
         var eventTitle = events[i].title["#text"];
         if(prevEventTitle !== eventTitle) {
@@ -228,7 +233,6 @@ function gettingDataFromEventfullAPI(search) {
             } else {
               eventStartTime = eventStartHour + ':' + eventStartMin + 'AM';
             }
-            console.log(eventStartDate , eventStartTime);
           }
           if(events[i].image.hasOwnProperty("medium")) {
             eventImageUrl = 'https://' + events[i].image.medium.url['#text'].slice(2);
@@ -304,7 +308,8 @@ $('#log-in-btn').on('click', function() {
 });
 
 $('#log-out-btn').on('click', function() {
-  console.log(this.id);
+  favoriteCityArr = [];
+  upcomingEventImageArr = [];
   $('#saved-Cities').empty();
   $("#saved-Cities-Card").hide();
   username = '';
@@ -312,14 +317,20 @@ $('#log-out-btn').on('click', function() {
   $('#log-in-btn').show();
   $('#log-out-btn').hide();
   $('#sign-in-invalid-text').text('');
+  $("#favorite-btn").hide();
 });
 
 
 $("#search-btn").on("click", function () {
-  console.log(1);
-  let searchInput = $("#input-city").val().trim().replace(/(^|\s)\S/g, x => x.toUpperCase());
-  gettingDataFromEventfullAPI(searchInput);
-  loadcity(searchInput);
+  $('#events').empty();
+  if($("#input-city").val()) {
+    let searchInput = $("#input-city").val().trim().replace(/(^|\s)\S/g, x => x.toUpperCase());
+    gettingDataFromEventfullAPI(searchInput);
+    loadcity(searchInput);
+  }
+  $("#input-city").val('');
+  $("#invalid-text").text('Enter a city');
+  
 });
 
 $("#favorite-btn").on("click", function () {
