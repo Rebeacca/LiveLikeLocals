@@ -92,6 +92,11 @@ const appCode = "TGeFTDkuDPK7Ol8eefzaUA"
                 .catch(function (err) {
                     console.log(err);
                 })
+
+                 $('#search-btn').on('click', function() {
+        event.preventDefault();
+        console.log(searchTerm.val())
+
         }
 
         gettingDataFromGecoderAPI();
