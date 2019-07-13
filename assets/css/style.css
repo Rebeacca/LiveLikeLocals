@@ -141,16 +141,7 @@ span.psw {
 }
 
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-    display: block;
-    float: none;
-  }
 
-  .cancelbtn {
-    width: 100%;
-  }
-}
 /* end of login */
 
 body {
@@ -266,10 +257,37 @@ h3 {
   color: rgb(58, 56, 56);
 }
 
+.invalid-text {
+  color: red;
+  position: absolute;
+  top: -10px;
+}
+
 #events {
   color: rgb(34, 34, 34);
 }
 
 #events h4 {
   margin: 0;
+}
+
+@media screen and (max-width: 640px) {
+  /* span.psw {
+    display: block;
+    float: none;
+  }
+
+  .cancelbtn {
+    width: 100%;
+  } */
+
+  .modal-content {
+    width: 100%;
+    padding: 10px;
+    /* Could be more or less, depending on screen size */
+  }
+
+  .modal-body {
+    width: 90%;
+  }
 }

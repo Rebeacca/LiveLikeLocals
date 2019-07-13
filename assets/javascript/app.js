@@ -1,8 +1,12 @@
 var favoriteCityArr = [];
 var username;
+var prevEventTitle = '';
 var searchInput = "Philadelphia";
+var upcomingEventImageArr = [];
 if(localStorage.getItem('city') !== '') {
   searchInput = localStorage.getItem('city');
+} else {
+  localStorage.setItem('city', searchInput);
 }
 
 var firebaseConfig = {
@@ -35,41 +39,46 @@ function signInValidation() {
     .val()
     .trim();
   database.ref("/userAccounts/").on("child_added", function(snapshot) {
-    if (
-      usernameInput === snapshot.val().username &&
-      snapshot.val().password === passwordInput
-    ) {
-      username = usernameInput;
-      localStorage.setItem("username", username);
-      database.ref("/userData/").once("value", function(snapshot) {
-        if (
-          snapshot.val().hasOwnProperty(username) &&
-          snapshot.val()[username].hasOwnProperty("favoriteCities")
-        ) {
-          favoriteCityArr = snapshot.val()[username].favoriteCities;
-          favoriteCityArr.forEach(function(cityName) {
-            var newDiv = $("<div>")
-              .attr("id", cityName.replace(' ', '-') + "-div")
-              .addClass("favorite-city-btn-div mr-2 ml-2");
-            var newBtn = $("<button>")
-              .text(cityName)
-              .addClass("svd-btn btn btn-outline-danger favorite-city")
-              .attr("id", cityName);
-            newDiv.append(newBtn);
-            $("#saved-Cities").append(newDiv);
-            $("#saved-Cities-Card").show();
-          });
-        }
-      });
-      $("#saved-Cities").empty();
-      modal.style.display = "none"
-      $('#log-in-btn').hide();
-      $('#log-out-btn').show();
-    }
+    if (usernameInput === snapshot.val().username) {
+      if(snapshot.val().password === passwordInput) {
+        username = usernameInput;
+        localStorage.setItem("username", username);
+        database.ref("/userData/").once("value", function(snapshot) {
+          if (
+            snapshot.val().hasOwnProperty(username) &&
+            snapshot.val()[username].hasOwnProperty("favoriteCities")
+          ) {
+            favoriteCityArr = snapshot.val()[username].favoriteCities;
+            favoriteCityArr.forEach(function(cityName) {
+              var newDiv = $("<div>")
+                .attr("id", cityName.replace(' ', '-') + "-div")
+                .addClass("favorite-city-btn-div mr-2 ml-2");
+              var newBtn = $("<button>")
+                .text(cityName)
+                .addClass("svd-btn btn btn-outline-danger favorite-city")
+                .attr("id", cityName);
+              newDiv.append(newBtn);
+              $("#saved-Cities").append(newDiv);
+              $("#saved-Cities-Card").show();
+            });
+          }
+        });
+        $("#saved-Cities").empty();
+        modal.style.display = "none"
+        $('#log-in-btn').hide();
+        $('#log-out-btn').show();
+        $('#sign-in-invalid-text').text('');
+        $("#username-input").val('');
+        $("#password-input").val('');
+      }
+    } else {
+      $('#sign-in-invalid-text').text('The username or the password is invalid');
+    };
   });
 }
 
 function createNewAccFunc() {
+  let signedInUsernames = [];
   let newUsernameInput = $("#newusername-input")
     .val()
     .trim();
@@ -79,13 +88,25 @@ function createNewAccFunc() {
   let confirmPasswordInput = $("#confirm-password-input")
     .val()
     .trim();
-  if (newPasswordInput === confirmPasswordInput) {
-    database.ref("/userAccounts").push({
-      username: newUsernameInput,
-      password: newPasswordInput
+    database.ref('/userAccounts').on('child_added', (snapshot) => {
+      signedInUsernames.push(snapshot.val().username);
     });
-  }
+    setTimeout(function() {
+      if (newPasswordInput === confirmPasswordInput && !signedInUsernames.includes(newUsernameInput)) {
+        database.ref("/userAccounts").push({
+          username: newUsernameInput,
+          password: newPasswordInput
+        });
+        $("#create-acc-div").hide();
+        $("#log-in-div").show();
+      } else if(signedInUsernames.includes(newUsernameInput)){
+          $('#create-acc-invalid-text').text('The username is not available.');
+      } else {
+          $('#create-acc-invalid-text').text('The passwords are not the same. Please type again.');
+      }
+    },2000);
 }
+  
 
 function loadcity(cityinput) {
   $("#dash-city").text(cityinput);
@@ -107,7 +128,10 @@ function addToFavorite() {
     .attr("id", favoriteCity);
   newDiv.append(newBtn);
   $("#saved-Cities").append(newDiv);
+  $("#saved-Cities-Card").show();
 }
+
+
 
 function gettingDataFromWeatherAPI(search) {
   $.ajax({
@@ -176,6 +200,7 @@ function xmlToJson(xml) {
 
 var i = 0;              
 function gettingDataFromEventfullAPI(search) {
+  var count = 0;
   let setting = {
     url: `https://community-eventful.p.rapidapi.com/events/search?keywords=${search}&app_key=RG2KXbmbvfckpd86`,
     method: "GET",
@@ -192,18 +217,27 @@ function gettingDataFromEventfullAPI(search) {
     })
     .then(function(response) {
       var events = response.search.events.event;
-      for (var i = 0; i < 3; i++) {
+      for (var i = 0; count < 3; i++) {
         var eventTitle = events[i].title["#text"];
-        var eventUrl = events[i].url["#text"];
-        var newTitle = $("<a>")
-          .attr("href", eventUrl)
-          .attr("target", "_blank")
-          .text(eventTitle)
-          .addClass('card-link');
-        $("#upcoming-event-" + i).html(newTitle);
+        if(eventTitle !== prevEventTitle) {
+          if(events[i].image.hasOwnProperty("medium")) {
+            eventImageUrl = 'https://' + events[i].image.medium.url['#text'].slice(2);
+          }else {
+            eventImageUrl = 'https://www.crucial.com.au/blog/wp-content/uploads/2014/12/events_medium.jpg';
+          }
+          upcomingEventImageArr.push(eventImageUrl); 
+          $('#upcoming-event-img').attr('src', upcomingEventImageArr[0])
+          var eventUrl = events[i].url["#text"];
+          var newTitle = $("<a>")
+            .attr("href", eventUrl)
+            .attr("target", "_blank")
+            .text(eventTitle)
+            .addClass('card-link');
+          $("#upcoming-event-" + count).html(newTitle);
+          count++;
+        }
+        prevEventTitle = eventTitle;
       }
-    }).then(function(response) {
-      console.log(1);
     });
 }
 
@@ -289,6 +323,8 @@ function getNYTheadlines(search) {
 
     $("#nyt-panel-body").empty();
     $("#nyt-panel-body").prepend(headline_div);
+  }).then(function() {
+    $("#nyt-panel-body").prepend($('<h1>').text('New York Times').css('color', 'white'));
   });
 }
 
@@ -307,6 +343,7 @@ $("#sign-in-btn").on("click", function () {
 });
 
 $("#sign-up-link").on('click', function() {
+  $('#sign-in-invalid-text').text('');
   $("#create-acc-div").show();
   $("#log-in-div").hide();
 });
@@ -317,6 +354,7 @@ $("#new-acc-btn").on("click", function () {
 });
 
 $("#sign-in-link").on('click', function() {
+  $('#create-acc-invalid-text').text('');
   $("#create-acc-div").hide();
   $("#log-in-div").show();
 });
@@ -328,11 +366,15 @@ $('#log-in-btn').on('click', function() {
 });
 
 $('#log-out-btn').on('click', function() {
-  console.log(this.id);
+  favoriteCityArr = [];
+  upcomingEventImageArr = [];
   $('#saved-Cities').empty();
   $("#saved-Cities-Card").hide();
   username = '';
   localStorage.setItem('username', username);
+  $('#log-in-btn').show();
+  $('#log-out-btn').hide();
+  $('#sign-in-invalid-text').text('');
 });
 
 $("#favorite-btn").on("click", function() {
@@ -354,8 +396,20 @@ $("#search-btn").on("click", function() {
     .val()
     .trim()
     .replace(/(^|\s)\S/g, x => x.toUpperCase());
-  loadpanels(searchInput);
-  $("#input-city").val('');
+    loadpanels(searchInput);
+    $("#input-city").val('');
+});
+
+$('#upcoming-event-0').hover(function () {
+  $('#upcoming-event-img').attr('src', upcomingEventImageArr[0])
+});
+
+$('#upcoming-event-1').hover(function () {
+  $('#upcoming-event-img').attr('src', upcomingEventImageArr[1])
+});
+
+$('#upcoming-event-2').hover(function () {
+  $('#upcoming-event-img').attr('src', upcomingEventImageArr[2])
 });
 
 
