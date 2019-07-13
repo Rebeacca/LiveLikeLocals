@@ -126,6 +126,7 @@ function createNewAccFunc() {
         });
         $("#create-acc-div").hide();
         $("#log-in-div").show();
+        $('#sign-in-invalid-text').text('');
       } else if(signedInUsernames.includes(newUsernameInput)){
           $('#create-acc-invalid-text').text('The username is not available.');
       } else {
