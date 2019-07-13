@@ -24,13 +24,12 @@
     <!-- Log In Modal -->
     <div id="id01" class="modal" >
       <div class="modal-body">
-        <div class="container-fluid">
           <form class="modal-content animate bg-dark" action="/action_page.php">
             <section
               id="signInSection"
               class="row d-flex justify-content-center flex-row"
             >
-              <div id="log-in-div" class="col-4 landing-col">
+              <div id="log-in-div" class="col-sm-10 landing-col">
                 <div class="card border-light text-white bg-dark ">
                   <div class="card-header">
                     <h5>
@@ -40,6 +39,7 @@
                   <div class="card-body">
                     <form action="" id="sign-in-form" class="sign-in">
                       <div id="inputs" class="inputs form-group">
+                          <p id="sign-in-invalid-text" style="color: red"></p>
                         <div class="form-group">
                           <input
                             class="form-control"
@@ -65,9 +65,9 @@
                   </div>
                 </div>
               </div>
-              <div id="create-acc-div" class="col-4 landing-col">
-                <div class="card border-danger bg-secondary">
-                  <div class="card-header text-danger bg-dark">
+              <div id="create-acc-div" class="col-sm-10 landing-col">
+                <div class="card border-light text-white bg-dark">
+                  <div class="card-header">
                     <h5>Create Account</h5>
                   </div>
                   <div class="card-body">
@@ -78,6 +78,7 @@
                     >
                       <div id="inputs" class="inputs form-group">
                         <div class="form-group">
+                            <p id="create-acc-invalid-text" style="color: red"></p>
                           <input
                             class="form-control "
                             type="text"
@@ -112,7 +113,6 @@
               </div>
             </section>
           </form>
-        </div>
       </div>
     </div>
     <div class="container main-container">
@@ -136,8 +136,9 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto"></ul>
-          <div class="form-inline my-2 my-lg-0 ">
-              <input
+          <div id="input-city-div" class="form-inline my-2 my-lg-0 ">
+            <p id="invalid-text" class="invalid-text"></p>
+            <input
               id="input-city"
               class="form-control mr-sm-2"
               type="search"
@@ -146,16 +147,16 @@
               autocomplete="off"
             />
             <div id="city-suggestion"></div>
-            </div>
-            <button
-              class="btn btn-danger my-2 my-sm-0"
-              id="search-btn"
-              type="submit"
-            >
-              GO
-            </button>
           </div>
           <button
+            class="btn btn-danger my-2 my-sm-0"
+            id="search-btn"
+            type="submit"
+          >
+            GO
+          </button>
+        </div>
+        <button
           class="btn btn-outline-danger my-2 ml-2 my-sm-0"
           id='log-in-btn'
         >
@@ -168,7 +169,7 @@
         >
           Log out
         </button>
-        
+        <!-- </section> -->
       </nav>
       <section
         id="controlSection"
@@ -210,8 +211,9 @@
           </div>
         </div>
       </section>
-      <section id="events" class="container p-3 pt-0"></section>
+      <section id="events" class="container"></section>
     </div>
+
     
     <!--end of main-container-->
 
@@ -237,8 +239,12 @@
     ></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script> -->
+    <!-- <script async defer
+   src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"> 
+    </script>     -->
     <script src="assets/javascript/events.js"></script>
     <script src="assets/javascript/deletefavorite.js"></script>
+    <script src="assets/javascript/searchAutoFill.js"></script>
+
   </body>
 </html>

@@ -1,5 +1,5 @@
 
-var city = 'philadelphia';
+var city = 'Philadelphia';
 var favoriteCityArr = [];
 var username;
 var prevEventTitle = '';
@@ -37,13 +37,10 @@ if(localStorage.getItem('username')) {
       });
     };
   });
-  // localStorage.setItem('username', '')
-}
-
-
-if(localStorage.getItem('city')) {
   city = localStorage.getItem('city');
   $("#dash-city").text(city);
+  $('#log-in-btn').hide();
+  $('#log-out-btn').show();
 } else {
   $("#dash-city").text(city);
 }
@@ -57,41 +54,46 @@ function signInValidation() {
     .val()
     .trim();
   database.ref("/userAccounts/").on("child_added", function(snapshot) {
-    if (
-      usernameInput === snapshot.val().username &&
-      snapshot.val().password === passwordInput
-    ) {
-      username = usernameInput;
-      localStorage.setItem("username", username);
-      database.ref("/userData/").once("value", function(snapshot) {
-        if (
-          snapshot.val().hasOwnProperty(username) &&
-          snapshot.val()[username].hasOwnProperty("favoriteCities")
-        ) {
-          favoriteCityArr = snapshot.val()[username].favoriteCities;
-          favoriteCityArr.forEach(function(cityName) {
-            var newDiv = $("<div>")
-              .attr("id", cityName.replace(' ', '-') + "-div")
-              .addClass("favorite-city-btn-div mr-2 ml-2");
-            var newBtn = $("<button>")
-              .text(cityName)
-              .addClass("svd-btn btn btn-outline-danger favorite-city")
-              .attr("id", cityName);
-            newDiv.append(newBtn);
-            $("#saved-Cities").append(newDiv);
-            $("#saved-Cities-Card").show();
-          });
-        }
-      });
-      $("#saved-Cities").empty();
-      modal.style.display = "none"
-      $('#log-in-btn').hide();
-      $('#log-out-btn').show();
-    }
+    if (usernameInput === snapshot.val().username) {
+      if(snapshot.val().password === passwordInput) {
+        username = usernameInput;
+        localStorage.setItem("username", username);
+        database.ref("/userData/").once("value", function(snapshot) {
+          if (
+            snapshot.val().hasOwnProperty(username) &&
+            snapshot.val()[username].hasOwnProperty("favoriteCities")
+          ) {
+            favoriteCityArr = snapshot.val()[username].favoriteCities;
+            favoriteCityArr.forEach(function(cityName) {
+              var newDiv = $("<div>")
+                .attr("id", cityName.replace(' ', '-') + "-div")
+                .addClass("favorite-city-btn-div mr-2 ml-2");
+              var newBtn = $("<button>")
+                .text(cityName)
+                .addClass("svd-btn btn btn-outline-danger favorite-city")
+                .attr("id", cityName);
+              newDiv.append(newBtn);
+              $("#saved-Cities").append(newDiv);
+              $("#saved-Cities-Card").show();
+            });
+          }
+        });
+        $("#saved-Cities").empty();
+        modal.style.display = "none"
+        $('#log-in-btn').hide();
+        $('#log-out-btn').show();
+        $('#sign-in-invalid-text').text('');
+        $("#username-input").val('');
+        $("#password-input").val('');
+      }
+    } else {
+      $('#sign-in-invalid-text').text('The username or the password is invalid');
+    };
   });
 }
 
 function createNewAccFunc() {
+  let signedInUsernames = [];
   let newUsernameInput = $("#newusername-input")
     .val()
     .trim();
@@ -101,13 +103,24 @@ function createNewAccFunc() {
   let confirmPasswordInput = $("#confirm-password-input")
     .val()
     .trim();
-  if (newPasswordInput === confirmPasswordInput) {
-    database.ref("/userAccounts").push({
-      username: newUsernameInput,
-      password: newPasswordInput
+    database.ref('/userAccounts').on('child_added', (snapshot) => {
+      signedInUsernames.push(snapshot.val().username);
     });
-  }
-};
+    setTimeout(function() {
+      if (newPasswordInput === confirmPasswordInput && !signedInUsernames.includes(newUsernameInput)) {
+        database.ref("/userAccounts").push({
+          username: newUsernameInput,
+          password: newPasswordInput
+        });
+        $("#create-acc-div").hide();
+        $("#log-in-div").show();
+      } else if(signedInUsernames.includes(newUsernameInput)){
+          $('#create-acc-invalid-text').text('The username is not available.');
+      } else {
+          $('#create-acc-invalid-text').text('The passwords are not the same. Please type again.');
+      }
+    },2000);
+}
 
 function loadcity(cityinput) {
   $("#dash-city").text(cityinput);
@@ -129,6 +142,7 @@ function addToFavorite() {
     .attr("id", favoriteCity);
   newDiv.append(newBtn);
   $("#saved-Cities").append(newDiv);
+  $("#saved-Cities-Card").show();
 }
 
 function xmlToJson(xml) {
@@ -170,6 +184,7 @@ function xmlToJson(xml) {
   return obj;
 }
 
+var latLngArr = [];
 function gettingDataFromEventfullAPI(search) {
   let setting = {
     // http://api.eventful.com/json/events/search?...&location=San+Diego
@@ -184,11 +199,11 @@ function gettingDataFromEventfullAPI(search) {
   $.ajax(setting)
     .then(function(response) {
       response = xmlToJson(response);
-      console.log(response);
       return response;
     })
     .then(function(response) {
       var events = response.search.events.event;
+      console.log(events);
       for (var i = 0; i < events.length; i++) {
         var eventTitle = events[i].title["#text"];
         if(prevEventTitle !== eventTitle) {
@@ -196,16 +211,41 @@ function gettingDataFromEventfullAPI(search) {
           var eventUrl = events[i].url["#text"];
           var eventImageUrl;
           var eventLocation = events[i].venue_address["#text"];
+          var eventStartTime = events[i].start_time["#text"];
+          if(eventStartTime) {
+            var timeArr = eventStartTime.split(' ');
+            var eventStartDate = timeArr[0];
+            var eventStartTime = timeArr[1];
+            var eventStartYear = eventStartDate.split('-')[0];
+            var eventStartMonth = eventStartDate.split('-')[1];
+            var eventStartDay = eventStartDate.split('-')[2];
+            var eventStartHour = parseInt(eventStartTime.split(':')[0]);
+            var eventStartMin = eventStartTime.split(':')[1];
+            eventStartDate = eventStartMonth + '-' + eventStartDay + '-' + eventStartYear;
+            if(eventStartHour > 12) {
+              eventStartHour -= 12;
+              eventStartTime = eventStartHour + ':' + eventStartMin + 'PM';
+            } else {
+              eventStartTime = eventStartHour + ':' + eventStartMin + 'AM';
+            }
+            console.log(eventStartDate , eventStartTime);
+          }
           if(events[i].image.hasOwnProperty("medium")) {
             eventImageUrl = 'https://' + events[i].image.medium.url['#text'].slice(2);
           }else {
             eventImageUrl = 'https://www.crucial.com.au/blog/wp-content/uploads/2014/12/events_medium.jpg';
           }
+          var eventLat = parseFloat(events[i].latitude["#text"]);
+          var eventLng = parseFloat(events[i].longitude["#text"]);
+          latlng = {lat: eventLat, lng: eventLng};
+          latLngArr.push(Object.assign({}, latlng));
           var newTitle = $('<h4>').text(eventTitle).addClass('card-title');
           var newCardBody = $('<div>').addClass('card-body');
           var newImgDiv = $('<div>');
           var newImg = $('<img>').attr('src', eventImageUrl).attr('alt', eventTitle).addClass('float-left img-fluid');
           newImgDiv.append(newImg);
+          var newStartDateP = $('<p>').text(eventStartDate); 
+          var newStartTimeP = $('<p>').text(eventStartTime);
           if(eventDescription) {
             var eventDescription300 = eventDescription.split('').splice(0,400);
             var modifiedEventDescription = eventDescription300.join('')+eventDescription.slice(400).split('.')[0] + '...';  
@@ -215,9 +255,12 @@ function gettingDataFromEventfullAPI(search) {
               var newDescription = $('<p>').addClass('text-justify card-text').html(modifiedEventDescription);
             }
           }
+          if(!eventLocation) {
+            eventLocation = '';
+          }
           var newLocation = $('<p>').text('Location : ' + eventLocation);
           var newUrl = $('<a>').html("see more").attr('href', eventUrl).attr('target', '_blank');
-          newCardBody.append(newImgDiv).append(newDescription).append(newLocation).append(newUrl);
+          newCardBody.append(newImgDiv).append(newStartDateP).append(newStartTimeP).append(newLocation).append(newDescription).append(newUrl);
           var newCard = $('<div>').addClass('card mt-3');
           var newCardHeader = $('<div>').addClass('card-header bg-light');
           newCardHeader.append(newTitle);
@@ -260,6 +303,16 @@ $('#log-in-btn').on('click', function() {
   $("#log-in-div").show();
 });
 
+$('#log-out-btn').on('click', function() {
+  console.log(this.id);
+  $('#saved-Cities').empty();
+  $("#saved-Cities-Card").hide();
+  username = '';
+  localStorage.setItem('username', username);
+  $('#log-in-btn').show();
+  $('#log-out-btn').hide();
+  $('#sign-in-invalid-text').text('');
+});
 
 
 $("#search-btn").on("click", function () {
@@ -286,5 +339,3 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 };
-
-gettingDataFromEventfullAPI("philadelphia")
