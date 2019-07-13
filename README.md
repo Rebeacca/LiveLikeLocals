@@ -1,45 +1,74 @@
-## TEAM 
-Project 1
+##### Project Title
 
-### Project Title
 # LIVE LIKE LOCALS
 
-LLLL - Live Life Like Locals
+## LLL - Live Like Locals
 
-### Team Members
-# Rebeacca • Elijah • Stephanie • Brendan • Min
+# Team Members
 
-### Project Description
-A dash board with various info about a particular location. Including Events, Weather, Map, Sports, Landmarks, Pictures, and Tweets.  
-Also user to store their favorite cities and if they have been there. 
+Rebeacca • Elijah • Stephanie • Brendan • Min
 
-### Sketch of the Design
-[See wire frame of Landing Page and Dashboard Page](https://drive.google.com/file/d/1-oBXfiJ9c2-8TDEMnMD0eGRKxSTQpHhM/view?usp=sharing)
-* Site is essentially a dashboard with inforamtion about a city/location.
-* Site contains "Panels" of inforamtion pulled from APIs to display various data sets. 
-* User can set preferences of which panels they want see on thier dashboard. 
-* User can add different locations/city's to store and check on. 
-* Allow users to recieve Auto generated emails that Summarize the changing data of their favorite city. 
+### [git repository](https://github.com/Rebeacca/LiveLikeLocals)
+
+### [Deployement](https://rebeacca.github.io/LiveLikeLocals/)
+
+# Project Description
+
+Our website is a *fully responsive* portal to local living. New to town? Soon to be Moving? miss the old city? Use **Live Like Locals** to keep track of of the local happenings and information in your favorite city!
+
+We use a bit of city validation and a number of API _AJAX_ calls to pull and display data deatils of upcoming events, sports arenas in your area, the weather, and the latest national press news in a stylish and custom your city theme.
+
+# Expected Use
+
+User need not log in to search for information about a city, they can immedialty start looking for a city.
+
+If a user chooses to log in they will be able load thier favorite cities, they will also beable to add to and remove from the list thier favorite cities.
+
+User looking for more infomration on upcoming events can click on the events headling and see a larger, more deatiled list of even in a second section of the site.
+
+## Project Construction
+
+### [Initial Sketch of Idea](https://drive.google.com/file/d/1-oBXfiJ9c2-8TDEMnMD0eGRKxSTQpHhM/view?usp=sharing)
+
+### MVPs
+
+- A site for users to look up events, weather, and other information on any city they search
+
+- Users can create accounts to save their favorite cities and have them instantly upon login
 
 ### APIs
-(Weather API, Events API)  Optional:Sports API, Wikipedia API, Hotels API/AirBNB, Twitter
 
-### Tasks
-* Create Login Credentials
-* allow users set preferences on which Panels they want displayed. 
-* Pull info from various APIs to display on the page. 
+- openweathermap
+- community-eventful
+- sportsdata.io
+- googleapis
+- api.nytimes
 
-### Rough Timeline
+### New Technology
 
-#### JS developtment
-1 week?
-MONDAY-We will have 2 API's up and running.
+We've implemented a few technologies and techniques in our project, including
+
+- User login credentianls, with a stored user preferences
+- auto-complete form validation to help control user city inputs
+- .xmlToJson method to do just that
+- blending modes in css
+
+We even stduied and learned some technolgoies that we were unable to implement including some photo manipulation .js libraries and Sass.
+
+### Features for the Future
+Our site is easily expanable to include more dash board panesl of local information such as
+
+* Geolocation data and api to give you more infor on directions and evnts in yoru immediate area. 
+* Hotel accomidations
+* Coupons
+* Community events
+* Restaurant reviews
+* Local media sources
+* Social media happneings in your city
 
 
-#### Styling
-3 days?
+Additional plans for future funcitonality enhancement to the site include toggling panels and creating suites of panesl for more user customization.
 
-#### Deployment
-1 second
+### Project Review
 
-
+We think we have achived the goals we set out when initial coming up with this project idea. We have built a strong foundation on which this project can grow and a framework that can easily expand to let people better [**Live Like Locals**](./assets/images/lll.png).
