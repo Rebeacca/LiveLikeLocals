@@ -323,6 +323,8 @@ function getNYTheadlines(search) {
 
     $("#nyt-panel-body").empty();
     $("#nyt-panel-body").prepend(headline_div);
+  }).then(function() {
+    $("#nyt-panel-body").prepend($('<h1>').text('New York Times').css('color', 'white'));
   });
 }
 
