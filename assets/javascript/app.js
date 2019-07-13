@@ -2,6 +2,7 @@ var favoriteCityArr = [];
 var username;
 var prevEventTitle = '';
 var searchInput = "Philadelphia";
+var upcomingEventImageArr = [];
 if(localStorage.getItem('city') !== '') {
   searchInput = localStorage.getItem('city');
 } else {
@@ -219,6 +220,13 @@ function gettingDataFromEventfullAPI(search) {
       for (var i = 0; count < 3; i++) {
         var eventTitle = events[i].title["#text"];
         if(eventTitle !== prevEventTitle) {
+          if(events[i].image.hasOwnProperty("medium")) {
+            eventImageUrl = 'https://' + events[i].image.medium.url['#text'].slice(2);
+          }else {
+            eventImageUrl = 'https://www.crucial.com.au/blog/wp-content/uploads/2014/12/events_medium.jpg';
+          }
+          upcomingEventImageArr.push(eventImageUrl); 
+          $('#upcoming-event-img').attr('src', upcomingEventImageArr[0])
           var eventUrl = events[i].url["#text"];
           var newTitle = $("<a>")
             .attr("href", eventUrl)
@@ -356,7 +364,8 @@ $('#log-in-btn').on('click', function() {
 });
 
 $('#log-out-btn').on('click', function() {
-  console.log(this.id);
+  favoriteCityArr = [];
+  upcomingEventImageArr = [];
   $('#saved-Cities').empty();
   $("#saved-Cities-Card").hide();
   username = '';
@@ -387,6 +396,18 @@ $("#search-btn").on("click", function() {
     .replace(/(^|\s)\S/g, x => x.toUpperCase());
     loadpanels(searchInput);
     $("#input-city").val('');
+});
+
+$('#upcoming-event-0').hover(function () {
+  $('#upcoming-event-img').attr('src', upcomingEventImageArr[0])
+});
+
+$('#upcoming-event-1').hover(function () {
+  $('#upcoming-event-img').attr('src', upcomingEventImageArr[1])
+});
+
+$('#upcoming-event-2').hover(function () {
+  $('#upcoming-event-img').attr('src', upcomingEventImageArr[2])
 });
 
 
