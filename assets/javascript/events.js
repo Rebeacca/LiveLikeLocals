@@ -326,11 +326,12 @@ $("#search-btn").on("click", function () {
   if($("#input-city").val()) {
     let searchInput = $("#input-city").val().trim().replace(/(^|\s)\S/g, x => x.toUpperCase());
     gettingDataFromEventfullAPI(searchInput);
+    $("#input-city").val('');
     loadcity(searchInput);
+  } else {
+    $("#input-city").val('');
+    $("#invalid-text").text('Enter a city');
   }
-  $("#input-city").val('');
-  $("#invalid-text").text('Enter a city');
-  
 });
 
 $("#favorite-btn").on("click", function () {

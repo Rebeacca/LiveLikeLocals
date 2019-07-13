@@ -423,10 +423,10 @@ loadpanels(searchInput);
 
 $("#search-btn").on("click", function() {
   event.preventDefault();
-  
   if($("#input-city").val()) {
     upcomingEventImageArr = [];
     let searchInput = $("#input-city").val().trim().replace(/(^|\s)\S/g, x => x.toUpperCase());
+    $("#input-city").val('');
     loadpanels(searchInput);
   } else {
     $("#invalid-text").text('Enter a city');
